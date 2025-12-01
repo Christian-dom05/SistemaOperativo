@@ -11,12 +11,10 @@ repositories {
 }
 
 dependencies {
-    // La librería de FXGL
     implementation 'com.github.almasb:fxgl:21.1'
 }
 
 java {
-    // Ajustado a Java 21 para evitar conflictos
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
 }
@@ -29,6 +27,5 @@ sourceSets {
 }
 
 application {
-    // Asegúrate que esta ruta sea correcta para tu clase principal
     mainClass = 'main.SpaceOsApp'
 }

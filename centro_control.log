@@ -1,0 +1,404 @@
+[15:56:22] === Iniciando oSimulacion Space OS ===
+[15:56:22] Memoria: asignados 5 marcos a Nave-Dory (pid=1). Usados 5/50
+[15:56:22] obj.ColaListos: Nave-Dory (pid=1) enlistado. Tamaño=1
+[15:56:22] Memoria: asignados 3 marcos a Nave-Borealis (pid=2). Usados 8/50
+[15:56:22] obj.ColaListos: Nave-Borealis (pid=2) enlistado. Tamaño=2
+[15:56:22] Memoria: asignados 7 marcos a Nave-Cassiopeia (pid=3). Usados 15/50
+[15:56:22] obj.ColaListos: Nave-Cassiopeia (pid=3) enlistado. Tamaño=3
+[15:56:22] Memoria: asignados 2 marcos a Nave-Draco (pid=4). Usados 17/50
+[15:56:22] obj.ColaListos: Nave-Draco (pid=4) enlistado. Tamaño=4
+[15:56:22] Memoria: asignados 1 marcos a Nave-Equinox (pid=5). Usados 18/50
+[15:56:22] obj.ColaListos: Nave-Equinox (pid=5) enlistado. Tamaño=5
+[15:56:22] obj.Planificador: iniciando Round-Robin con quantum=200ms
+[15:56:22] obj.ColaListos: desenlistado Nave-Dory (pid=1). Tamaño=4
+[15:56:22] obj.CPU: cargado Nave-Dory (pid=1) en el SOL.
+[15:56:23] obj.CPU: descargado Nave-Dory (pid=1) desde el SOL.
+[15:56:23] obj.ColaListos: Nave-Dory (pid=1) enlistado. Tamaño=5
+[15:56:23] obj.ColaListos: desenlistado Nave-Borealis (pid=2). Tamaño=4
+[15:56:23] obj.CPU: cargado Nave-Borealis (pid=2) en el SOL.
+[15:56:23] obj.CPU: descargado Nave-Borealis (pid=2) desde el SOL.
+[15:56:23] obj.ColaListos: Nave-Borealis (pid=2) enlistado. Tamaño=5
+[15:56:23] obj.ColaListos: desenlistado Nave-Cassiopeia (pid=3). Tamaño=4
+[15:56:23] obj.CPU: cargado Nave-Cassiopeia (pid=3) en el SOL.
+[15:56:23] Nave-Cassiopeia (pid=3) adquirio recurso Planeta-Y.
+[15:56:23] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=2
+[15:56:23] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 3
+[15:56:23] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=1
+[15:56:23] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 2
+[15:56:23] Nave-Cassiopeia (pid=3) adquirio recurso Estacion-Alpha.
+[15:56:23] obj.CPU: descargado Nave-Cassiopeia (pid=3) desde el SOL.
+[15:56:23] obj.ColaListos: Nave-Cassiopeia (pid=3) enlistado. Tamaño=5
+[15:56:23] obj.ColaListos: desenlistado Nave-Draco (pid=4). Tamaño=4
+[15:56:23] obj.CPU: cargado Nave-Draco (pid=4) en el SOL.
+[15:56:23] obj.CPU: descargado Nave-Draco (pid=4) desde el SOL.
+[15:56:23] obj.ColaListos: Nave-Draco (pid=4) enlistado. Tamaño=5
+[15:56:23] obj.ColaListos: desenlistado Nave-Equinox (pid=5). Tamaño=4
+[15:56:23] obj.CPU: cargado Nave-Equinox (pid=5) en el SOL.
+[15:56:24] ColaBloqueados: Nave-Equinox (pid=5) enlistado. Tamaño=1
+[15:56:24] Nave-Equinox (pid=5) realiza E/S y se bloquea.
+[15:56:24] obj.CPU: descargado Nave-Equinox (pid=5) desde el SOL.
+[15:56:24] obj.Planificador: Nave-Equinox (pid=5) fue bloqueado durante su quantum.
+[15:56:24] obj.ColaListos: desenlistado Nave-Dory (pid=1). Tamaño=3
+[15:56:24] obj.CPU: cargado Nave-Dory (pid=1) en el SOL.
+[15:56:24] Nave-Dory (pid=1) adquirio recurso Marte.
+[15:56:24] ColaBloqueados: Nave-Dory (pid=1) enlistado. Tamaño=2
+[15:56:24] Nave-Dory (pid=1) realiza E/S y se bloquea.
+[15:56:24] obj.CPU: descargado Nave-Dory (pid=1) desde el SOL.
+[15:56:24] obj.Planificador: Nave-Dory (pid=1) fue bloqueado durante su quantum.
+[15:56:24] obj.ColaListos: desenlistado Nave-Borealis (pid=2). Tamaño=2
+[15:56:24] obj.CPU: cargado Nave-Borealis (pid=2) en el SOL.
+[15:56:24] Nave-Borealis (pid=2) adquirio recurso Estacion-Alpha.
+[15:56:24] obj.CPU: descargado Nave-Borealis (pid=2) desde el SOL.
+[15:56:24] obj.ColaListos: Nave-Borealis (pid=2) enlistado. Tamaño=3
+[15:56:24] obj.ColaListos: desenlistado Nave-Cassiopeia (pid=3). Tamaño=2
+[15:56:24] obj.CPU: cargado Nave-Cassiopeia (pid=3) en el SOL.
+[15:56:24] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=3
+[15:56:24] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 4
+[15:56:24] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=2
+[15:56:24] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 3
+[15:56:24] obj.CPU: descargado Nave-Cassiopeia (pid=3) desde el SOL.
+[15:56:24] obj.ColaListos: Nave-Cassiopeia (pid=3) enlistado. Tamaño=3
+[15:56:24] obj.ColaListos: desenlistado Nave-Draco (pid=4). Tamaño=2
+[15:56:24] obj.CPU: cargado Nave-Draco (pid=4) en el SOL.
+[15:56:24] obj.CPU: descargado Nave-Draco (pid=4) desde el SOL.
+[15:56:24] obj.ColaListos: Nave-Draco (pid=4) enlistado. Tamaño=3
+[15:56:24] obj.ColaListos: desenlistado Nave-Borealis (pid=2). Tamaño=2
+[15:56:24] obj.CPU: cargado Nave-Borealis (pid=2) en el SOL.
+[15:56:25] ColaBloqueados: removido Nave-Equinox (pid=5). Tamaño=1
+[15:56:25] obj.ColaListos: Nave-Equinox (pid=5) enlistado. Tamaño=3
+[15:56:25] Evento: I/O completado para Nave-Equinox (pid=5). Mover BLACK HOLE -> PLANET.
+[15:56:25] obj.CPU: descargado Nave-Borealis (pid=2) desde el SOL.
+[15:56:25] obj.ColaListos: Nave-Borealis (pid=2) enlistado. Tamaño=4
+[15:56:25] obj.ColaListos: desenlistado Nave-Cassiopeia (pid=3). Tamaño=3
+[15:56:25] obj.CPU: cargado Nave-Cassiopeia (pid=3) en el SOL.
+[15:56:25] ColaBloqueados: Nave-Cassiopeia (pid=3) enlistado. Tamaño=2
+[15:56:25] Nave-Cassiopeia (pid=3) realiza E/S y se bloquea.
+[15:56:25] obj.CPU: descargado Nave-Cassiopeia (pid=3) desde el SOL.
+[15:56:25] obj.Planificador: Nave-Cassiopeia (pid=3) fue bloqueado durante su quantum.
+[15:56:25] obj.ColaListos: desenlistado Nave-Draco (pid=4). Tamaño=2
+[15:56:25] obj.CPU: cargado Nave-Draco (pid=4) en el SOL.
+[15:56:25] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=4
+[15:56:25] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 5
+[15:56:25] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=3
+[15:56:25] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 4
+[15:56:25] obj.CPU: descargado Nave-Draco (pid=4) desde el SOL.
+[15:56:25] Memoria: liberados 2 marcos de Nave-Draco (pid=4). Usados 16/50
+[15:56:25] obj.Planificador: Nave-Draco (pid=4) TERMINADO.
+[15:56:25] obj.ColaListos: desenlistado Nave-Equinox (pid=5). Tamaño=1
+[15:56:25] obj.CPU: cargado Nave-Equinox (pid=5) en el SOL.
+[15:56:25] obj.CPU: descargado Nave-Equinox (pid=5) desde el SOL.
+[15:56:25] Memoria: liberados 1 marcos de Nave-Equinox (pid=5). Usados 15/50
+[15:56:25] obj.Planificador: Nave-Equinox (pid=5) TERMINADO.
+[15:56:25] obj.ColaListos: desenlistado Nave-Borealis (pid=2). Tamaño=0
+[15:56:25] obj.CPU: cargado Nave-Borealis (pid=2) en el SOL.
+[15:56:26] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=5
+[15:56:26] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 6
+[15:56:26] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=4
+[15:56:26] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 5
+[15:56:26] ColaBloqueados: removido Nave-Dory (pid=1). Tamaño=1
+[15:56:26] obj.ColaListos: Nave-Dory (pid=1) enlistado. Tamaño=1
+[15:56:26] Evento: I/O completado para Nave-Dory (pid=1). Mover BLACK HOLE -> PLANET.
+[15:56:26] obj.CPU: descargado Nave-Borealis (pid=2) desde el SOL.
+[15:56:26] Memoria: liberados 3 marcos de Nave-Borealis (pid=2). Usados 12/50
+[15:56:26] obj.Planificador: Nave-Borealis (pid=2) TERMINADO.
+[15:56:26] obj.ColaListos: desenlistado Nave-Dory (pid=1). Tamaño=0
+[15:56:26] obj.CPU: cargado Nave-Dory (pid=1) en el SOL.
+[15:56:26] obj.CPU: descargado Nave-Dory (pid=1) desde el SOL.
+[15:56:26] obj.ColaListos: Nave-Dory (pid=1) enlistado. Tamaño=1
+[15:56:26] obj.ColaListos: desenlistado Nave-Dory (pid=1). Tamaño=0
+[15:56:26] obj.CPU: cargado Nave-Dory (pid=1) en el SOL.
+[15:56:26] obj.CPU: descargado Nave-Dory (pid=1) desde el SOL.
+[15:56:26] obj.ColaListos: Nave-Dory (pid=1) enlistado. Tamaño=1
+[15:56:26] obj.ColaListos: desenlistado Nave-Dory (pid=1). Tamaño=0
+[15:56:26] obj.CPU: cargado Nave-Dory (pid=1) en el SOL.
+[15:56:26] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:56:26] Evento: obj.Recurso Marte liberado por entorno.
+[15:56:26] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:56:26] ColaBloqueados: removido Nave-Cassiopeia (pid=3). Tamaño=0
+[15:56:26] obj.ColaListos: Nave-Cassiopeia (pid=3) enlistado. Tamaño=1
+[15:56:26] Evento: I/O completado para Nave-Cassiopeia (pid=3). Mover BLACK HOLE -> PLANET.
+[15:56:26] obj.CPU: descargado Nave-Dory (pid=1) desde el SOL.
+[15:56:26] obj.ColaListos: Nave-Dory (pid=1) enlistado. Tamaño=2
+[15:56:26] obj.ColaListos: desenlistado Nave-Cassiopeia (pid=3). Tamaño=1
+[15:56:26] obj.CPU: cargado Nave-Cassiopeia (pid=3) en el SOL.
+[15:56:26] obj.CPU: descargado Nave-Cassiopeia (pid=3) desde el SOL.
+[15:56:26] obj.ColaListos: Nave-Cassiopeia (pid=3) enlistado. Tamaño=2
+[15:56:26] obj.ColaListos: desenlistado Nave-Dory (pid=1). Tamaño=1
+[15:56:26] obj.CPU: cargado Nave-Dory (pid=1) en el SOL.
+[15:56:27] obj.CPU: descargado Nave-Dory (pid=1) desde el SOL.
+[15:56:27] Memoria: liberados 5 marcos de Nave-Dory (pid=1). Usados 7/50
+[15:56:27] obj.Planificador: Nave-Dory (pid=1) TERMINADO.
+[15:56:27] obj.ColaListos: desenlistado Nave-Cassiopeia (pid=3). Tamaño=0
+[15:56:27] obj.CPU: cargado Nave-Cassiopeia (pid=3) en el SOL.
+[15:56:27] obj.CPU: descargado Nave-Cassiopeia (pid=3) desde el SOL.
+[15:56:27] obj.ColaListos: Nave-Cassiopeia (pid=3) enlistado. Tamaño=1
+[15:56:27] obj.ColaListos: desenlistado Nave-Cassiopeia (pid=3). Tamaño=0
+[15:56:27] obj.CPU: cargado Nave-Cassiopeia (pid=3) en el SOL.
+[15:56:27] obj.CPU: descargado Nave-Cassiopeia (pid=3) desde el SOL.
+[15:56:27] obj.ColaListos: Nave-Cassiopeia (pid=3) enlistado. Tamaño=1
+[15:56:27] obj.ColaListos: desenlistado Nave-Cassiopeia (pid=3). Tamaño=0
+[15:56:27] obj.CPU: cargado Nave-Cassiopeia (pid=3) en el SOL.
+[15:56:27] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=6
+[15:56:27] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 7
+[15:56:27] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=5
+[15:56:27] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 6
+[15:56:27] ColaBloqueados: Nave-Cassiopeia (pid=3) enlistado. Tamaño=1
+[15:56:27] Nave-Cassiopeia (pid=3) realiza E/S y se bloquea.
+[15:56:27] obj.CPU: descargado Nave-Cassiopeia (pid=3) desde el SOL.
+[15:56:27] obj.Planificador: Nave-Cassiopeia (pid=3) fue bloqueado durante su quantum.
+[15:56:28] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=7
+[15:56:28] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 8
+[15:56:28] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=6
+[15:56:28] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 7
+[15:56:29] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=8
+[15:56:29] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 9
+[15:56:29] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=7
+[15:56:29] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 8
+[15:56:30] ColaBloqueados: removido Nave-Cassiopeia (pid=3). Tamaño=0
+[15:56:30] obj.ColaListos: Nave-Cassiopeia (pid=3) enlistado. Tamaño=1
+[15:56:30] Evento: I/O completado para Nave-Cassiopeia (pid=3). Mover BLACK HOLE -> PLANET.
+[15:56:30] obj.ColaListos: desenlistado Nave-Cassiopeia (pid=3). Tamaño=0
+[15:56:30] obj.CPU: cargado Nave-Cassiopeia (pid=3) en el SOL.
+[15:56:30] ColaBloqueados: Nave-Cassiopeia (pid=3) enlistado. Tamaño=1
+[15:56:30] Nave-Cassiopeia (pid=3) realiza E/S y se bloquea.
+[15:56:30] obj.CPU: descargado Nave-Cassiopeia (pid=3) desde el SOL.
+[15:56:30] obj.Planificador: Nave-Cassiopeia (pid=3) fue bloqueado durante su quantum.
+[15:56:30] ColaBloqueados: removido Nave-Cassiopeia (pid=3). Tamaño=0
+[15:56:30] obj.ColaListos: Nave-Cassiopeia (pid=3) enlistado. Tamaño=1
+[15:56:30] Evento: I/O completado para Nave-Cassiopeia (pid=3). Mover BLACK HOLE -> PLANET.
+[15:56:30] obj.ColaListos: desenlistado Nave-Cassiopeia (pid=3). Tamaño=0
+[15:56:30] obj.CPU: cargado Nave-Cassiopeia (pid=3) en el SOL.
+[15:56:30] obj.CPU: descargado Nave-Cassiopeia (pid=3) desde el SOL.
+[15:56:30] Memoria: liberados 7 marcos de Nave-Cassiopeia (pid=3). Usados 0/50
+[15:56:30] obj.Planificador: Nave-Cassiopeia (pid=3) TERMINADO.
+[15:56:32] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=9
+[15:56:32] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 10
+[15:56:32] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=8
+[15:56:32] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 9
+[15:56:32] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=10
+[15:56:32] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 11
+[15:56:32] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=9
+[15:56:32] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 10
+[15:56:32] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:56:32] Evento: obj.Recurso Marte liberado por entorno.
+[15:56:32] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:56:33] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=11
+[15:56:33] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 12
+[15:56:33] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=10
+[15:56:33] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 11
+[15:56:34] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=12
+[15:56:34] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 13
+[15:56:34] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=11
+[15:56:34] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 12
+[15:56:34] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:56:34] Evento: obj.Recurso Marte liberado por entorno.
+[15:56:34] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:56:34] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=13
+[15:56:34] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 14
+[15:56:34] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=12
+[15:56:34] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 13
+[15:56:36] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:56:36] Evento: obj.Recurso Marte liberado por entorno.
+[15:56:36] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:56:37] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=14
+[15:56:37] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 15
+[15:56:37] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=13
+[15:56:37] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 14
+[15:56:40] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=15
+[15:56:40] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 16
+[15:56:40] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=14
+[15:56:40] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 15
+[15:56:40] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:56:40] Evento: obj.Recurso Marte liberado por entorno.
+[15:56:40] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:56:40] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=16
+[15:56:40] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 17
+[15:56:40] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=15
+[15:56:40] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 16
+[15:56:41] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:56:41] Evento: obj.Recurso Marte liberado por entorno.
+[15:56:41] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:56:41] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=17
+[15:56:41] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 18
+[15:56:41] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=16
+[15:56:41] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 17
+[15:56:41] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:56:41] Evento: obj.Recurso Marte liberado por entorno.
+[15:56:41] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:56:43] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=18
+[15:56:43] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 19
+[15:56:43] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=17
+[15:56:43] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 18
+[15:56:43] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:56:43] Evento: obj.Recurso Marte liberado por entorno.
+[15:56:43] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:56:43] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=19
+[15:56:43] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 20
+[15:56:43] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=18
+[15:56:43] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 19
+[15:56:44] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=20
+[15:56:44] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 21
+[15:56:44] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=19
+[15:56:44] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 20
+[15:56:47] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=21
+[15:56:47] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 22
+[15:56:47] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=20
+[15:56:47] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 21
+[15:56:47] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=22
+[15:56:47] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 23
+[15:56:47] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=21
+[15:56:47] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 22
+[15:56:48] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=23
+[15:56:48] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 24
+[15:56:48] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=22
+[15:56:48] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 23
+[15:56:50] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:56:50] Evento: obj.Recurso Marte liberado por entorno.
+[15:56:50] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:56:54] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=24
+[15:56:54] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 25
+[15:56:54] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=23
+[15:56:54] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 24
+[15:56:56] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=25
+[15:56:56] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 26
+[15:56:56] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=24
+[15:56:56] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 25
+[15:56:57] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=26
+[15:56:57] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 27
+[15:56:57] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=25
+[15:56:57] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 26
+[15:56:57] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=27
+[15:56:57] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 28
+[15:56:57] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=26
+[15:56:57] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 27
+[15:56:58] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:56:58] Evento: obj.Recurso Marte liberado por entorno.
+[15:56:58] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:56:58] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=28
+[15:56:58] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 29
+[15:56:58] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=27
+[15:56:58] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 28
+[15:56:59] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=29
+[15:56:59] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 30
+[15:56:59] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=28
+[15:56:59] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 29
+[15:57] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=30
+[15:57] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 31
+[15:57] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=29
+[15:57] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 30
+[15:57] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=31
+[15:57] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 32
+[15:57] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=30
+[15:57] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 31
+[15:57] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:57] Evento: obj.Recurso Marte liberado por entorno.
+[15:57] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:57:01] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=32
+[15:57:01] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 33
+[15:57:01] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=31
+[15:57:01] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 32
+[15:57:02] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=33
+[15:57:02] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 34
+[15:57:02] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=32
+[15:57:02] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 33
+[15:57:02] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=34
+[15:57:02] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 35
+[15:57:02] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=33
+[15:57:02] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 34
+[15:57:03] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=35
+[15:57:03] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 36
+[15:57:03] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=34
+[15:57:03] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 35
+[15:57:04] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=36
+[15:57:04] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 37
+[15:57:04] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=35
+[15:57:04] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 36
+[15:57:04] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:57:04] Evento: obj.Recurso Marte liberado por entorno.
+[15:57:04] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:57:07] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=37
+[15:57:07] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 38
+[15:57:07] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=36
+[15:57:07] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 37
+[15:57:07] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:57:07] Evento: obj.Recurso Marte liberado por entorno.
+[15:57:07] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:57:07] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=38
+[15:57:07] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 39
+[15:57:07] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=37
+[15:57:07] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 38
+[15:57:08] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=39
+[15:57:08] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 40
+[15:57:08] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=38
+[15:57:08] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 39
+[15:57:09] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:57:09] Evento: obj.Recurso Marte liberado por entorno.
+[15:57:09] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:57:09] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:57:09] Evento: obj.Recurso Marte liberado por entorno.
+[15:57:09] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:57:10] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=40
+[15:57:10] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 41
+[15:57:10] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=39
+[15:57:10] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 40
+[15:57:11] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=41
+[15:57:11] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 42
+[15:57:11] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=40
+[15:57:11] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 41
+[15:57:12] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=42
+[15:57:12] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 43
+[15:57:12] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=41
+[15:57:12] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 42
+[15:57:13] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:57:13] Evento: obj.Recurso Marte liberado por entorno.
+[15:57:13] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:57:14] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=43
+[15:57:14] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 44
+[15:57:14] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=42
+[15:57:14] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 43
+[15:57:14] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:57:14] Evento: obj.Recurso Marte liberado por entorno.
+[15:57:14] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:57:15] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=44
+[15:57:15] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 45
+[15:57:15] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=43
+[15:57:15] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 44
+[15:57:16] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=45
+[15:57:16] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 46
+[15:57:16] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=44
+[15:57:16] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 45
+[15:57:17] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=46
+[15:57:17] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 47
+[15:57:17] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=45
+[15:57:17] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 46
+[15:57:17] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:57:17] Evento: obj.Recurso Marte liberado por entorno.
+[15:57:17] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:57:17] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=47
+[15:57:17] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 48
+[15:57:17] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=46
+[15:57:17] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 47
+[15:57:19] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:57:19] Evento: obj.Recurso Marte liberado por entorno.
+[15:57:19] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:57:19] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:57:19] Evento: obj.Recurso Marte liberado por entorno.
+[15:57:19] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:57:20] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=48
+[15:57:20] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 49
+[15:57:20] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=47
+[15:57:20] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 48
+[15:57:20] Evento: obj.Recurso Estacion-Alpha liberado por entorno.
+[15:57:20] Evento: obj.Recurso Marte liberado por entorno.
+[15:57:20] Evento: obj.Recurso Planeta-Y liberado por entorno.
+[15:57:22] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=49
+[15:57:22] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 50
+[15:57:22] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=48
+[15:57:22] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 49
+[15:57:22] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=50
+[15:57:22] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 51
+[15:57:22] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=49
+[15:57:22] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 50
+[15:57:23] HiloEventos: finalizo simulacion de eventos.
+[15:57:25] obj.Planificador: detenido.
+[15:57:25] === Simulacion finalizada ===
