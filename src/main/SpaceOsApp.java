@@ -4,6 +4,7 @@ import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import javafx.geometry.Point2D;
+import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
@@ -17,52 +18,63 @@ import java.util.*;
 
 public class SpaceOsApp extends GameApplication {
 
-    // Ya no necesitamos guardar referencias a los hilos para cerrarlos manualmente
-    // porque usaremos setDaemon(true)
+    // --- VARIABLES GLOBALES DEL SISTEMA OPERATIVO ---
+    // Las necesitamos aquí para que el botón pueda acceder a ellas
+    private Memoria memoria;
+    private ColaListos colaListos;
+    private ColaBloqueados colaBloq;
+    private CPU cpu;
+    private Map<String, Recurso> recursos;
+    private Map<String, SemaphoroGalactico> semaforos;
+
+    // Contador para generar PIDs únicos
+    private int pidCounter = 1;
 
     @Override
     protected void initSettings(GameSettings settings) {
         settings.setWidth(1280);
         settings.setHeight(720);
-        settings.setTitle("GalaxyOS - Simulador SO");
-        settings.setVersion("1.0");
-        // El color de fondo se define mejor en initUI o initGame para esta versión
+        settings.setTitle("GalaxyOS - Control Manual");
+        settings.setVersion("2.1");
     }
 
     @Override
     protected void initUI() {
-        // 1. Establecer el color de fondo del espacio
         FXGL.getGameScene().setBackgroundColor(Color.web("#0a0a2a"));
 
-        // 2. Crear el área de logs (Izquierda)
+        // 1. Área de Logs
         TextArea logTextArea = new TextArea();
         logTextArea.setEditable(false);
         logTextArea.setWrapText(true);
-        // Estilo "Hacker" para los logs
         logTextArea.setStyle("-fx-font-family: 'Consolas'; -fx-text-fill: limegreen; -fx-control-inner-background: black;");
-        VBox logBox = new VBox(logTextArea);
-        VBox.setVgrow(logTextArea, javafx.scene.layout.Priority.ALWAYS);
 
-        // Conectar logs
         UIAdapter.getInstance().setLogArea(logTextArea);
 
-        // 3. Crear un panel transparente para la derecha (donde se verá el juego)
+        // 2. Botón "Lanzar Nave"
+        Button btnLanzar = new Button("LANZAR NAVE (NUEVO PROCESO)");
+        btnLanzar.setStyle("-fx-font-size: 16px; -fx-base: #4444aa; -fx-text-fill: white;");
+        btnLanzar.setMaxWidth(Double.MAX_VALUE); // Que ocupe todo el ancho disponible
+
+        // --- ACCIÓN DEL BOTÓN ---
+        btnLanzar.setOnAction(e -> crearYLanzarProceso());
+
+        // Contenedor izquierdo (Botón + Logs)
+        VBox leftPane = new VBox(10, btnLanzar, logTextArea);
+        leftPane.setStyle("-fx-padding: 10; -fx-background-color: #111;");
+        VBox.setVgrow(logTextArea, javafx.scene.layout.Priority.ALWAYS);
+
+        // 3. Panel derecho transparente para el juego
         Pane gameOverlayPane = new Pane();
         gameOverlayPane.setStyle("-fx-background-color: transparent;");
-        // Permitir que los clics pasen a través del panel derecho hacia el juego
         gameOverlayPane.setPickOnBounds(false);
 
-        // 4. Crear el SplitPane
+        // 4. SplitPane principal
         SplitPane splitPane = new SplitPane();
         splitPane.setPrefSize(FXGL.getAppWidth(), FXGL.getAppHeight());
-        splitPane.getItems().addAll(logBox, gameOverlayPane);
-
-        // Configurar el SplitPane para que sea transparente y deje ver el juego de fondo
-        splitPane.setStyle("-fx-background-color: transparent; -fx-padding: 0;");
-        // Posición inicial del divisor (33% logs, 66% juego)
+        splitPane.getItems().addAll(leftPane, gameOverlayPane);
+        splitPane.setStyle("-fx-background-color: transparent;");
         splitPane.setDividerPositions(0.33);
 
-        // Añadir la interfaz SOBRE el juego
         FXGL.addUINode(splitPane);
     }
 
@@ -70,81 +82,60 @@ public class SpaceOsApp extends GameApplication {
     protected void initGame() {
         FXGL.getGameWorld().addEntityFactory(new SpaceOsFactory());
 
-        // Calcular coordenadas para el "Radar" (la parte derecha de la pantalla)
-        double gameCenterX = (FXGL.getAppWidth() * 0.66) / 2 + (FXGL.getAppWidth() * 0.33);
-        double gameCenterY = FXGL.getAppHeight() / 2.0;
+        // Configurar posiciones del radar
+        double cx = (FXGL.getAppWidth() * 0.66) / 2 + (FXGL.getAppWidth() * 0.33);
+        double cy = FXGL.getAppHeight() / 2.0;
 
-        UIAdapter.getInstance().posSol = new Point2D(gameCenterX, gameCenterY);
-        UIAdapter.getInstance().posReady = new Point2D(gameCenterX - 250, gameCenterY);
-        UIAdapter.getInstance().posBlocked = new Point2D(gameCenterX + 250, gameCenterY);
+        UIAdapter.getInstance().posSol = new Point2D(cx, cy);
+        UIAdapter.getInstance().posReady = new Point2D(cx - 250, cy);
+        UIAdapter.getInstance().posBlocked = new Point2D(cx + 250, cy);
 
-        // Spawnear entidades estáticas
         FXGL.spawn("SOL_CPU", UIAdapter.getInstance().posSol);
         FXGL.spawn("PLANETA_READY", UIAdapter.getInstance().posReady);
         FXGL.spawn("PLANETA_BLOCKED", UIAdapter.getInstance().posBlocked);
 
-        // Iniciar la lógica en un hilo separado
-        Thread hiloSimulacion = new Thread(this::iniciarSimulacionBackend, "Hilo-Simulacion");
-        hiloSimulacion.setDaemon(true); // IMPORTANTE: Se cierra solo al cerrar la ventana
-        hiloSimulacion.start();
+        // INICIALIZAR EL KERNEL DEL SO (Sin crear naves todavía)
+        inicializarKernel();
     }
 
-    private void iniciarSimulacionBackend() {
-        CentroControl.registrar("=== Iniciando Simulacion Space OS (Grafica) ===");
+    private void inicializarKernel() {
+        CentroControl.registrar("=== Inicializando Kernel Space OS ===");
 
-        // Crear componentes del SO
-        Memoria memoria = new Memoria(50, 4);
-        ColaListos colaListos = new ColaListos();
-        ColaBloqueados colaBloq = new ColaBloqueados();
-        CPU cpu = new CPU();
+        // Instanciar componentes del SO
+        memoria = new Memoria(50, 4); // 50 marcos totales
+        colaListos = new ColaListos();
+        colaBloq = new ColaBloqueados();
+        cpu = new CPU();
 
-        Map<String, Recurso> recursos = new HashMap<>();
+        recursos = new HashMap<>();
         recursos.put("Marte", new Recurso("Portal-Marte", 1));
         recursos.put("Estacion-Alpha", new Recurso("Estacion-Alpha", 2));
-        recursos.put("Planeta-Y", new Recurso("Planeta-Y", 1));
 
-        Map<String, SemaphoroGalactico> semaforos = new HashMap<>();
+        semaforos = new HashMap<>();
         semaforos.put("Marte", new SemaphoroGalactico("Portal-Marte", 1));
         semaforos.put("Estacion-Alpha", new SemaphoroGalactico("Portal-EstAlpha", 2));
 
-        List<BCP> naves = new ArrayList<>();
-        naves.add(new BCP(1, "Nave-Dory", 1200, 5, Arrays.asList("Marte")));
-        naves.add(new BCP(2, "Nave-Borealis", 800, 3, Arrays.asList("Estacion-Alpha")));
-        naves.add(new BCP(3, "Nave-Cassiopeia", 1500, 7, Arrays.asList("Planeta-Y", "Estacion-Alpha")));
-        naves.add(new BCP(4, "Nave-Draco", 600, 2, Collections.emptyList()));
-        naves.add(new BCP(5, "Nave-Equinox", 400, 1, Arrays.asList("Estacion-Alpha")));
+        // Arrancar hilos del sistema (Planificador y Eventos)
+        // NOTA: Ya no creamos naves aquí. Se esperan al botón.
 
-        // Carga inicial
-        for (BCP bcp : naves) {
-            bcp.estado = BCP.EstadoProceso.NUEVO;
-            UIAdapter.getInstance().crearNaveVisual(bcp);
-
-            if (memoria.asignar(bcp)) {
-                colaListos.enlistar(bcp);
-            } else {
-                colaBloq.enlistar(bcp);
-                CentroControl.registrar(String.format("%s (pid=%d) no puede iniciar por memoria.", bcp.nombre, bcp.pid));
-            }
-            try { Thread.sleep(200); } catch (InterruptedException e) {}
-        }
-
-        // Hilo del Planificador
         Planificador planificador = new Planificador(colaListos, colaBloq, memoria, cpu, recursos, semaforos, 200);
         Thread hiloPlanificador = new Thread(planificador, "HiloPlanificador");
-        hiloPlanificador.setDaemon(true); // Se cierra automático
+        hiloPlanificador.setDaemon(true);
         hiloPlanificador.start();
 
-        // Hilo de Eventos Aleatorios
         Thread hiloEventos = new Thread(() -> {
             Random rnd = new Random();
             while (true) {
                 try { Thread.sleep(500); } catch (InterruptedException e) { break; }
+                // Liberar semáforos aleatoriamente
                 if (rnd.nextDouble() < 0.4) {
                     for (SemaphoroGalactico s : semaforos.values()) s.signalSem(colaListos, colaBloq);
                 }
+                // Liberar recursos aleatoriamente
                 if (rnd.nextDouble() < 0.2) {
                     for (Recurso r : recursos.values()) r.liberar();
                 }
+                // Desbloquear procesos aleatoriamente (simula fin de I/O)
                 synchronized (colaBloq) {
                     List<BCP> b = colaBloq.snapshot();
                     for (BCP p : b) if (Math.random() < 0.3) {
@@ -154,8 +145,42 @@ public class SpaceOsApp extends GameApplication {
                 }
             }
         }, "HiloEventos");
-        hiloEventos.setDaemon(true); // Se cierra automático
+        hiloEventos.setDaemon(true);
         hiloEventos.start();
+
+        CentroControl.registrar("Kernel listo. Esperando comandos...");
+    }
+
+    // --- LÓGICA DEL BOTÓN ---
+    private void crearYLanzarProceso() {
+        // 1. Generar datos aleatorios para el proceso
+        Random rnd = new Random();
+        int pid = pidCounter++;
+        String nombre = "Nave-" + pid;
+        int tiempoCpu = 1000 + rnd.nextInt(2000); // Entre 1 y 3 segundos
+        int paginas = 1 + rnd.nextInt(5); // Entre 1 y 5 páginas de memoria
+
+        // 2. Asignar recursos necesarios aleatoriamente
+        List<String> misRecursos = new ArrayList<>();
+        if (rnd.nextBoolean()) misRecursos.add("Marte");
+        if (rnd.nextBoolean()) misRecursos.add("Estacion-Alpha");
+
+        // 3. Crear el BCP (Bloque de Control de Proceso)
+        BCP nuevoBcp = new BCP(pid, nombre, tiempoCpu, paginas, misRecursos);
+
+        CentroControl.registrar("BOTON: Solicitando lanzamiento de " + nombre + " (" + paginas + " pags)");
+
+        // 4. Crear visualmente (aparece en la UI)
+        UIAdapter.getInstance().crearNaveVisual(nuevoBcp);
+
+        // 5. Intentar cargar en memoria e iniciar
+        if (memoria.asignar(nuevoBcp)) {
+            colaListos.enlistar(nuevoBcp);
+            CentroControl.registrar("SISTEMA: " + nombre + " admitido en READY.");
+        } else {
+            colaBloq.enlistar(nuevoBcp);
+            CentroControl.registrar("SISTEMA: " + nombre + " enviado a BLOCKED (Memoria llena).");
+        }
     }
 
     public static void main(String[] args) {

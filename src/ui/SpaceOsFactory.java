@@ -7,9 +7,9 @@ import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle; // Usamos Rectangle para el "cuadro"
 import javafx.scene.text.Text;
-import obj.BCP; // <--- IMPORTANTE
+import obj.BCP;
 
 import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 
@@ -44,20 +44,23 @@ public class SpaceOsFactory implements EntityFactory {
 
     @Spawns("NAVE_PROCESO")
     public Entity newNaveProceso(SpawnData data) {
-        // AQUI ESTABA EL ERROR: Cambiar PCB por BCP
         BCP bcp = data.get("pcb");
 
-        Polygon naveShape = new Polygon(0, 0, 20, 10, 0, 20);
-        naveShape.setFill(Color.LIGHTGRAY);
+        // --- CAMBIO: Ahora es un Cuadro (Rectangle) ---
+        // Si quieres poner una imagen luego, usarías: FXGL.texture("nave.jpg", 40, 40)
+        Rectangle naveShape = new Rectangle(40, 40, Color.SILVER);
         naveShape.setStroke(Color.WHITE);
+        naveShape.setStrokeWidth(2);
 
+        // Centrar el texto del PID sobre el cuadro
         Text pidText = new Text("P" + bcp.pid);
-        pidText.setFill(Color.WHITE);
-        pidText.setTranslateY(-5);
+        pidText.setFill(Color.BLACK);
+        pidText.setTranslateX(10); // Ajuste visual
+        pidText.setTranslateY(25);
 
         return entityBuilder(data)
                 .type(EntityType.NAVE_PROCESO)
-                .viewWithBBox(naveShape)
+                .viewWithBBox(naveShape) // La caja de colisión es el cuadro
                 .view(pidText)
                 .with("pcb", bcp)
                 .build();

@@ -1,677 +1,301 @@
-[02:33:50] === Iniciando Simulacion Space OS (Grafica) ===
-[02:33:50] Memoria: asignados 5 marcos a Nave-Dory (pid=1). Usados 5/50
-[02:33:50] obj.ColaListos: Nave-Dory (pid=1) enlistado. Tamaño=1
-[02:33:50] Memoria: asignados 3 marcos a Nave-Borealis (pid=2). Usados 8/50
-[02:33:50] obj.ColaListos: Nave-Borealis (pid=2) enlistado. Tamaño=2
-[02:33:50] Memoria: asignados 7 marcos a Nave-Cassiopeia (pid=3). Usados 15/50
-[02:33:50] obj.ColaListos: Nave-Cassiopeia (pid=3) enlistado. Tamaño=3
-[02:33:50] Memoria: asignados 2 marcos a Nave-Draco (pid=4). Usados 17/50
-[02:33:50] obj.ColaListos: Nave-Draco (pid=4) enlistado. Tamaño=4
-[02:33:51] Memoria: asignados 1 marcos a Nave-Equinox (pid=5). Usados 18/50
-[02:33:51] obj.ColaListos: Nave-Equinox (pid=5) enlistado. Tamaño=5
-[02:33:51] obj.Planificador: iniciando Round-Robin con quantum=200ms
-[02:33:51] obj.ColaListos: desenlistado Nave-Dory (pid=1). Tamaño=4
-[02:33:51] obj.CPU: cargado Nave-Dory (pid=1) en el SOL.
-[02:33:51] Nave-Dory (pid=1) adquirio recurso Marte.
-[02:33:51] obj.CPU: descargado Nave-Dory (pid=1) desde el SOL.
-[02:33:51] obj.ColaListos: Nave-Dory (pid=1) enlistado. Tamaño=5
-[02:33:51] obj.ColaListos: desenlistado Nave-Borealis (pid=2). Tamaño=4
-[02:33:51] obj.CPU: cargado Nave-Borealis (pid=2) en el SOL.
-[02:33:51] Nave-Borealis (pid=2) adquirio recurso Estacion-Alpha.
-[02:33:51] obj.CPU: descargado Nave-Borealis (pid=2) desde el SOL.
-[02:33:51] obj.ColaListos: Nave-Borealis (pid=2) enlistado. Tamaño=5
-[02:33:51] obj.ColaListos: desenlistado Nave-Cassiopeia (pid=3). Tamaño=4
-[02:33:51] obj.CPU: cargado Nave-Cassiopeia (pid=3) en el SOL.
-[02:33:52] obj.CPU: descargado Nave-Cassiopeia (pid=3) desde el SOL.
-[02:33:52] obj.ColaListos: Nave-Cassiopeia (pid=3) enlistado. Tamaño=5
-[02:33:52] obj.ColaListos: desenlistado Nave-Draco (pid=4). Tamaño=4
-[02:33:52] obj.CPU: cargado Nave-Draco (pid=4) en el SOL.
-[02:33:52] obj.CPU: descargado Nave-Draco (pid=4) desde el SOL.
-[02:33:52] obj.ColaListos: Nave-Draco (pid=4) enlistado. Tamaño=5
-[02:33:52] obj.ColaListos: desenlistado Nave-Equinox (pid=5). Tamaño=4
-[02:33:52] obj.CPU: cargado Nave-Equinox (pid=5) en el SOL.
-[02:33:52] ColaBloqueados: Nave-Equinox (pid=5) enlistado. Tamaño=1
-[02:33:52] Nave-Equinox (pid=5) realiza E/S y se bloquea.
-[02:33:52] obj.CPU: descargado Nave-Equinox (pid=5) desde el SOL.
-[02:33:52] obj.Planificador: Nave-Equinox (pid=5) fue bloqueado durante su quantum.
-[02:33:52] obj.ColaListos: desenlistado Nave-Dory (pid=1). Tamaño=3
-[02:33:52] obj.CPU: cargado Nave-Dory (pid=1) en el SOL.
-[02:33:52] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=2
-[02:33:52] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 3
-[02:33:52] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=1
-[02:33:52] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 2
-[02:33:52] obj.CPU: descargado Nave-Dory (pid=1) desde el SOL.
-[02:33:52] obj.ColaListos: Nave-Dory (pid=1) enlistado. Tamaño=4
-[02:33:52] obj.ColaListos: desenlistado Nave-Borealis (pid=2). Tamaño=3
-[02:33:52] obj.CPU: cargado Nave-Borealis (pid=2) en el SOL.
-[02:33:52] obj.CPU: descargado Nave-Borealis (pid=2) desde el SOL.
-[02:33:52] obj.ColaListos: Nave-Borealis (pid=2) enlistado. Tamaño=4
-[02:33:52] obj.ColaListos: desenlistado Nave-Cassiopeia (pid=3). Tamaño=3
-[02:33:52] obj.CPU: cargado Nave-Cassiopeia (pid=3) en el SOL.
-[02:33:52] ColaBloqueados: Nave-Cassiopeia (pid=3) enlistado. Tamaño=2
-[02:33:52] Nave-Cassiopeia (pid=3) realiza E/S y se bloquea.
-[02:33:52] obj.CPU: descargado Nave-Cassiopeia (pid=3) desde el SOL.
-[02:33:52] obj.Planificador: Nave-Cassiopeia (pid=3) fue bloqueado durante su quantum.
-[02:33:52] obj.ColaListos: desenlistado Nave-Draco (pid=4). Tamaño=2
-[02:33:52] obj.CPU: cargado Nave-Draco (pid=4) en el SOL.
-[02:33:53] ColaBloqueados: Nave-Draco (pid=4) enlistado. Tamaño=3
-[02:33:53] Nave-Draco (pid=4) realiza E/S y se bloquea.
-[02:33:53] obj.CPU: descargado Nave-Draco (pid=4) desde el SOL.
-[02:33:53] obj.Planificador: Nave-Draco (pid=4) fue bloqueado durante su quantum.
-[02:33:53] obj.ColaListos: desenlistado Nave-Dory (pid=1). Tamaño=1
-[02:33:53] obj.CPU: cargado Nave-Dory (pid=1) en el SOL.
-[02:33:53] obj.CPU: descargado Nave-Dory (pid=1) desde el SOL.
-[02:33:53] obj.ColaListos: Nave-Dory (pid=1) enlistado. Tamaño=2
-[02:33:53] obj.ColaListos: desenlistado Nave-Borealis (pid=2). Tamaño=1
-[02:33:53] obj.CPU: cargado Nave-Borealis (pid=2) en el SOL.
-[02:33:53] ColaBloqueados: removido Nave-Cassiopeia (pid=3). Tamaño=2
-[02:33:53] obj.ColaListos: Nave-Cassiopeia (pid=3) enlistado. Tamaño=2
-[02:33:53] obj.CPU: descargado Nave-Borealis (pid=2) desde el SOL.
-[02:33:53] obj.ColaListos: Nave-Borealis (pid=2) enlistado. Tamaño=3
-[02:33:53] obj.ColaListos: desenlistado Nave-Dory (pid=1). Tamaño=2
-[02:33:53] obj.CPU: cargado Nave-Dory (pid=1) en el SOL.
-[02:33:53] obj.CPU: descargado Nave-Dory (pid=1) desde el SOL.
-[02:33:53] obj.ColaListos: Nave-Dory (pid=1) enlistado. Tamaño=3
-[02:33:53] obj.ColaListos: desenlistado Nave-Cassiopeia (pid=3). Tamaño=2
-[02:33:53] obj.CPU: cargado Nave-Cassiopeia (pid=3) en el SOL.
-[02:33:53] obj.CPU: descargado Nave-Cassiopeia (pid=3) desde el SOL.
-[02:33:53] obj.ColaListos: Nave-Cassiopeia (pid=3) enlistado. Tamaño=3
-[02:33:53] obj.ColaListos: desenlistado Nave-Borealis (pid=2). Tamaño=2
-[02:33:53] obj.CPU: cargado Nave-Borealis (pid=2) en el SOL.
-[02:33:54] obj.CPU: descargado Nave-Borealis (pid=2) desde el SOL.
-[02:33:54] Memoria: liberados 3 marcos de Nave-Borealis (pid=2). Usados 15/50
-[02:33:54] obj.Planificador: Nave-Borealis (pid=2) TERMINADO.
-[02:33:54] obj.ColaListos: desenlistado Nave-Dory (pid=1). Tamaño=1
-[02:33:54] obj.CPU: cargado Nave-Dory (pid=1) en el SOL.
-[02:33:54] obj.CPU: descargado Nave-Dory (pid=1) desde el SOL.
-[02:33:54] obj.ColaListos: Nave-Dory (pid=1) enlistado. Tamaño=2
-[02:33:54] obj.ColaListos: desenlistado Nave-Cassiopeia (pid=3). Tamaño=1
-[02:33:54] obj.CPU: cargado Nave-Cassiopeia (pid=3) en el SOL.
-[02:33:54] Nave-Cassiopeia (pid=3) adquirio recurso Planeta-Y.
-[02:33:54] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=3
-[02:33:54] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 4
-[02:33:54] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=2
-[02:33:54] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 3
-[02:33:54] ColaBloqueados: removido Nave-Draco (pid=4). Tamaño=1
-[02:33:54] obj.ColaListos: Nave-Draco (pid=4) enlistado. Tamaño=2
-[02:33:54] obj.CPU: descargado Nave-Cassiopeia (pid=3) desde el SOL.
-[02:33:54] obj.ColaListos: Nave-Cassiopeia (pid=3) enlistado. Tamaño=3
-[02:33:54] obj.ColaListos: desenlistado Nave-Dory (pid=1). Tamaño=2
-[02:33:54] obj.CPU: cargado Nave-Dory (pid=1) en el SOL.
-[02:33:54] obj.CPU: descargado Nave-Dory (pid=1) desde el SOL.
-[02:33:54] Memoria: liberados 5 marcos de Nave-Dory (pid=1). Usados 10/50
-[02:33:54] obj.Planificador: Nave-Dory (pid=1) TERMINADO.
-[02:33:54] obj.ColaListos: desenlistado Nave-Draco (pid=4). Tamaño=1
-[02:33:54] obj.CPU: cargado Nave-Draco (pid=4) en el SOL.
-[02:33:55] obj.CPU: descargado Nave-Draco (pid=4) desde el SOL.
-[02:33:55] obj.ColaListos: Nave-Draco (pid=4) enlistado. Tamaño=2
-[02:33:55] obj.ColaListos: desenlistado Nave-Cassiopeia (pid=3). Tamaño=1
-[02:33:55] obj.CPU: cargado Nave-Cassiopeia (pid=3) en el SOL.
-[02:33:55] Nave-Cassiopeia (pid=3) adquirio recurso Estacion-Alpha.
-[02:33:55] obj.CPU: descargado Nave-Cassiopeia (pid=3) desde el SOL.
-[02:33:55] obj.ColaListos: Nave-Cassiopeia (pid=3) enlistado. Tamaño=2
-[02:33:55] obj.ColaListos: desenlistado Nave-Draco (pid=4). Tamaño=1
-[02:33:55] obj.CPU: cargado Nave-Draco (pid=4) en el SOL.
-[02:33:55] obj.CPU: descargado Nave-Draco (pid=4) desde el SOL.
-[02:33:55] Memoria: liberados 2 marcos de Nave-Draco (pid=4). Usados 8/50
-[02:33:55] obj.Planificador: Nave-Draco (pid=4) TERMINADO.
-[02:33:55] obj.ColaListos: desenlistado Nave-Cassiopeia (pid=3). Tamaño=0
-[02:33:55] obj.CPU: cargado Nave-Cassiopeia (pid=3) en el SOL.
-[02:33:55] obj.CPU: descargado Nave-Cassiopeia (pid=3) desde el SOL.
-[02:33:55] obj.ColaListos: Nave-Cassiopeia (pid=3) enlistado. Tamaño=1
-[02:33:55] obj.ColaListos: desenlistado Nave-Cassiopeia (pid=3). Tamaño=0
-[02:33:55] obj.CPU: cargado Nave-Cassiopeia (pid=3) en el SOL.
-[02:33:55] obj.CPU: descargado Nave-Cassiopeia (pid=3) desde el SOL.
-[02:33:55] obj.ColaListos: Nave-Cassiopeia (pid=3) enlistado. Tamaño=1
-[02:33:55] obj.ColaListos: desenlistado Nave-Cassiopeia (pid=3). Tamaño=0
-[02:33:55] obj.CPU: cargado Nave-Cassiopeia (pid=3) en el SOL.
-[02:33:55] obj.CPU: descargado Nave-Cassiopeia (pid=3) desde el SOL.
-[02:33:55] Memoria: liberados 7 marcos de Nave-Cassiopeia (pid=3). Usados 1/50
-[02:33:55] obj.Planificador: Nave-Cassiopeia (pid=3) TERMINADO.
-[02:33:56] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=4
-[02:33:56] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 5
-[02:33:56] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=3
-[02:33:56] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 4
-[02:33:57] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=5
-[02:33:57] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 6
-[02:33:57] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=4
-[02:33:57] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 5
-[02:33:57] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=6
-[02:33:57] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 7
-[02:33:57] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=5
-[02:33:57] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 6
-[02:33:57] ColaBloqueados: removido Nave-Equinox (pid=5). Tamaño=0
-[02:33:57] obj.ColaListos: Nave-Equinox (pid=5) enlistado. Tamaño=1
-[02:33:58] obj.ColaListos: desenlistado Nave-Equinox (pid=5). Tamaño=0
-[02:33:58] obj.CPU: cargado Nave-Equinox (pid=5) en el SOL.
-[02:33:58] obj.CPU: descargado Nave-Equinox (pid=5) desde el SOL.
-[02:33:58] obj.ColaListos: Nave-Equinox (pid=5) enlistado. Tamaño=1
-[02:33:58] obj.ColaListos: desenlistado Nave-Equinox (pid=5). Tamaño=0
-[02:33:58] obj.CPU: cargado Nave-Equinox (pid=5) en el SOL.
-[02:33:58] obj.CPU: descargado Nave-Equinox (pid=5) desde el SOL.
-[02:33:58] Memoria: liberados 1 marcos de Nave-Equinox (pid=5). Usados 0/50
-[02:33:58] obj.Planificador: Nave-Equinox (pid=5) TERMINADO.
-[02:33:58] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=7
-[02:33:58] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 8
-[02:33:58] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=6
-[02:33:58] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 7
-[02:33:59] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=8
-[02:33:59] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 9
-[02:33:59] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=7
-[02:33:59] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 8
-[02:34:01] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=9
-[02:34:01] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 10
-[02:34:01] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=8
-[02:34:01] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 9
-[02:34:03] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=10
-[02:34:03] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 11
-[02:34:03] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=9
-[02:34:03] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 10
-[02:34:05] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=11
-[02:34:05] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 12
-[02:34:05] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=10
-[02:34:05] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 11
-[02:34:06] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=12
-[02:34:06] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 13
-[02:34:06] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=11
-[02:34:06] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 12
-[02:34:07] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=13
-[02:34:07] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 14
-[02:34:07] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=12
-[02:34:07] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 13
-[02:34:07] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=14
-[02:34:07] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 15
-[02:34:07] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=13
-[02:34:07] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 14
-[02:34:10] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=15
-[02:34:10] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 16
-[02:34:10] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=14
-[02:34:10] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 15
-[02:34:11] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=16
-[02:34:11] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 17
-[02:34:11] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=15
-[02:34:11] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 16
-[02:34:11] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=17
-[02:34:11] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 18
-[02:34:11] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=16
-[02:34:11] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 17
-[02:34:12] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=18
-[02:34:12] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 19
-[02:34:12] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=17
-[02:34:12] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 18
-[02:34:12] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=19
-[02:34:12] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 20
-[02:34:12] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=18
-[02:34:12] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 19
-[02:34:13] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=20
-[02:34:13] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 21
-[02:34:13] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=19
-[02:34:13] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 20
-[02:34:14] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=21
-[02:34:14] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 22
-[02:34:14] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=20
-[02:34:14] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 21
-[02:34:15] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=22
-[02:34:15] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 23
-[02:34:15] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=21
-[02:34:15] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 22
-[02:34:17] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=23
-[02:34:17] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 24
-[02:34:17] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=22
-[02:34:17] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 23
-[02:34:18] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=24
-[02:34:18] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 25
-[02:34:18] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=23
-[02:34:18] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 24
-[02:34:19] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=25
-[02:34:19] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 26
-[02:34:19] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=24
-[02:34:19] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 25
-[02:34:22] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=26
-[02:34:22] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 27
-[02:34:22] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=25
-[02:34:22] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 26
-[02:34:22] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=27
-[02:34:22] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 28
-[02:34:22] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=26
-[02:34:22] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 27
-[02:34:23] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=28
-[02:34:23] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 29
-[02:34:23] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=27
-[02:34:23] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 28
-[02:34:24] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=29
-[02:34:24] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 30
-[02:34:24] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=28
-[02:34:24] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 29
-[02:34:25] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=30
-[02:34:25] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 31
-[02:34:25] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=29
-[02:34:25] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 30
-[02:34:28] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=31
-[02:34:28] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 32
-[02:34:28] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=30
-[02:34:28] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 31
-[02:34:30] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=32
-[02:34:30] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 33
-[02:34:30] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=31
-[02:34:30] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 32
-[02:34:30] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=33
-[02:34:30] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 34
-[02:34:30] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=32
-[02:34:30] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 33
-[02:34:33] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=34
-[02:34:33] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 35
-[02:34:33] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=33
-[02:34:33] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 34
-[02:34:33] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=35
-[02:34:33] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 36
-[02:34:33] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=34
-[02:34:33] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 35
-[02:34:35] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=36
-[02:34:35] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 37
-[02:34:35] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=35
-[02:34:35] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 36
-[02:34:35] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=37
-[02:34:35] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 38
-[02:34:35] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=36
-[02:34:35] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 37
-[02:34:37] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=38
-[02:34:37] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 39
-[02:34:37] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=37
-[02:34:37] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 38
-[02:34:41] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=39
-[02:34:41] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 40
-[02:34:41] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=38
-[02:34:41] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 39
-[02:34:42] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=40
-[02:34:42] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 41
-[02:34:42] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=39
-[02:34:42] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 40
-[02:34:44] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=41
-[02:34:44] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 42
-[02:34:44] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=40
-[02:34:44] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 41
-[02:34:46] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=42
-[02:34:46] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 43
-[02:34:46] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=41
-[02:34:46] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 42
-[02:34:46] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=43
-[02:34:46] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 44
-[02:34:46] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=42
-[02:34:46] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 43
-[02:34:47] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=44
-[02:34:47] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 45
-[02:34:47] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=43
-[02:34:47] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 44
-[02:34:51] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=45
-[02:34:51] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 46
-[02:34:51] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=44
-[02:34:51] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 45
-[02:34:51] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=46
-[02:34:51] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 47
-[02:34:51] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=45
-[02:34:51] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 46
-[02:34:52] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=47
-[02:34:52] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 48
-[02:34:52] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=46
-[02:34:52] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 47
-[02:34:53] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=48
-[02:34:53] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 49
-[02:34:53] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=47
-[02:34:53] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 48
-[02:34:56] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=49
-[02:34:56] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 50
-[02:34:56] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=48
-[02:34:56] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 49
-[02:34:57] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=50
-[02:34:57] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 51
-[02:34:57] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=49
-[02:34:57] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 50
-[02:34:58] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=51
-[02:34:58] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 52
-[02:34:58] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=50
-[02:34:58] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 51
-[02:34:59] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=52
-[02:34:59] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 53
-[02:34:59] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=51
-[02:34:59] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 52
-[02:34:59] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=53
-[02:34:59] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 54
-[02:34:59] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=52
-[02:34:59] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 53
-[02:35] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=54
-[02:35] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 55
-[02:35] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=53
-[02:35] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 54
-[02:35:01] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=55
-[02:35:01] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 56
-[02:35:01] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=54
-[02:35:01] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 55
-[02:35:08] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=56
-[02:35:08] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 57
-[02:35:08] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=55
-[02:35:08] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 56
-[02:35:09] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=57
-[02:35:09] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 58
-[02:35:09] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=56
-[02:35:09] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 57
-[02:35:11] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=58
-[02:35:11] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 59
-[02:35:11] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=57
-[02:35:11] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 58
-[02:35:11] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=59
-[02:35:11] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 60
-[02:35:11] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=58
-[02:35:11] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 59
-[02:35:12] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=60
-[02:35:12] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 61
-[02:35:12] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=59
-[02:35:12] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 60
-[02:35:13] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=61
-[02:35:13] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 62
-[02:35:13] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=60
-[02:35:13] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 61
-[02:35:13] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=62
-[02:35:13] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 63
-[02:35:13] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=61
-[02:35:13] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 62
-[02:35:14] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=63
-[02:35:14] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 64
-[02:35:14] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=62
-[02:35:14] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 63
-[02:35:15] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=64
-[02:35:15] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 65
-[02:35:15] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=63
-[02:35:15] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 64
-[02:35:17] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=65
-[02:35:17] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 66
-[02:35:17] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=64
-[02:35:17] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 65
-[02:35:17] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=66
-[02:35:17] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 67
-[02:35:17] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=65
-[02:35:17] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 66
-[02:35:18] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=67
-[02:35:18] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 68
-[02:35:18] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=66
-[02:35:18] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 67
-[02:35:20] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=68
-[02:35:20] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 69
-[02:35:20] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=67
-[02:35:20] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 68
-[02:35:20] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=69
-[02:35:20] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 70
-[02:35:20] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=68
-[02:35:20] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 69
-[02:35:21] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=70
-[02:35:21] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 71
-[02:35:21] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=69
-[02:35:21] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 70
-[02:35:22] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=71
-[02:35:22] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 72
-[02:35:22] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=70
-[02:35:22] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 71
-[02:35:22] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=72
-[02:35:22] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 73
-[02:35:22] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=71
-[02:35:22] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 72
-[02:35:23] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=73
-[02:35:23] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 74
-[02:35:23] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=72
-[02:35:23] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 73
-[02:35:25] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=74
-[02:35:25] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 75
-[02:35:25] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=73
-[02:35:25] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 74
-[02:35:27] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=75
-[02:35:27] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 76
-[02:35:27] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=74
-[02:35:27] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 75
-[02:35:28] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=76
-[02:35:28] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 77
-[02:35:28] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=75
-[02:35:28] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 76
-[02:35:29] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=77
-[02:35:29] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 78
-[02:35:29] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=76
-[02:35:29] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 77
-[02:35:32] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=78
-[02:35:32] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 79
-[02:35:32] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=77
-[02:35:32] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 78
-[02:35:34] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=79
-[02:35:34] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 80
-[02:35:34] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=78
-[02:35:34] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 79
-[02:35:37] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=80
-[02:35:37] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 81
-[02:35:37] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=79
-[02:35:37] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 80
-[02:35:37] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=81
-[02:35:37] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 82
-[02:35:37] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=80
-[02:35:37] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 81
-[02:35:39] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=82
-[02:35:39] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 83
-[02:35:39] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=81
-[02:35:39] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 82
-[02:35:41] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=83
-[02:35:41] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 84
-[02:35:41] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=82
-[02:35:41] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 83
-[02:35:42] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=84
-[02:35:42] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 85
-[02:35:42] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=83
-[02:35:42] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 84
-[02:35:44] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=85
-[02:35:44] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 86
-[02:35:44] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=84
-[02:35:44] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 85
-[02:35:46] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=86
-[02:35:46] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 87
-[02:35:46] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=85
-[02:35:46] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 86
-[02:35:46] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=87
-[02:35:46] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 88
-[02:35:46] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=86
-[02:35:46] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 87
-[02:35:47] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=88
-[02:35:47] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 89
-[02:35:47] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=87
-[02:35:47] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 88
-[02:35:48] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=89
-[02:35:48] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 90
-[02:35:48] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=88
-[02:35:48] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 89
-[02:35:48] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=90
-[02:35:48] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 91
-[02:35:48] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=89
-[02:35:48] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 90
-[02:35:49] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=91
-[02:35:49] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 92
-[02:35:49] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=90
-[02:35:49] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 91
-[02:35:49] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=92
-[02:35:49] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 93
-[02:35:49] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=91
-[02:35:49] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 92
-[02:35:50] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=93
-[02:35:50] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 94
-[02:35:50] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=92
-[02:35:50] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 93
-[02:35:51] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=94
-[02:35:51] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 95
-[02:35:51] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=93
-[02:35:51] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 94
-[02:35:53] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=95
-[02:35:53] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 96
-[02:35:53] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=94
-[02:35:53] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 95
-[02:35:54] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=96
-[02:35:54] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 97
-[02:35:54] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=95
-[02:35:54] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 96
-[02:35:59] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=97
-[02:35:59] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 98
-[02:35:59] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=96
-[02:35:59] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 97
-[02:36:03] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=98
-[02:36:03] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 99
-[02:36:03] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=97
-[02:36:03] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 98
-[02:36:03] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=99
-[02:36:03] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 100
-[02:36:03] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=98
-[02:36:03] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 99
-[02:36:04] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=100
-[02:36:04] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 101
-[02:36:04] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=99
-[02:36:04] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 100
-[02:36:05] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=101
-[02:36:05] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 102
-[02:36:05] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=100
-[02:36:05] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 101
-[02:36:07] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=102
-[02:36:07] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 103
-[02:36:07] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=101
-[02:36:07] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 102
-[02:36:07] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=103
-[02:36:07] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 104
-[02:36:07] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=102
-[02:36:07] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 103
-[02:36:08] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=104
-[02:36:08] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 105
-[02:36:08] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=103
-[02:36:08] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 104
-[02:36:09] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=105
-[02:36:09] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 106
-[02:36:09] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=104
-[02:36:09] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 105
-[02:36:10] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=106
-[02:36:10] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 107
-[02:36:10] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=105
-[02:36:10] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 106
-[02:36:13] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=107
-[02:36:13] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 108
-[02:36:13] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=106
-[02:36:13] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 107
-[02:36:14] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=108
-[02:36:14] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 109
-[02:36:14] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=107
-[02:36:14] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 108
-[02:36:15] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=109
-[02:36:15] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 110
-[02:36:15] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=108
-[02:36:15] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 109
-[02:36:16] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=110
-[02:36:16] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 111
-[02:36:16] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=109
-[02:36:16] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 110
-[02:36:17] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=111
-[02:36:17] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 112
-[02:36:17] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=110
-[02:36:17] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 111
-[02:36:17] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=112
-[02:36:17] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 113
-[02:36:17] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=111
-[02:36:17] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 112
-[02:36:19] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=113
-[02:36:19] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 114
-[02:36:19] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=112
-[02:36:19] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 113
-[02:36:20] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=114
-[02:36:20] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 115
-[02:36:20] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=113
-[02:36:20] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 114
-[02:36:21] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=115
-[02:36:21] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 116
-[02:36:21] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=114
-[02:36:21] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 115
-[02:36:22] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=116
-[02:36:22] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 117
-[02:36:22] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=115
-[02:36:22] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 116
-[02:36:24] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=117
-[02:36:24] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 118
-[02:36:24] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=116
-[02:36:24] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 117
-[02:36:25] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=118
-[02:36:25] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 119
-[02:36:25] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=117
-[02:36:25] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 118
-[02:36:27] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=119
-[02:36:27] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 120
-[02:36:27] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=118
-[02:36:27] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 119
-[02:36:28] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=120
-[02:36:28] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 121
-[02:36:28] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=119
-[02:36:28] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 120
-[02:36:29] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=121
-[02:36:29] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 122
-[02:36:29] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=120
-[02:36:29] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 121
-[02:36:30] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=122
-[02:36:30] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 123
-[02:36:30] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=121
-[02:36:30] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 122
-[02:36:35] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=123
-[02:36:35] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 124
-[02:36:35] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=122
-[02:36:35] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 123
-[02:36:41] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=124
-[02:36:41] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 125
-[02:36:41] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=123
-[02:36:41] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 124
-[02:36:42] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=125
-[02:36:42] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 126
-[02:36:42] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=124
-[02:36:42] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 125
-[02:36:43] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=126
-[02:36:43] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 127
-[02:36:43] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=125
-[02:36:43] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 126
-[02:36:45] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=127
-[02:36:45] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 128
-[02:36:45] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=126
-[02:36:45] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 127
-[02:36:46] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=128
-[02:36:46] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 129
-[02:36:46] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=127
-[02:36:46] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 128
-[02:36:47] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=129
-[02:36:47] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 130
-[02:36:47] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=128
-[02:36:47] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 129
-[02:36:48] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=130
-[02:36:48] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 131
-[02:36:48] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=129
-[02:36:48] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 130
-[02:36:48] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=131
-[02:36:48] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 132
-[02:36:48] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=130
-[02:36:48] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 131
-[02:36:52] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=132
-[02:36:52] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 133
-[02:36:52] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=131
-[02:36:52] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 132
-[02:36:53] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=133
-[02:36:53] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 134
-[02:36:53] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=132
-[02:36:53] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 133
-[02:36:54] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=134
-[02:36:54] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 135
-[02:36:54] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=133
-[02:36:54] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 134
-[02:36:54] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=135
-[02:36:54] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 136
-[02:36:54] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=134
-[02:36:54] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 135
-[02:36:55] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=136
-[02:36:55] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 137
-[02:36:55] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=135
-[02:36:55] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 136
-[02:36:55] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=137
-[02:36:55] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 138
-[02:36:55] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=136
-[02:36:55] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 137
+[03:18:01] === Inicializando Kernel Space OS ===
+[03:18:01] Kernel listo. Esperando comandos...
+[03:18:01] obj.Planificador: iniciando Round-Robin con quantum=200ms
+[03:18:01] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=2
+[03:18:01] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 3
+[03:18:01] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=1
+[03:18:01] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 2
+[03:18:02] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=3
+[03:18:02] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 4
+[03:18:02] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=2
+[03:18:02] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 3
+[03:18:03] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=4
+[03:18:03] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 5
+[03:18:03] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=3
+[03:18:03] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 4
+[03:18:07] BOTON: Solicitando lanzamiento de Nave-1 (2 pags)
+[03:18:07] Memoria: asignados 2 marcos a Nave-1 (pid=1). Usados 2/50
+[03:18:07] obj.ColaListos: Nave-1 (pid=1) enlistado. Tamaño=1
+[03:18:07] SISTEMA: Nave-1 admitido en READY.
+[03:18:07] obj.ColaListos: desenlistado Nave-1 (pid=1). Tamaño=0
+[03:18:07] obj.CPU: cargado Nave-1 (pid=1) en el SOL.
+[03:18:07] Nave-1 (pid=1) adquirio recurso Estacion-Alpha.
+[03:18:07] obj.CPU: descargado Nave-1 (pid=1) desde el SOL.
+[03:18:07] obj.ColaListos: Nave-1 (pid=1) enlistado. Tamaño=1
+[03:18:07] obj.ColaListos: desenlistado Nave-1 (pid=1). Tamaño=0
+[03:18:07] obj.CPU: cargado Nave-1 (pid=1) en el SOL.
+[03:18:07] obj.CPU: descargado Nave-1 (pid=1) desde el SOL.
+[03:18:07] obj.ColaListos: Nave-1 (pid=1) enlistado. Tamaño=1
+[03:18:07] obj.ColaListos: desenlistado Nave-1 (pid=1). Tamaño=0
+[03:18:07] obj.CPU: cargado Nave-1 (pid=1) en el SOL.
+[03:18:07] obj.CPU: descargado Nave-1 (pid=1) desde el SOL.
+[03:18:07] obj.ColaListos: Nave-1 (pid=1) enlistado. Tamaño=1
+[03:18:07] obj.ColaListos: desenlistado Nave-1 (pid=1). Tamaño=0
+[03:18:07] obj.CPU: cargado Nave-1 (pid=1) en el SOL.
+[03:18:08] obj.CPU: descargado Nave-1 (pid=1) desde el SOL.
+[03:18:08] obj.ColaListos: Nave-1 (pid=1) enlistado. Tamaño=1
+[03:18:08] obj.ColaListos: desenlistado Nave-1 (pid=1). Tamaño=0
+[03:18:08] obj.CPU: cargado Nave-1 (pid=1) en el SOL.
+[03:18:08] obj.CPU: descargado Nave-1 (pid=1) desde el SOL.
+[03:18:08] obj.ColaListos: Nave-1 (pid=1) enlistado. Tamaño=1
+[03:18:08] obj.ColaListos: desenlistado Nave-1 (pid=1). Tamaño=0
+[03:18:08] obj.CPU: cargado Nave-1 (pid=1) en el SOL.
+[03:18:08] obj.CPU: descargado Nave-1 (pid=1) desde el SOL.
+[03:18:08] obj.ColaListos: Nave-1 (pid=1) enlistado. Tamaño=1
+[03:18:08] obj.ColaListos: desenlistado Nave-1 (pid=1). Tamaño=0
+[03:18:08] obj.CPU: cargado Nave-1 (pid=1) en el SOL.
+[03:18:08] ColaBloqueados: Nave-1 (pid=1) enlistado. Tamaño=1
+[03:18:08] Nave-1 (pid=1) realiza E/S y se bloquea.
+[03:18:08] obj.CPU: descargado Nave-1 (pid=1) desde el SOL.
+[03:18:08] obj.Planificador: Nave-1 (pid=1) fue bloqueado durante su quantum.
+[03:18:08] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=5
+[03:18:08] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 6
+[03:18:08] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=4
+[03:18:08] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 5
+[03:18:08] ColaBloqueados: removido Nave-1 (pid=1). Tamaño=0
+[03:18:08] obj.ColaListos: Nave-1 (pid=1) enlistado. Tamaño=1
+[03:18:08] obj.ColaListos: desenlistado Nave-1 (pid=1). Tamaño=0
+[03:18:08] obj.CPU: cargado Nave-1 (pid=1) en el SOL.
+[03:18:09] obj.CPU: descargado Nave-1 (pid=1) desde el SOL.
+[03:18:09] obj.ColaListos: Nave-1 (pid=1) enlistado. Tamaño=1
+[03:18:09] obj.ColaListos: desenlistado Nave-1 (pid=1). Tamaño=0
+[03:18:09] obj.CPU: cargado Nave-1 (pid=1) en el SOL.
+[03:18:09] obj.CPU: descargado Nave-1 (pid=1) desde el SOL.
+[03:18:09] obj.ColaListos: Nave-1 (pid=1) enlistado. Tamaño=1
+[03:18:09] obj.ColaListos: desenlistado Nave-1 (pid=1). Tamaño=0
+[03:18:09] obj.CPU: cargado Nave-1 (pid=1) en el SOL.
+[03:18:09] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=6
+[03:18:09] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 7
+[03:18:09] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=5
+[03:18:09] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 6
+[03:18:09] obj.CPU: descargado Nave-1 (pid=1) desde el SOL.
+[03:18:09] obj.ColaListos: Nave-1 (pid=1) enlistado. Tamaño=1
+[03:18:09] obj.ColaListos: desenlistado Nave-1 (pid=1). Tamaño=0
+[03:18:09] obj.CPU: cargado Nave-1 (pid=1) en el SOL.
+[03:18:09] obj.CPU: descargado Nave-1 (pid=1) desde el SOL.
+[03:18:09] obj.ColaListos: Nave-1 (pid=1) enlistado. Tamaño=1
+[03:18:09] obj.ColaListos: desenlistado Nave-1 (pid=1). Tamaño=0
+[03:18:09] obj.CPU: cargado Nave-1 (pid=1) en el SOL.
+[03:18:09] obj.CPU: descargado Nave-1 (pid=1) desde el SOL.
+[03:18:09] obj.ColaListos: Nave-1 (pid=1) enlistado. Tamaño=1
+[03:18:09] obj.ColaListos: desenlistado Nave-1 (pid=1). Tamaño=0
+[03:18:09] obj.CPU: cargado Nave-1 (pid=1) en el SOL.
+[03:18:10] obj.CPU: descargado Nave-1 (pid=1) desde el SOL.
+[03:18:10] Memoria: liberados 2 marcos de Nave-1 (pid=1). Usados 0/50
+[03:18:10] obj.Planificador: Nave-1 (pid=1) TERMINADO.
+[03:18:10] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=7
+[03:18:10] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 8
+[03:18:10] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=6
+[03:18:10] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 7
+[03:18:11] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=8
+[03:18:11] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 9
+[03:18:11] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=7
+[03:18:11] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 8
+[03:18:12] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=9
+[03:18:12] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 10
+[03:18:12] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=8
+[03:18:12] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 9
+[03:18:13] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=10
+[03:18:13] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 11
+[03:18:13] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=9
+[03:18:13] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 10
+[03:18:15] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=11
+[03:18:15] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 12
+[03:18:15] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=10
+[03:18:15] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 11
+[03:18:15] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=12
+[03:18:15] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 13
+[03:18:15] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=11
+[03:18:15] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 12
+[03:18:17] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=13
+[03:18:17] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 14
+[03:18:17] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=12
+[03:18:17] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 13
+[03:18:19] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=14
+[03:18:19] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 15
+[03:18:19] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=13
+[03:18:19] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 14
+[03:18:20] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=15
+[03:18:20] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 16
+[03:18:20] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=14
+[03:18:20] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 15
+[03:18:21] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=16
+[03:18:21] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 17
+[03:18:21] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=15
+[03:18:21] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 16
+[03:18:21] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=17
+[03:18:21] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 18
+[03:18:21] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=16
+[03:18:21] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 17
+[03:18:22] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=18
+[03:18:22] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 19
+[03:18:22] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=17
+[03:18:22] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 18
+[03:18:22] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=19
+[03:18:22] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 20
+[03:18:22] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=18
+[03:18:22] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 19
+[03:18:24] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=20
+[03:18:24] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 21
+[03:18:24] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=19
+[03:18:24] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 20
+[03:18:24] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=21
+[03:18:24] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 22
+[03:18:24] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=20
+[03:18:24] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 21
+[03:18:26] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=22
+[03:18:26] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 23
+[03:18:26] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=21
+[03:18:26] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 22
+[03:18:27] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=23
+[03:18:27] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 24
+[03:18:27] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=22
+[03:18:27] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 23
+[03:18:28] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=24
+[03:18:28] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 25
+[03:18:28] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=23
+[03:18:28] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 24
+[03:18:28] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=25
+[03:18:28] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 26
+[03:18:28] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=24
+[03:18:28] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 25
+[03:18:29] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=26
+[03:18:29] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 27
+[03:18:29] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=25
+[03:18:29] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 26
+[03:18:30] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=27
+[03:18:30] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 28
+[03:18:30] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=26
+[03:18:30] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 27
+[03:18:31] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=28
+[03:18:31] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 29
+[03:18:31] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=27
+[03:18:31] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 28
+[03:18:33] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=29
+[03:18:33] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 30
+[03:18:33] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=28
+[03:18:33] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 29
+[03:18:35] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=30
+[03:18:35] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 31
+[03:18:35] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=29
+[03:18:35] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 30
+[03:18:36] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=31
+[03:18:36] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 32
+[03:18:36] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=30
+[03:18:36] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 31
+[03:18:38] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=32
+[03:18:38] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 33
+[03:18:38] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=31
+[03:18:38] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 32
+[03:18:40] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=33
+[03:18:40] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 34
+[03:18:40] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=32
+[03:18:40] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 33
+[03:18:41] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=34
+[03:18:41] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 35
+[03:18:41] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=33
+[03:18:41] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 34
+[03:18:44] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=35
+[03:18:44] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 36
+[03:18:44] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=34
+[03:18:44] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 35
+[03:18:46] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=36
+[03:18:46] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 37
+[03:18:46] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=35
+[03:18:46] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 36
+[03:18:47] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=37
+[03:18:47] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 38
+[03:18:47] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=36
+[03:18:47] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 37
+[03:18:49] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=38
+[03:18:49] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 39
+[03:18:49] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=37
+[03:18:49] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 38
+[03:18:53] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=39
+[03:18:53] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 40
+[03:18:53] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=38
+[03:18:53] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 39
+[03:18:55] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=40
+[03:18:55] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 41
+[03:18:55] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=39
+[03:18:55] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 40
+[03:18:56] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=41
+[03:18:56] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 42
+[03:18:56] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=40
+[03:18:56] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 41
+[03:18:56] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=42
+[03:18:56] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 43
+[03:18:56] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=41
+[03:18:56] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 42
+[03:19] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=43
+[03:19] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 44
+[03:19] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=42
+[03:19] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 43
+[03:19] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=44
+[03:19] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 45
+[03:19] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=43
+[03:19] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 44
+[03:19:01] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=45
+[03:19:01] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 46
+[03:19:01] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=44
+[03:19:01] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 45
+[03:19:03] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=46
+[03:19:03] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 47
+[03:19:03] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=45
+[03:19:03] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 46
+[03:19:04] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=47
+[03:19:04] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 48
+[03:19:04] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=46
+[03:19:04] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 47
+[03:19:05] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=48
+[03:19:05] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 49
+[03:19:05] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=47
+[03:19:05] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 48
+[03:19:06] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=49
+[03:19:06] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 50
+[03:19:06] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=48
+[03:19:06] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 49
+[03:19:06] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=50
+[03:19:06] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 51
+[03:19:06] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=49
+[03:19:06] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 50
+[03:19:08] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=51
+[03:19:08] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 52
+[03:19:08] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=50
+[03:19:08] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 51
+[03:19:08] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=52
+[03:19:08] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 53
+[03:19:08] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=51
+[03:19:08] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 52
+[03:19:11] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=53
+[03:19:11] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 54
+[03:19:11] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=52
+[03:19:11] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 53
+[03:19:13] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=54
+[03:19:13] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 55
+[03:19:13] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=53
+[03:19:13] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 54
+[03:19:14] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=55
+[03:19:14] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 56
+[03:19:14] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=54
+[03:19:14] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 55
+[03:19:15] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=56
+[03:19:15] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 57
+[03:19:15] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=55
+[03:19:15] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 56
+[03:19:16] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=57
+[03:19:16] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 58
+[03:19:16] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=56
+[03:19:16] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 57
+[03:19:16] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=58
+[03:19:16] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 59
+[03:19:16] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=57
+[03:19:16] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 58
+[03:19:17] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=59
+[03:19:17] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 60
+[03:19:17] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=58
+[03:19:17] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 59
+[03:19:17] Semaforo Portal-EstAlpha: SIGNAL llamado. Valor actual=60
+[03:19:17] Semaforo Portal-EstAlpha: ningun proceso esperando. Valor incrementado a 61
+[03:19:17] Semaforo Portal-Marte: SIGNAL llamado. Valor actual=59
+[03:19:17] Semaforo Portal-Marte: ningun proceso esperando. Valor incrementado a 60
