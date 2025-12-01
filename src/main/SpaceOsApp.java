@@ -38,7 +38,13 @@ public class SpaceOsApp extends GameApplication {
 
     @Override
     protected void initUI() {
-        FXGL.getGameScene().setBackgroundColor(Color.web("#0a0a2a"));
+
+        // Si tienes una imagen llamada "fondo.jpg" en src/assets/textures/, descomenta esto:
+        // FXGL.getGameScene().setBackgroundRepeat("fondo.jpg");
+
+        // Si no hay imagen, usamos el color espacio profundo:
+        FXGL.getGameScene().setBackgroundColor(Color.web("#050510"));
+        //FXGL.getGameScene().setBackgroundColor(Color.web("#0a0a2a"));
         TextArea logTextArea = new TextArea();
         logTextArea.setEditable(false);
         logTextArea.setWrapText(true);
@@ -69,6 +75,13 @@ public class SpaceOsApp extends GameApplication {
     @Override
     protected void initGame() {
         FXGL.getGameWorld().addEntityFactory(new SpaceOsFactory());
+
+        // --- GENERACIÓN DE ESTRELLAS DE FONDO ---
+        for (int i = 0; i < 150; i++) {
+            double x = Math.random() * FXGL.getAppWidth();
+            double y = Math.random() * FXGL.getAppHeight();
+            FXGL.spawn("ESTRELLA", x, y);
+        }
 
         double cx = (FXGL.getAppWidth() * 0.66) / 2 + (FXGL.getAppWidth() * 0.33);
         double cy = FXGL.getAppHeight() / 2.0;

@@ -1,73 +1,89 @@
-[03:54] Planificador: Iniciando Round-Robin (Quantum=200ms)
-[03:54:12] Memoria: Cargado Nave-1.
-[03:54:12] ColaListos: Nave-1 en órbita de espera.
-[03:54:13] CPU: Nave-1 aterrizó en el SOL.
-[03:54:13] CPU: Nave-1 despegando del SOL.
-[03:54:14] ColaListos: Nave-1 en órbita de espera.
-[03:54:15] CPU: Nave-1 aterrizó en el SOL.
-[03:54:16] ColaBloqueados: Nave-1 atrapado en gravedad roja.
-[03:54:16] Nave-1 realiza E/S y se bloquea.
-[03:54:16] CPU: Nave-1 despegando del SOL.
-[03:54:17] ColaListos: Nave-1 en órbita de espera.
-[03:54:18] CPU: Nave-1 aterrizó en el SOL.
-[03:54:18] CPU: Nave-1 despegando del SOL.
-[03:54:19] ColaListos: Nave-1 en órbita de espera.
-[03:54:20] CPU: Nave-1 aterrizó en el SOL.
-[03:54:20] CPU: Nave-1 despegando del SOL.
-[03:54:21] ColaListos: Nave-1 en órbita de espera.
-[03:54:22] CPU: Nave-1 aterrizó en el SOL.
-[03:54:22] CPU: Nave-1 despegando del SOL.
-[03:54:23] ColaListos: Nave-1 en órbita de espera.
-[03:54:24] CPU: Nave-1 aterrizó en el SOL.
-[03:54:24] CPU: Nave-1 despegando del SOL.
-[03:54:25] ColaListos: Nave-1 en órbita de espera.
-[03:54:25] CPU: Nave-1 aterrizó en el SOL.
-[03:54:26] CPU: Nave-1 despegando del SOL.
-[03:54:26] ColaListos: Nave-1 en órbita de espera.
-[03:54:27] CPU: Nave-1 aterrizó en el SOL.
-[03:54:28] CPU: Nave-1 despegando del SOL.
-[03:54:28] ColaListos: Nave-1 en órbita de espera.
-[03:54:29] CPU: Nave-1 aterrizó en el SOL.
-[03:54:29] CPU: Nave-1 despegando del SOL.
-[03:54:30] ColaListos: Nave-1 en órbita de espera.
-[03:54:31] CPU: Nave-1 aterrizó en el SOL.
-[03:54:31] CPU: Nave-1 despegando del SOL.
-[03:54:32] ColaListos: Nave-1 en órbita de espera.
-[03:54:33] CPU: Nave-1 aterrizó en el SOL.
-[03:54:33] CPU: Nave-1 despegando del SOL.
-[03:54:34] ColaListos: Nave-1 en órbita de espera.
-[03:54:35] CPU: Nave-1 aterrizó en el SOL.
-[03:54:36] Nave-1 recolectó Estacion-Alpha.
-[03:54:36] CPU: Nave-1 despegando del SOL.
-[03:54:36] ColaListos: Nave-1 en órbita de espera.
-[03:54:37] CPU: Nave-1 aterrizó en el SOL.
-[03:54:37] CPU: Nave-1 despegando del SOL.
-[03:54:38] ColaListos: Nave-1 en órbita de espera.
-[03:54:39] CPU: Nave-1 aterrizó en el SOL.
-[03:54:39] CPU: Nave-1 despegando del SOL.
-[03:54:40] ColaListos: Nave-1 en órbita de espera.
-[03:54:41] CPU: Nave-1 aterrizó en el SOL.
-[03:54:41] CPU: Nave-1 despegando del SOL.
-[03:54:42] ColaListos: Nave-1 en órbita de espera.
-[03:54:43] CPU: Nave-1 aterrizó en el SOL.
-[03:54:43] CPU: Nave-1 despegando del SOL.
-[03:54:43] Planificador: Nave-1 TERMINADO.
-[03:55:30] Memoria: Cargado Nave-2.
-[03:55:30] ColaListos: Nave-2 en órbita de espera.
-[03:55:30] Memoria: Cargado Nave-3.
-[03:55:30] ColaListos: Nave-3 en órbita de espera.
-[03:55:31] CPU: Nave-2 aterrizó en el SOL.
-[03:55:31] CPU: Nave-2 despegando del SOL.
-[03:55:32] ColaListos: Nave-2 en órbita de espera.
-[03:55:33] CPU: Nave-3 aterrizó en el SOL.
-[03:55:33] CPU: Nave-3 despegando del SOL.
-[03:55:34] ColaListos: Nave-3 en órbita de espera.
-[03:55:34] CPU: Nave-2 aterrizó en el SOL.
-[03:55:35] CPU: Nave-2 despegando del SOL.
-[03:55:35] ColaListos: Nave-2 en órbita de espera.
-[03:55:36] CPU: Nave-3 aterrizó en el SOL.
-[03:55:37] CPU: Nave-3 despegando del SOL.
-[03:55:37] ColaListos: Nave-3 en órbita de espera.
-[03:55:38] CPU: Nave-2 aterrizó en el SOL.
-[03:55:38] CPU: Nave-2 despegando del SOL.
-[03:55:39] Memoria: Cargado Nave-4.
+[04:20:24] Planificador: Iniciando Round-Robin (Quantum=200ms)
+[04:20:28] Memoria: Cargado Nave-1.
+[04:20:28] ColaListos: Nave-1 en órbita de espera.
+[04:20:29] CPU: Nave-1 aterrizó en el SOL.
+[04:20:30] Nave-1 recolectó Marte.
+[04:20:30] CPU: Nave-1 despegando del SOL.
+[04:20:31] ColaListos: Nave-1 en órbita de espera.
+[04:20:32] CPU: Nave-1 aterrizó en el SOL.
+[04:20:32] CPU: Nave-1 despegando del SOL.
+[04:20:33] ColaListos: Nave-1 en órbita de espera.
+[04:20:33] CPU: Nave-1 aterrizó en el SOL.
+[04:20:34] CPU: Nave-1 despegando del SOL.
+[04:20:34] ColaListos: Nave-1 en órbita de espera.
+[04:20:35] CPU: Nave-1 aterrizó en el SOL.
+[04:20:35] CPU: Nave-1 despegando del SOL.
+[04:20:36] ColaListos: Nave-1 en órbita de espera.
+[04:20:37] CPU: Nave-1 aterrizó en el SOL.
+[04:20:37] CPU: Nave-1 despegando del SOL.
+[04:20:38] ColaListos: Nave-1 en órbita de espera.
+[04:20:39] CPU: Nave-1 aterrizó en el SOL.
+[04:20:39] CPU: Nave-1 despegando del SOL.
+[04:20:40] ColaListos: Nave-1 en órbita de espera.
+[04:20:41] CPU: Nave-1 aterrizó en el SOL.
+[04:20:41] Nave-1 recolectó Estacion-Alpha.
+[04:20:42] CPU: Nave-1 despegando del SOL.
+[04:20:42] ColaListos: Nave-1 en órbita de espera.
+[04:20:43] CPU: Nave-1 aterrizó en el SOL.
+[04:20:43] CPU: Nave-1 despegando del SOL.
+[04:20:44] ColaListos: Nave-1 en órbita de espera.
+[04:20:45] CPU: Nave-1 aterrizó en el SOL.
+[04:20:45] CPU: Nave-1 despegando del SOL.
+[04:20:46] ColaListos: Nave-1 en órbita de espera.
+[04:20:47] CPU: Nave-1 aterrizó en el SOL.
+[04:20:47] CPU: Nave-1 despegando del SOL.
+[04:20:48] ColaListos: Nave-1 en órbita de espera.
+[04:20:48] CPU: Nave-1 aterrizó en el SOL.
+[04:20:49] CPU: Nave-1 despegando del SOL.
+[04:20:50] ColaListos: Nave-1 en órbita de espera.
+[04:20:50] CPU: Nave-1 aterrizó en el SOL.
+[04:20:51] CPU: Nave-1 despegando del SOL.
+[04:20:51] ColaListos: Nave-1 en órbita de espera.
+[04:20:52] CPU: Nave-1 aterrizó en el SOL.
+[04:20:52] CPU: Nave-1 despegando del SOL.
+[04:20:53] ColaListos: Nave-1 en órbita de espera.
+[04:20:54] CPU: Nave-1 aterrizó en el SOL.
+[04:20:55] ColaBloqueados: Nave-1 atrapado en gravedad roja.
+[04:20:55] Nave-1 realiza E/S y se bloquea.
+[04:20:55] CPU: Nave-1 despegando del SOL.
+[04:20:56] ColaListos: Nave-1 en órbita de espera.
+[04:20:56] CPU: Nave-1 aterrizó en el SOL.
+[04:20:57] CPU: Nave-1 despegando del SOL.
+[04:20:57] ColaListos: Nave-1 en órbita de espera.
+[04:20:58] CPU: Nave-1 aterrizó en el SOL.
+[04:20:58] CPU: Nave-1 despegando del SOL.
+[04:20:59] ColaListos: Nave-1 en órbita de espera.
+[04:21] CPU: Nave-1 aterrizó en el SOL.
+[04:21] CPU: Nave-1 despegando del SOL.
+[04:21:01] ColaListos: Nave-1 en órbita de espera.
+[04:21:02] CPU: Nave-1 aterrizó en el SOL.
+[04:21:02] CPU: Nave-1 despegando del SOL.
+[04:21:03] ColaListos: Nave-1 en órbita de espera.
+[04:21:04] CPU: Nave-1 aterrizó en el SOL.
+[04:21:04] CPU: Nave-1 despegando del SOL.
+[04:21:05] ColaListos: Nave-1 en órbita de espera.
+[04:21:05] CPU: Nave-1 aterrizó en el SOL.
+[04:21:06] CPU: Nave-1 despegando del SOL.
+[04:21:06] Planificador: Nave-1 TERMINADO.
+[04:21:19] Memoria: Cargado Nave-2.
+[04:21:19] ColaListos: Nave-2 en órbita de espera.
+[04:21:19] CPU: Nave-2 aterrizó en el SOL.
+[04:21:20] CPU: Nave-2 despegando del SOL.
+[04:21:20] ColaListos: Nave-2 en órbita de espera.
+[04:21:21] CPU: Nave-2 aterrizó en el SOL.
+[04:21:21] CPU: Nave-2 despegando del SOL.
+[04:21:22] ColaListos: Nave-2 en órbita de espera.
+[04:21:23] CPU: Nave-2 aterrizó en el SOL.
+[04:21:23] CPU: Nave-2 despegando del SOL.
+[04:21:24] ColaListos: Nave-2 en órbita de espera.
+[04:21:25] CPU: Nave-2 aterrizó en el SOL.
+[04:21:25] CPU: Nave-2 despegando del SOL.
+[04:21:26] ColaListos: Nave-2 en órbita de espera.
+[04:21:27] CPU: Nave-2 aterrizó en el SOL.
+[04:21:27] CPU: Nave-2 despegando del SOL.
+[04:21:28] ColaListos: Nave-2 en órbita de espera.
+[04:21:28] CPU: Nave-2 aterrizó en el SOL.
+[04:21:29] CPU: Nave-2 despegando del SOL.
+[04:21:29] ColaListos: Nave-2 en órbita de espera.
+[04:21:30] CPU: Nave-2 aterrizó en el SOL.
+[04:21:30] CPU: Nave-2 despegando del SOL.

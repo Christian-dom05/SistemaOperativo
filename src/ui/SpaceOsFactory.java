@@ -1,5 +1,7 @@
 package ui;
 
+import javafx.geometry.Point2D;
+import javafx.util.Duration; // Asegúrate de importar esto
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
@@ -148,5 +150,30 @@ public class SpaceOsFactory implements EntityFactory {
                 .view(text)
                 .zIndex(-1) // Que se dibuje detrás de las naves
                 .build();
+    }
+
+    @Spawns("ESTRELLA")
+    public Entity newEstrella(SpawnData data) {
+        // Un círculo blanco muy pequeño
+        Circle shape = new Circle(1.5, Color.WHITE);
+        shape.setOpacity(0.6); // Semitransparente
+
+        // Animación simple de parpadeo (Scale)
+        Entity estrella = entityBuilder(data)
+                .view(shape)
+                .zIndex(-10) // Poner muy al fondo
+                .build();
+
+        // Añadir animación de parpadeo aleatorio
+        FXGL.animationBuilder()
+                .duration(Duration.seconds(1 + Math.random() * 2))
+                .repeatInfinitely()
+                .autoReverse(true)
+                .scale(estrella)
+                .from(new Point2D(1, 1))
+                .to(new Point2D(0.5, 0.5))
+                .buildAndPlay();
+
+        return estrella;
     }
 }
