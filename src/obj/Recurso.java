@@ -1,3 +1,5 @@
+package obj;
+
 public class Recurso {
     public final String nombre;
     private final int cantidadTotal;
@@ -8,12 +10,18 @@ public class Recurso {
         this.cantidadTotal = cantidad;
     }
 
-    public synchronized boolean solicitar() {
-        if (enUso < cantidadTotal) { enUso++; return true; }
+    public synchronized boolean solicitar()
+    {
+        if (enUso < cantidadTotal)
+        {
+            enUso++;
+            return true;
+        }
         return false;
     }
 
-    public synchronized void liberar() {
+    public synchronized void liberar()
+    {
         if (enUso > 0) enUso--;
     }
 

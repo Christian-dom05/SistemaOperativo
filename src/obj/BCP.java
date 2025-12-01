@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PCB {
+public class BCP {
     public final int pid;
     public String nombre;
     public EstadoProceso estado;
@@ -16,7 +16,7 @@ public class PCB {
     public List<String> recursosNecesarios = new ArrayList<>();
     public int paginasMemoria;
 
-    public PCB(int pid, String nombre, int cpuMs, int paginas, List<String> recursos) {
+    public BCP(int pid, String nombre, int cpuMs, int paginas, List<String> recursos) {
         this.pid = pid;
         this.nombre = nombre;
         this.estado = EstadoProceso.NUEVO;
@@ -29,7 +29,7 @@ public class PCB {
 
     @Override
     public String toString() {
-        return String.format("obj.PCB(pid=%d,nombre=%s,estado=%s,pc=%d,restante=%d)", pid, nombre, estado, contadorPrograma, tiempoCpuRestanteMs);
+        return String.format("obj.BCP(pid=%d,nombre=%s,estado=%s,pc=%d,restante=%d)", pid, nombre, estado, contadorPrograma, tiempoCpuRestanteMs);
     }
 
     public enum EstadoProceso { NUEVO, LISTO, EJECUTANDO, BLOQUEADO, TERMINADO }

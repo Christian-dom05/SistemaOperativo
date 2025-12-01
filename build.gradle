@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.tuproyecto'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // La librería de FXGL
+    implementation 'com.github.almasb:fxgl:21.1'
+}
+
+java {
+    // Ajustado a Java 21 para evitar conflictos
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+sourceSets {
+    main {
+        java { srcDirs = ['src'] }
+        resources { srcDirs = ['src'] }
+    }
+}
+
+application {
+    // Asegúrate que esta ruta sea correcta para tu clase principal
+    mainClass = 'main.SpaceOsApp'
+}

@@ -1,3 +1,5 @@
+package obj;
+
 import java.util.Map;
 
 public class Planificador implements Runnable {
@@ -12,51 +14,56 @@ public class Planificador implements Runnable {
 
     public Planificador(ColaListos cL, ColaBloqueados cB, Memoria mem, CPU cpu,
                         Map<String, Recurso> recursos, Map<String, SemaphoroGalactico> semaforos, int quantumMs) {
-        this.colaListos = cL; this.colaBloq = cB; this.memoria = mem; this.cpu = cpu;
-        this.recursos = recursos; this.semaforos = semaforos; this.quantumMs = quantumMs;
+        this.colaListos = cL;
+        this.colaBloq = cB;
+        this.memoria = mem;
+        this.cpu = cpu;
+        this.recursos = recursos;
+        this.semaforos = semaforos;
+        this.quantumMs = quantumMs;
     }
 
     @Override
     public void run() {
-        CentroControl.registrar("Planificador: iniciando Round-Robin con quantum=" + quantumMs + "ms");
+        CentroControl.registrar("obj.Planificador: iniciando Round-Robin con quantum=" + quantumMs + "ms");
         while (ejecutando) {
-            PCB pcb = null;
-            synchronized (colaListos) { pcb = colaListos.desencolar(); }
-            if (pcb == null) {
+            BCP bcp = null;
+            synchronized (colaListos) { bcp = colaListos.desenlistar(); }
+            if (bcp == null) {
                 try { Thread.sleep(100); } catch (InterruptedException ignored) {}
                 continue;
             }
-            cpu.cargar(pcb);
+            cpu.cargar(bcp);
             boolean bloqueado = false;
             try {
-                int tiempo = Math.min(quantumMs, pcb.tiempoCpuRestanteMs);
+                int tiempo = Math.min(quantumMs, bcp.tiempoCpuRestanteMs);
                 int paso = 50;
                 int ejecutado = 0;
                 while (ejecutado < tiempo) {
                     int s = Math.min(paso, tiempo - ejecutado);
                     Thread.sleep(s);
                     ejecutado += s;
-                    pcb.tiempoCpuRestanteMs -= s;
-                    pcb.contadorPrograma++;
+                    bcp.tiempoCpuRestanteMs -= s;
+                    bcp.contadorPrograma++;
 
-                    // Simular intento de adquirir recurso
-                    if (!pcb.recursosNecesarios.isEmpty() && Math.random() < 0.12) {
-                        String nombreRecurso = pcb.recursosNecesarios.get(0);
+                    // Simula el intento de adquirir recurso
+                    if (!bcp.recursosNecesarios.isEmpty() && Math.random() < 0.12) {
+                        String nombreRecurso = bcp.recursosNecesarios.get(0);
                         Recurso r = recursos.get(nombreRecurso);
                         if (r != null) {
                             synchronized (r) {
                                 if (r.solicitar()) {
-                                    CentroControl.registrar(String.format("%s (pid=%d) adquirio recurso %s.", pcb.nombre, pcb.pid, nombreRecurso));
-                                    pcb.recursosNecesarios.remove(0);
+                                    CentroControl.registrar(String.format("%s (pid=%d) adquirio recurso %s.", bcp.nombre, bcp.pid, nombreRecurso));
+                                    bcp.recursosNecesarios.remove(0);
                                 } else {
                                     SemaphoroGalactico sys = semaforos.get(nombreRecurso);
                                     if (sys != null) {
-                                        sys.waitSem(pcb, colaListos, colaBloq);
+                                        sys.waitSem(bcp, colaListos, colaBloq);
                                         bloqueado = true; break;
                                     } else {
-                                        pcb.estado = PCB.EstadoProceso.BLOQUEADO;
-                                        colaBloq.encolar(pcb);
-                                        CentroControl.registrar(String.format("%s (pid=%d) bloqueado por recurso %s.", pcb.nombre, pcb.pid, nombreRecurso));
+                                        bcp.estado = BCP.EstadoProceso.BLOQUEADO;
+                                        colaBloq.enlistar(bcp);
+                                        CentroControl.registrar(String.format("%s (pid=%d) bloqueado por recurso %s.", bcp.nombre, bcp.pid, nombreRecurso));
                                         bloqueado = true; break;
                                     }
                                 }
@@ -64,33 +71,33 @@ public class Planificador implements Runnable {
                         }
                     }
                     if (Math.random() < 0.04) {
-                        pcb.estado = PCB.EstadoProceso.BLOQUEADO;
-                        colaBloq.encolar(pcb);
-                        CentroControl.registrar(String.format("%s (pid=%d) realiza E/S y se bloquea.", pcb.nombre, pcb.pid));
+                        bcp.estado = BCP.EstadoProceso.BLOQUEADO;
+                        colaBloq.enlistar(bcp);
+                        CentroControl.registrar(String.format("%s (pid=%d) realiza E/S y se bloquea.", bcp.nombre, bcp.pid));
                         bloqueado = true; break;
                     }
-                    if (pcb.tiempoCpuRestanteMs <= 0) break;
+                    if (bcp.tiempoCpuRestanteMs <= 0) break;
                 }
             } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
 
-            if (pcb.tiempoCpuRestanteMs <= 0) {
-                pcb.estado = PCB.EstadoProceso.TERMINADO;
+            if (bcp.tiempoCpuRestanteMs <= 0) {
+                bcp.estado = BCP.EstadoProceso.TERMINADO;
                 cpu.descargar();
-                memoria.liberar(pcb);
-                CentroControl.registrar(String.format("Planificador: %s (pid=%d) TERMINADO.", pcb.nombre, pcb.pid));
+                memoria.liberar(bcp);
+                CentroControl.registrar(String.format("obj.Planificador: %s (pid=%d) TERMINADO.", bcp.nombre, bcp.pid));
                 continue;
             }
 
             if (bloqueado) {
                 cpu.descargar();
-                CentroControl.registrar(String.format("Planificador: %s (pid=%d) fue bloqueado durante su quantum.", pcb.nombre, pcb.pid));
+                CentroControl.registrar(String.format("obj.Planificador: %s (pid=%d) fue bloqueado durante su quantum.", bcp.nombre, bcp.pid));
                 continue; // no reencolar
             } else {
                 cpu.descargar();
-                colaListos.encolar(pcb);
+                colaListos.enlistar(bcp);
             }
         }
-        CentroControl.registrar("Planificador: detenido.");
+        CentroControl.registrar("obj.Planificador: detenido.");
     }
 
     public void detener() { ejecutando = false; }
