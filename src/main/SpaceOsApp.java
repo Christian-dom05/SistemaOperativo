@@ -32,32 +32,42 @@ public class SpaceOsApp extends GameApplication {
     protected void initSettings(GameSettings settings) {
         settings.setWidth(1280);
         settings.setHeight(720);
-        settings.setTitle("GalaxyOS - Flujo Fluido");
-        settings.setVersion("4.0");
+        settings.setTitle("GalaxyOS - Ultimate UI");
+        settings.setVersion("5.0");
     }
 
     @Override
     protected void initUI() {
+        FXGL.getGameScene().setBackgroundColor(Color.web("#020205")); // Negro profundo
 
-        // Si tienes una imagen llamada "fondo.jpg" en src/assets/textures/, descomenta esto:
-        // FXGL.getGameScene().setBackgroundRepeat("fondo.jpg");
-
-        // Si no hay imagen, usamos el color espacio profundo:
-        FXGL.getGameScene().setBackgroundColor(Color.web("#050510"));
-        //FXGL.getGameScene().setBackgroundColor(Color.web("#0a0a2a"));
+        // Estilo Matrix/Cyberpunk para los logs
         TextArea logTextArea = new TextArea();
         logTextArea.setEditable(false);
         logTextArea.setWrapText(true);
-        logTextArea.setStyle("-fx-font-family: 'Consolas'; -fx-text-fill: limegreen; -fx-control-inner-background: black;");
+        logTextArea.setStyle(
+                "-fx-control-inner-background: #000000; " +
+                        "-fx-font-family: 'Consolas'; " +
+                        "-fx-highlight-fill: #00ff00; " +
+                        "-fx-highlight-text-fill: #000000; " +
+                        "-fx-text-fill: #00ff00; " +
+                        "-fx-border-color: #004400;"
+        );
         UIAdapter.getInstance().setLogArea(logTextArea);
 
-        Button btnLanzar = new Button("LANZAR NAVE");
-        btnLanzar.setStyle("-fx-font-size: 16px; -fx-base: #4444aa; -fx-text-fill: white;");
+        Button btnLanzar = new Button(">>> LANZAR MISION <<<");
+        btnLanzar.setStyle(
+                "-fx-background-color: #0044aa; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-font-size: 14px; " +
+                        "-fx-border-color: #0088ff; " +
+                        "-fx-cursor: hand;"
+        );
         btnLanzar.setMaxWidth(Double.MAX_VALUE);
         btnLanzar.setOnAction(e -> crearYLanzarProceso());
 
-        VBox leftPane = new VBox(10, btnLanzar, logTextArea);
-        leftPane.setStyle("-fx-padding: 10; -fx-background-color: #111;");
+        VBox leftPane = new VBox(15, btnLanzar, logTextArea);
+        leftPane.setStyle("-fx-padding: 15; -fx-background-color: rgba(0, 0, 0, 0.8);");
         VBox.setVgrow(logTextArea, javafx.scene.layout.Priority.ALWAYS);
 
         Pane gameOverlayPane = new Pane();
@@ -66,8 +76,8 @@ public class SpaceOsApp extends GameApplication {
 
         SplitPane splitPane = new SplitPane();
         splitPane.getItems().addAll(leftPane, gameOverlayPane);
-        splitPane.setStyle("-fx-background-color: transparent;");
-        splitPane.setDividerPositions(0.33);
+        splitPane.setStyle("-fx-background-color: transparent; -fx-padding: 0;");
+        splitPane.setDividerPositions(0.25); // Menos espacio para logs, más para gráficos
 
         FXGL.addUINode(splitPane);
     }
@@ -76,41 +86,46 @@ public class SpaceOsApp extends GameApplication {
     protected void initGame() {
         FXGL.getGameWorld().addEntityFactory(new SpaceOsFactory());
 
-        // --- GENERACIÓN DE ESTRELLAS DE FONDO ---
-        for (int i = 0; i < 150; i++) {
-            double x = Math.random() * FXGL.getAppWidth();
-            double y = Math.random() * FXGL.getAppHeight();
-            FXGL.spawn("ESTRELLA", x, y);
+        // --- FONDO ESTELAR ---
+        for (int i = 0; i < 200; i++) {
+            FXGL.spawn("ESTRELLA", Math.random() * FXGL.getAppWidth(), Math.random() * FXGL.getAppHeight());
         }
 
-        double cx = (FXGL.getAppWidth() * 0.66) / 2 + (FXGL.getAppWidth() * 0.33);
+        // --- CALCULO DE POSICIONES SIMÉTRICAS ---
+        // Centro del área de juego (aprox, descontando el panel izquierdo)
+        double gameWidth = FXGL.getAppWidth() * 0.75;
+        double offsetX = FXGL.getAppWidth() * 0.25;
+
+        double cx = offsetX + (gameWidth / 2);
         double cy = FXGL.getAppHeight() / 2.0;
 
-        // --- SPAWN Y REGISTRO DE UBICACIONES ---
-        // 1. Entidades Base
-        Entity sol = FXGL.spawn("SOL_CPU", cx, cy);
+        // 1. SOL (Centro)
+        Entity sol = FXGL.spawn("SOL_CPU", cx, cy - 50); // Un poco arriba del centro
         UIAdapter.getInstance().registrarUbicacion("CPU", sol.getPosition());
 
-        Entity ready = FXGL.spawn("PLANETA_READY", cx - 200, cy);
+        // 2. PLANETAS (Lados)
+        Entity ready = FXGL.spawn("PLANETA_READY", cx - 250, cy - 50);
         UIAdapter.getInstance().registrarUbicacion("READY", ready.getPosition());
 
-        Entity blocked = FXGL.spawn("PLANETA_BLOCKED", cx + 200, cy);
+        Entity blocked = FXGL.spawn("PLANETA_BLOCKED", cx + 250, cy - 50);
         UIAdapter.getInstance().registrarUbicacion("BLOCKED", blocked.getPosition());
 
-        Entity nebula = FXGL.spawn("NEBULOSA_MEMORIA", cx - 300, cy - 250);
+        // 3. MEMORIA (Arriba Izquierda, como "origen")
+        Entity nebula = FXGL.spawn("NEBULOSA_MEMORIA", cx - 350, cy - 250);
         UIAdapter.getInstance().registrarUbicacion("MEMORIA", nebula.getPosition());
 
-        // 2. Recursos y Semáforos
-        spawnYRegistrar("Marte", "RECURSO", cx + 150, cy - 200, 1);
-        spawnYRegistrar("Portal-Marte", "SEMAFORO", cx + 250, cy - 200, 1);
+        // 4. CINTURÓN DE RECURSOS (Abajo en arco)
+        // Grupo Marte (Izquierda abajo)
+        spawnYRegistrar("Marte", "RECURSO", cx - 150, cy + 150, 1);
+        spawnYRegistrar("Portal-Marte", "SEMAFORO", cx - 150, cy + 230, 1);
 
-        spawnYRegistrar("Estacion-Alpha", "RECURSO", cx + 150, cy + 200, 2);
-        spawnYRegistrar("Portal-EstAlpha", "SEMAFORO", cx + 250, cy + 200, 2);
+        // Grupo Estación Alpha (Derecha abajo)
+        spawnYRegistrar("Estacion-Alpha", "RECURSO", cx + 150, cy + 150, 2);
+        spawnYRegistrar("Portal-EstAlpha", "SEMAFORO", cx + 150, cy + 230, 2);
 
         inicializarKernel();
     }
 
-    // Helper para registrar
     private void spawnYRegistrar(String nombre, String tipo, double x, double y, int val) {
         Entity e = FXGL.spawn(tipo, new SpawnData(x, y).put("nombre", nombre).put("capacidad", val).put("valor", val));
         UIAdapter.getInstance().registrarUbicacion(nombre, e.getPosition());
@@ -139,18 +154,11 @@ public class SpaceOsApp extends GameApplication {
             Random rnd = new Random();
             while (true) {
                 try { Thread.sleep(800); } catch (InterruptedException e) { break; }
-                if (rnd.nextDouble() < 0.3) {
-                    for (SemaphoroGalactico s : semaforos.values()) s.signalSem(colaListos, colaBloq);
-                }
-                if (rnd.nextDouble() < 0.2) {
-                    for (Recurso r : recursos.values()) r.liberar();
-                }
+                if (rnd.nextDouble() < 0.3) for (SemaphoroGalactico s : semaforos.values()) s.signalSem(colaListos, colaBloq);
+                if (rnd.nextDouble() < 0.2) for (Recurso r : recursos.values()) r.liberar();
                 synchronized (colaBloq) {
                     List<BCP> b = colaBloq.snapshot();
-                    for (BCP p : b) if (Math.random() < 0.3) {
-                        colaBloq.remover(p);
-                        colaListos.enlistar(p);
-                    }
+                    for (BCP p : b) if (Math.random() < 0.3) { colaBloq.remover(p); colaListos.enlistar(p); }
                 }
             }
         }, "HiloEventos");
@@ -161,7 +169,7 @@ public class SpaceOsApp extends GameApplication {
     private void crearYLanzarProceso() {
         Random rnd = new Random();
         int pid = pidCounter++;
-        String nombre = "Nave-" + pid;
+        String nombre = "Mision-" + pid;
         int tiempoCpu = 2000 + rnd.nextInt(3000);
         int paginas = 2 + rnd.nextInt(8);
 
@@ -171,7 +179,6 @@ public class SpaceOsApp extends GameApplication {
 
         BCP nuevoBcp = new BCP(pid, nombre, tiempoCpu, paginas, misRecursos);
 
-        // Crear visualmente (aparece en Memoria)
         UIAdapter.getInstance().crearNaveVisual(nuevoBcp);
 
         if (memoria.asignar(nuevoBcp)) {
