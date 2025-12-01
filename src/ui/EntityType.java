@@ -4,5 +4,9 @@ public enum EntityType {
     SOL_CPU,
     PLANETA_READY,
     PLANETA_BLOCKED,
-    NAVE_PROCESO
+    NAVE_PROCESO,
+    // Nuevos tipos
+    RECURSO,
+    SEMAFORO,
+    MEMORIA
 }

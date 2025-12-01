@@ -1,5 +1,6 @@
 package obj;
 
+import ui.UIAdapter;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -11,15 +12,16 @@ public class ColaListos {
     public synchronized void enlistar(BCP bcp) {
         bcp.estado = BCP.EstadoProceso.LISTO;
         cola.addLast(bcp);
-        CentroControl.registrar(String.format("obj.ColaListos: %s (pid=%d) enlistado. Tamaño=%d", bcp.nombre, bcp.pid, cola.size()));
+        // Animación: Nave vuela al Planeta Azul (READY)
+        UIAdapter.getInstance().moverNave(bcp, "READY");
+        CentroControl.registrar(String.format("ColaListos: %s en órbita de espera.", bcp.nombre));
     }
 
+    // --- CORRECCIÓN: Renombrado de desencolar() a desenlistar() ---
     public synchronized BCP desenlistar() {
-        BCP p = cola.pollFirst();
-        if (p != null) {
-            CentroControl.registrar(String.format("obj.ColaListos: desenlistado %s (pid=%d). Tamaño=%d", p.nombre, p.pid, cola.size()));
-        }
-        return p;
+        // No necesitamos animación aquí, la animación ocurre
+        // cuando el Planificador lo manda a la CPU.
+        return cola.pollFirst();
     }
 
     public synchronized boolean estaVacia() { return cola.isEmpty(); }

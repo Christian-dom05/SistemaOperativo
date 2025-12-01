@@ -1,5 +1,5 @@
 package obj;
-
+import ui.UIAdapter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,31 +7,33 @@ public class Memoria {
     private final int marcosTotales;
     private final int tamMarcoKb;
     private int marcosUsados = 0;
-    private final Map<Integer,Integer> asignacion = new HashMap<>(); // pid -> marcos
+    private final Map<Integer,Integer> asignacion = new HashMap<>();
 
     public Memoria(int marcosTotales, int tamMarcoKb) {
         this.marcosTotales = marcosTotales;
         this.tamMarcoKb = tamMarcoKb;
+        UIAdapter.getInstance().actualizarMemoriaUI(0, marcosTotales);
     }
 
     public synchronized boolean asignar(BCP bcp) {
         if (bcp.paginasMemoria <= (marcosTotales - marcosUsados)) {
             asignacion.put(bcp.pid, bcp.paginasMemoria);
             marcosUsados += bcp.paginasMemoria;
-            CentroControl.registrar(String.format("Memoria: asignados %d marcos a %s (pid=%d). Usados %d/%d", bcp.paginasMemoria, bcp.nombre, bcp.pid, marcosUsados, marcosTotales));
+            UIAdapter.getInstance().actualizarMemoriaUI(marcosUsados, marcosTotales);
+
+            // Animación breve en memoria
+            UIAdapter.getInstance().moverNave(bcp, "MEMORIA");
+            CentroControl.registrar(String.format("Memoria: Cargado %s.", bcp.nombre));
             return true;
         }
-        CentroControl.registrar(String.format("Memoria: no hay suficiente para %s (pid=%d). Necesita %d, libres %d", bcp.nombre, bcp.pid, bcp.paginasMemoria, marcosTotales - marcosUsados));
         return false;
     }
-
-    public synchronized void liberar(BCP BCP) {
-        Integer m = asignacion.remove(BCP.pid);
+    // ... resto igual (liberar)
+    public synchronized void liberar(BCP bcp) {
+        Integer m = asignacion.remove(bcp.pid);
         if (m != null) {
             marcosUsados -= m;
-            CentroControl.registrar(String.format("Memoria: liberados %d marcos de %s (pid=%d). Usados %d/%d", m, BCP.nombre, BCP.pid, marcosUsados, marcosTotales));
+            UIAdapter.getInstance().actualizarMemoriaUI(marcosUsados, marcosTotales);
         }
     }
-
-    public synchronized int getMarcosLibres() { return marcosTotales - marcosUsados; }
 }

@@ -14,90 +14,122 @@ public class Planificador implements Runnable {
 
     public Planificador(ColaListos cL, ColaBloqueados cB, Memoria mem, CPU cpu,
                         Map<String, Recurso> recursos, Map<String, SemaphoroGalactico> semaforos, int quantumMs) {
-        this.colaListos = cL;
-        this.colaBloq = cB;
-        this.memoria = mem;
-        this.cpu = cpu;
-        this.recursos = recursos;
-        this.semaforos = semaforos;
-        this.quantumMs = quantumMs;
+        this.colaListos = cL; this.colaBloq = cB; this.memoria = mem; this.cpu = cpu;
+        this.recursos = recursos; this.semaforos = semaforos; this.quantumMs = quantumMs;
     }
 
     @Override
     public void run() {
-        CentroControl.registrar("obj.Planificador: iniciando Round-Robin con quantum=" + quantumMs + "ms");
+        CentroControl.registrar("Planificador: Iniciando Round-Robin (Quantum=" + quantumMs + "ms)");
         while (ejecutando) {
             BCP bcp = null;
-            synchronized (colaListos) { bcp = colaListos.desenlistar(); }
+
+            // Sección crítica para sacar proceso
+            synchronized (colaListos) {
+                bcp = colaListos.desenlistar();
+            }
+
             if (bcp == null) {
                 try { Thread.sleep(100); } catch (InterruptedException ignored) {}
                 continue;
             }
+
+            // --- ANIMACIÓN Y CARGA ---
+            // Esto moverá la nave visualmente y pausará este hilo hasta que llegue
             cpu.cargar(bcp);
+
             boolean bloqueado = false;
             try {
                 int tiempo = Math.min(quantumMs, bcp.tiempoCpuRestanteMs);
-                int paso = 50;
+                int paso = 50; // Ejecutar en pasos pequeños
                 int ejecutado = 0;
+
                 while (ejecutado < tiempo) {
+                    // Simular tiempo de CPU
                     int s = Math.min(paso, tiempo - ejecutado);
-                    Thread.sleep(s);
+                    Thread.sleep(s); // Tiempo real de simulación
                     ejecutado += s;
                     bcp.tiempoCpuRestanteMs -= s;
                     bcp.contadorPrograma++;
 
-                    // Simula el intento de adquirir recurso
-                    if (!bcp.recursosNecesarios.isEmpty() && Math.random() < 0.12) {
+                    // --- LÓGICA DE RECURSOS (Probabilidad de pedir recurso) ---
+                    if (!bcp.recursosNecesarios.isEmpty() && Math.random() < 0.08) { // 8% de probabilidad por paso
                         String nombreRecurso = bcp.recursosNecesarios.get(0);
+
+                        // Intentar obtener recurso
                         Recurso r = recursos.get(nombreRecurso);
+                        boolean adquirido = false;
+
                         if (r != null) {
                             synchronized (r) {
-                                if (r.solicitar()) {
-                                    CentroControl.registrar(String.format("%s (pid=%d) adquirio recurso %s.", bcp.nombre, bcp.pid, nombreRecurso));
+                                // Pasamos 'bcp' para que Recurso pueda animar la nave yendo hacia él
+                                if (r.solicitar(bcp)) {
                                     bcp.recursosNecesarios.remove(0);
-                                } else {
-                                    SemaphoroGalactico sys = semaforos.get(nombreRecurso);
-                                    if (sys != null) {
-                                        sys.waitSem(bcp, colaListos, colaBloq);
-                                        bloqueado = true; break;
-                                    } else {
-                                        bcp.estado = BCP.EstadoProceso.BLOQUEADO;
-                                        colaBloq.enlistar(bcp);
-                                        CentroControl.registrar(String.format("%s (pid=%d) bloqueado por recurso %s.", bcp.nombre, bcp.pid, nombreRecurso));
-                                        bloqueado = true; break;
-                                    }
+                                    adquirido = true;
                                 }
                             }
                         }
+
+                        // Si no se pudo adquirir (o es un semáforo lo que se necesita)
+                        if (!adquirido) {
+                            SemaphoroGalactico sys = semaforos.get(nombreRecurso);
+                            // Intentamos buscar semáforo con el nombre "Portal-" + nombreRecurso si no existe directo
+                            if (sys == null) sys = semaforos.get("Portal-" + nombreRecurso);
+
+                            if (sys != null) {
+                                // waitSem moverá la nave y bloqueará si es necesario
+                                sys.waitSem(bcp, colaListos, colaBloq);
+                                bloqueado = true;
+                                break; // Salir del quantum, se bloqueó
+                            } else {
+                                // Si no hay recurso ni semáforo, bloqueo genérico
+                                bcp.estado = BCP.EstadoProceso.BLOQUEADO;
+                                colaBloq.enlistar(bcp);
+                                CentroControl.registrar(String.format("%s bloqueado por recurso no disponible: %s", bcp.nombre, nombreRecurso));
+                                bloqueado = true;
+                                break;
+                            }
+                        }
                     }
-                    if (Math.random() < 0.04) {
+
+                    // --- SIMULACIÓN DE E/S (Bloqueo aleatorio) ---
+                    if (Math.random() < 0.02) { // 2% probabilidad
                         bcp.estado = BCP.EstadoProceso.BLOQUEADO;
-                        colaBloq.enlistar(bcp);
-                        CentroControl.registrar(String.format("%s (pid=%d) realiza E/S y se bloquea.", bcp.nombre, bcp.pid));
-                        bloqueado = true; break;
+                        colaBloq.enlistar(bcp); // Esto anima la nave yendo al planeta Blocked
+                        CentroControl.registrar(String.format("%s realiza E/S y se bloquea.", bcp.nombre));
+                        bloqueado = true;
+                        break;
                     }
+
                     if (bcp.tiempoCpuRestanteMs <= 0) break;
                 }
             } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+
+            // --- FIN DEL QUANTUM ---
 
             if (bcp.tiempoCpuRestanteMs <= 0) {
                 bcp.estado = BCP.EstadoProceso.TERMINADO;
                 cpu.descargar();
                 memoria.liberar(bcp);
-                CentroControl.registrar(String.format("obj.Planificador: %s (pid=%d) TERMINADO.", bcp.nombre, bcp.pid));
+
+                // Animación: Destruir la nave visualmente al terminar
+                ui.UIAdapter.getInstance().destruirNaveVisual(bcp);
+
+                CentroControl.registrar(String.format("Planificador: %s TERMINADO.", bcp.nombre));
                 continue;
             }
 
             if (bloqueado) {
                 cpu.descargar();
-                CentroControl.registrar(String.format("obj.Planificador: %s (pid=%d) fue bloqueado durante su quantum.", bcp.nombre, bcp.pid));
-                continue; // no reencolar
+                // No reencolamos en Listos porque ya se fue a Bloqueados o Semáforo
+                continue;
             } else {
+                // Quantum agotado, vuelve a la cola de listos
                 cpu.descargar();
-                colaListos.enlistar(bcp);
+                colaListos.enlistar(bcp); // Anima la nave de vuelta a Ready
             }
         }
-        CentroControl.registrar("obj.Planificador: detenido.");
+        CentroControl.registrar("Planificador: Detenido.");
     }
 
     public void detener() { ejecutando = false; }

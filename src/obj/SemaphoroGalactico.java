@@ -1,5 +1,5 @@
 package obj;
-
+import ui.UIAdapter;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -14,29 +14,31 @@ public class SemaphoroGalactico {
     }
 
     public synchronized void waitSem(BCP bcp, ColaListos colaListos, ColaBloqueados colaBloq) {
-        CentroControl.registrar(String.format("Semaforo %s: %s (pid=%d) hace WAIT (valor=%d)", nombre, bcp.nombre, bcp.pid, valor));
+        // Nave va al portal (Semaforo) visualmente
+        UIAdapter.getInstance().moverNave(bcp, nombre);
+
         if (valor > 0) {
             valor--;
-            CentroControl.registrar(String.format("Semaforo %s: otorgado a %s (pid=%d). Nuevo valor=%d", nombre, bcp.nombre, bcp.pid, valor));
+            UIAdapter.getInstance().actualizarSemaforoUI(nombre, valor);
+            CentroControl.registrar(String.format("Semaforo %s: %s cruzó el portal.", nombre, bcp.nombre));
         } else {
             colaEspera.add(bcp);
             bcp.estado = BCP.EstadoProceso.BLOQUEADO;
-            colaBloq.enlistar(bcp);
-            CentroControl.registrar(String.format("Semaforo %s: %s (pid=%d) bloqueado y enviado al agujero negro", nombre, bcp.nombre, bcp.pid));
+            colaBloq.enlistar(bcp); // Esto la moverá luego a BLOCKED
+            CentroControl.registrar(String.format("Semaforo %s: Portal cerrado para %s.", nombre, bcp.nombre));
         }
     }
 
     public synchronized void signalSem(ColaListos colaListos, ColaBloqueados colaBloq) {
-        CentroControl.registrar(String.format("Semaforo %s: SIGNAL llamado. Valor actual=%d", nombre, valor));
         BCP bcp = colaEspera.poll();
         if (bcp != null) {
             bcp.estado = BCP.EstadoProceso.LISTO;
             colaBloq.remover(bcp);
-            colaListos.enlistar(bcp);
-            CentroControl.registrar(String.format("Semaforo %s: liberado %s (pid=%d) hacia cola de listos", nombre, bcp.nombre, bcp.pid));
+            colaListos.enlistar(bcp); // Esto la moverá a READY
+            CentroControl.registrar(String.format("Semaforo %s: Portal abierto para %s.", nombre, bcp.nombre));
         } else {
             valor++;
-            CentroControl.registrar(String.format("Semaforo %s: ningun proceso esperando. Valor incrementado a %d", nombre, valor));
+            UIAdapter.getInstance().actualizarSemaforoUI(nombre, valor);
         }
     }
 }
