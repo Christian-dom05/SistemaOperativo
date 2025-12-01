@@ -4,8 +4,11 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea; // Ya no se usa mucho, pero lo dejamos por compatibilidad
 import javafx.scene.text.Text;
 import obj.BCP;
 
@@ -16,10 +19,13 @@ import java.util.concurrent.CountDownLatch;
 public class UIAdapter {
 
     private static UIAdapter instance;
-    private TextArea logArea;
+
+    // --- NUEVO: Manejo de logs con lista observable para mejor UI ---
+    private final ObservableList<String> listaLogs = FXCollections.observableArrayList();
+    private ListView<String> listViewLogs;
+
     private final Map<Integer, Entity> navesVisuales = new HashMap<>();
     private final Map<String, Point2D> ubicaciones = new HashMap<>();
-
     public final Map<String, Text> textosRecursos = new HashMap<>();
     public final Map<String, Text> textosSemaforos = new HashMap<>();
     public Text textoMemoria;
@@ -31,19 +37,37 @@ public class UIAdapter {
         return instance;
     }
 
-    public void setLogArea(TextArea area) { this.logArea = area; }
+    // Método de configuración nuevo para el ListView
+    public void setListView(ListView<String> listView) {
+        this.listViewLogs = listView;
+        this.listViewLogs.setItems(listaLogs);
+    }
+
+    // Mantenemos este por compatibilidad, pero ya no hace nada crítico
+    public void setLogArea(TextArea area) {}
 
     public void registrarUbicacion(String id, Point2D pos) {
         ubicaciones.put(id, pos);
     }
 
     public void agregarLog(String mensaje) {
-        if (logArea == null) return;
         Platform.runLater(() -> {
-            logArea.appendText(mensaje + "\n");
-            logArea.setScrollTop(Double.MAX_VALUE);
+            listaLogs.add(mensaje);
+            // Mantener solo los últimos 50 mensajes para armonía visual
+            if (listaLogs.size() > 50) {
+                listaLogs.remove(0);
+            }
+            // Auto-scroll al último elemento
+            if (listViewLogs != null) {
+                listViewLogs.scrollTo(listaLogs.size() - 1);
+            }
         });
     }
+
+    // ... (El resto de métodos moverNave, moverNaveAsync, etc. se mantienen IGUAL que en la versión anterior) ...
+    // COPIA AQUÍ LOS MÉTODOS moverNave, moverNaveAsync, animarInternal, crearNaveVisual, destruirNaveVisual
+    // y los actualizadores de UI (actualizarRecursoUI, etc.) DEL CÓDIGO ANTERIOR.
+    // Para no hacer el código gigante aquí, asumo que mantienes esa lógica.
 
     public void crearNaveVisual(BCP bcp) {
         Point2D posInicio = ubicaciones.getOrDefault("MEMORIA", new Point2D(0,0));
@@ -53,37 +77,21 @@ public class UIAdapter {
         });
     }
 
-    // --- MÉTODOS DE MOVIMIENTO ---
-
-    /**
-     * Mueve la nave y BLOQUEA el hilo hasta que llegue (Síncrono).
-     * Úsalo para acciones importantes: CPU, Recursos, Semáforos.
-     */
     public void moverNave(BCP bcp, String destinoId) {
         Point2D target = ubicaciones.get(destinoId);
         if (target == null) return;
-
         if (Platform.isFxApplicationThread()) {
             animarInternal(bcp, target, null);
         } else {
             CountDownLatch latch = new CountDownLatch(1);
             Platform.runLater(() -> animarInternal(bcp, target, latch));
-            try {
-                latch.await(); // El hilo lógico espera aquí
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
+            try { latch.await(); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
         }
     }
 
-    /**
-     * Mueve la nave SIN BLOQUEAR el hilo (Asíncrono).
-     * Úsalo para movimientos de rutina: Ir a Cola Listos, Ir a Bloqueados.
-     */
     public void moverNaveAsync(BCP bcp, String destinoId) {
         Point2D target = ubicaciones.get(destinoId);
         if (target == null) return;
-        // Enviamos null como latch para que no intente avisar a nadie
         Platform.runLater(() -> animarInternal(bcp, target, null));
     }
 
@@ -93,16 +101,13 @@ public class UIAdapter {
             if (latch != null) latch.countDown();
             return;
         }
-
         double offsetX = Math.random() * 20 - 10;
         double offsetY = Math.random() * 20 - 10;
         Point2D destinoFinal = new Point2D(targetPos.getX() + offsetX, targetPos.getY() + offsetY);
 
         FXGL.animationBuilder()
                 .duration(javafx.util.Duration.seconds(0.8))
-                .onFinished(() -> {
-                    if (latch != null) latch.countDown();
-                })
+                .onFinished(() -> { if (latch != null) latch.countDown(); })
                 .translate(nave)
                 .to(destinoFinal)
                 .buildAndPlay();
@@ -115,7 +120,6 @@ public class UIAdapter {
         });
     }
 
-    // --- ACTUALIZADORES UI ---
     public void actualizarRecursoUI(String nombre, int enUso, int total) {
         Platform.runLater(() -> {
             Text t = textosRecursos.get(nombre);
