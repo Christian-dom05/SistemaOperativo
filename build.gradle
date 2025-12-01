@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id 'application'
+    // Añadimos el plugin oficial de JavaFX para evitar problemas de rutas
+    id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
 group = 'com.tuproyecto'
@@ -11,7 +13,18 @@ repositories {
 }
 
 dependencies {
+    // Librería principal del motor de juegos
     implementation 'com.github.almasb:fxgl:21.1'
+
+    // FORZAMOS la carga de los controles de JavaFX (aquí están SplitPane y TextArea)
+    implementation 'org.openjfx:javafx-controls:21.0.2'
+    implementation 'org.openjfx:javafx-fxml:21.0.2'
+    implementation 'org.openjfx:javafx-graphics:21.0.2'
+}
+
+javafx {
+    version = "21.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics' ]
 }
 
 java {

@@ -6,9 +6,9 @@ import com.almasb.fxgl.dsl.FXGL;
 import javafx.geometry.Point2D;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import ui.EntityType;
 import ui.SpaceOsFactory;
 import ui.UIAdapter;
 import obj.*;
@@ -17,9 +17,8 @@ import java.util.*;
 
 public class SpaceOsApp extends GameApplication {
 
-    private Planificador planificadorRef;
-    private Thread hiloPlanificadorRef;
-    private Thread hiloEventosRef;
+    // Ya no necesitamos guardar referencias a los hilos para cerrarlos manualmente
+    // porque usaremos setDaemon(true)
 
     @Override
     protected void initSettings(GameSettings settings) {
@@ -27,31 +26,51 @@ public class SpaceOsApp extends GameApplication {
         settings.setHeight(720);
         settings.setTitle("GalaxyOS - Simulador SO");
         settings.setVersion("1.0");
-        settings.setBgColor(Color.web("#0a0a2a"));
+        // El color de fondo se define mejor en initUI o initGame para esta versión
     }
 
     @Override
     protected void initUI() {
+        // 1. Establecer el color de fondo del espacio
+        FXGL.getGameScene().setBackgroundColor(Color.web("#0a0a2a"));
+
+        // 2. Crear el área de logs (Izquierda)
         TextArea logTextArea = new TextArea();
         logTextArea.setEditable(false);
         logTextArea.setWrapText(true);
+        // Estilo "Hacker" para los logs
         logTextArea.setStyle("-fx-font-family: 'Consolas'; -fx-text-fill: limegreen; -fx-control-inner-background: black;");
+        VBox logBox = new VBox(logTextArea);
         VBox.setVgrow(logTextArea, javafx.scene.layout.Priority.ALWAYS);
 
+        // Conectar logs
         UIAdapter.getInstance().setLogArea(logTextArea);
 
+        // 3. Crear un panel transparente para la derecha (donde se verá el juego)
+        Pane gameOverlayPane = new Pane();
+        gameOverlayPane.setStyle("-fx-background-color: transparent;");
+        // Permitir que los clics pasen a través del panel derecho hacia el juego
+        gameOverlayPane.setPickOnBounds(false);
+
+        // 4. Crear el SplitPane
         SplitPane splitPane = new SplitPane();
         splitPane.setPrefSize(FXGL.getAppWidth(), FXGL.getAppHeight());
-        splitPane.setDividerPositions(0.33);
-        splitPane.getItems().addAll(new VBox(logTextArea), FXGL.getGameViewPane());
+        splitPane.getItems().addAll(logBox, gameOverlayPane);
 
-        FXGL.getGameScene().addUINode(splitPane);
+        // Configurar el SplitPane para que sea transparente y deje ver el juego de fondo
+        splitPane.setStyle("-fx-background-color: transparent; -fx-padding: 0;");
+        // Posición inicial del divisor (33% logs, 66% juego)
+        splitPane.setDividerPositions(0.33);
+
+        // Añadir la interfaz SOBRE el juego
+        FXGL.addUINode(splitPane);
     }
 
     @Override
     protected void initGame() {
         FXGL.getGameWorld().addEntityFactory(new SpaceOsFactory());
 
+        // Calcular coordenadas para el "Radar" (la parte derecha de la pantalla)
         double gameCenterX = (FXGL.getAppWidth() * 0.66) / 2 + (FXGL.getAppWidth() * 0.33);
         double gameCenterY = FXGL.getAppHeight() / 2.0;
 
@@ -59,16 +78,21 @@ public class SpaceOsApp extends GameApplication {
         UIAdapter.getInstance().posReady = new Point2D(gameCenterX - 250, gameCenterY);
         UIAdapter.getInstance().posBlocked = new Point2D(gameCenterX + 250, gameCenterY);
 
+        // Spawnear entidades estáticas
         FXGL.spawn("SOL_CPU", UIAdapter.getInstance().posSol);
         FXGL.spawn("PLANETA_READY", UIAdapter.getInstance().posReady);
         FXGL.spawn("PLANETA_BLOCKED", UIAdapter.getInstance().posBlocked);
 
-        new Thread(this::iniciarSimulacionBackend, "Hilo-Simulacion").start();
+        // Iniciar la lógica en un hilo separado
+        Thread hiloSimulacion = new Thread(this::iniciarSimulacionBackend, "Hilo-Simulacion");
+        hiloSimulacion.setDaemon(true); // IMPORTANTE: Se cierra solo al cerrar la ventana
+        hiloSimulacion.start();
     }
 
     private void iniciarSimulacionBackend() {
         CentroControl.registrar("=== Iniciando Simulacion Space OS (Grafica) ===");
 
+        // Crear componentes del SO
         Memoria memoria = new Memoria(50, 4);
         ColaListos colaListos = new ColaListos();
         ColaBloqueados colaBloq = new ColaBloqueados();
@@ -90,6 +114,7 @@ public class SpaceOsApp extends GameApplication {
         naves.add(new BCP(4, "Nave-Draco", 600, 2, Collections.emptyList()));
         naves.add(new BCP(5, "Nave-Equinox", 400, 1, Arrays.asList("Estacion-Alpha")));
 
+        // Carga inicial
         for (BCP bcp : naves) {
             bcp.estado = BCP.EstadoProceso.NUEVO;
             UIAdapter.getInstance().crearNaveVisual(bcp);
@@ -103,11 +128,14 @@ public class SpaceOsApp extends GameApplication {
             try { Thread.sleep(200); } catch (InterruptedException e) {}
         }
 
-        planificadorRef = new Planificador(colaListos, colaBloq, memoria, cpu, recursos, semaforos, 200);
-        hiloPlanificadorRef = new Thread(planificadorRef, "HiloPlanificador");
-        hiloPlanificadorRef.start();
+        // Hilo del Planificador
+        Planificador planificador = new Planificador(colaListos, colaBloq, memoria, cpu, recursos, semaforos, 200);
+        Thread hiloPlanificador = new Thread(planificador, "HiloPlanificador");
+        hiloPlanificador.setDaemon(true); // Se cierra automático
+        hiloPlanificador.start();
 
-        hiloEventosRef = new Thread(() -> {
+        // Hilo de Eventos Aleatorios
+        Thread hiloEventos = new Thread(() -> {
             Random rnd = new Random();
             while (true) {
                 try { Thread.sleep(500); } catch (InterruptedException e) { break; }
@@ -126,16 +154,8 @@ public class SpaceOsApp extends GameApplication {
                 }
             }
         }, "HiloEventos");
-        hiloEventosRef.start();
-    }
-
-    @Override
-    protected void onExit() {
-        if (planificadorRef != null) planificadorRef.detener();
-        if (hiloPlanificadorRef != null) hiloPlanificadorRef.interrupt();
-        if (hiloEventosRef != null) hiloEventosRef.interrupt();
-        CentroControl.cerrar();
-        System.exit(0);
+        hiloEventos.setDaemon(true); // Se cierra automático
+        hiloEventos.start();
     }
 
     public static void main(String[] args) {
