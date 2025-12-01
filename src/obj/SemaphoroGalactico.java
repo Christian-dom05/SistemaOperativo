@@ -13,19 +13,23 @@ public class SemaphoroGalactico {
         this.valor = inicial;
     }
 
-    public synchronized void waitSem(BCP bcp, ColaListos colaListos, ColaBloqueados colaBloq) {
-        // Nave va al portal (Semaforo) visualmente
+    // Quitamos 'synchronized' del método
+    public void waitSem(BCP bcp, ColaListos colaListos, ColaBloqueados colaBloq) {
+        // 1. Viajar al portal (Lento, pero no bloquea a otros)
         UIAdapter.getInstance().moverNave(bcp, nombre);
 
-        if (valor > 0) {
-            valor--;
-            UIAdapter.getInstance().actualizarSemaforoUI(nombre, valor);
-            CentroControl.registrar(String.format("Semaforo %s: %s cruzó el portal.", nombre, bcp.nombre));
-        } else {
-            colaEspera.add(bcp);
-            bcp.estado = BCP.EstadoProceso.BLOQUEADO;
-            colaBloq.enlistar(bcp); // Esto la moverá luego a BLOCKED
-            CentroControl.registrar(String.format("Semaforo %s: Portal cerrado para %s.", nombre, bcp.nombre));
+        // 2. Lógica (Rápido)
+        synchronized (this) {
+            if (valor > 0) {
+                valor--;
+                UIAdapter.getInstance().actualizarSemaforoUI(nombre, valor);
+                CentroControl.registrar(String.format("Semaforo %s: %s cruzó el portal.", nombre, bcp.nombre));
+            } else {
+                colaEspera.add(bcp);
+                bcp.estado = BCP.EstadoProceso.BLOQUEADO;
+                colaBloq.enlistar(bcp); // Se mueve a blocked
+                CentroControl.registrar(String.format("Semaforo %s: Portal cerrado para %s.", nombre, bcp.nombre));
+            }
         }
     }
 
@@ -34,7 +38,7 @@ public class SemaphoroGalactico {
         if (bcp != null) {
             bcp.estado = BCP.EstadoProceso.LISTO;
             colaBloq.remover(bcp);
-            colaListos.enlistar(bcp); // Esto la moverá a READY
+            colaListos.enlistar(bcp); // Se mueve a ready
             CentroControl.registrar(String.format("Semaforo %s: Portal abierto para %s.", nombre, bcp.nombre));
         } else {
             valor++;

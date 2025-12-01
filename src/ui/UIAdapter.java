@@ -18,8 +18,6 @@ public class UIAdapter {
     private static UIAdapter instance;
     private TextArea logArea;
     private final Map<Integer, Entity> navesVisuales = new HashMap<>();
-
-    // Almacén de coordenadas de todas las entidades (Planetas, Recursos, Semáforos)
     private final Map<String, Point2D> ubicaciones = new HashMap<>();
 
     public final Map<String, Text> textosRecursos = new HashMap<>();
@@ -35,6 +33,10 @@ public class UIAdapter {
 
     public void setLogArea(TextArea area) { this.logArea = area; }
 
+    public void registrarUbicacion(String id, Point2D pos) {
+        ubicaciones.put(id, pos);
+    }
+
     public void agregarLog(String mensaje) {
         if (logArea == null) return;
         Platform.runLater(() -> {
@@ -43,15 +45,7 @@ public class UIAdapter {
         });
     }
 
-    // --- REGISTRO DE UBICACIONES ---
-    public void registrarUbicacion(String id, Point2D pos) {
-        ubicaciones.put(id, pos);
-    }
-
-    // --- GESTIÓN VISUAL DE NAVES ---
-
     public void crearNaveVisual(BCP bcp) {
-        // Las naves nacen visualmente en la Memoria (Nebulosa)
         Point2D posInicio = ubicaciones.getOrDefault("MEMORIA", new Point2D(0,0));
         Platform.runLater(() -> {
             Entity nave = FXGL.spawn("NAVE_PROCESO", new SpawnData(posInicio.getX(), posInicio.getY()).put("pcb", bcp));
@@ -59,27 +53,38 @@ public class UIAdapter {
         });
     }
 
+    // --- MÉTODOS DE MOVIMIENTO ---
+
     /**
-     * Mueve la nave al destino y ESPERA a que llegue (si se llama desde hilo de fondo).
-     * Esto garantiza la fluidez: Lógica -> Animación -> Fin Animación -> Siguiente paso Lógica.
+     * Mueve la nave y BLOQUEA el hilo hasta que llegue (Síncrono).
+     * Úsalo para acciones importantes: CPU, Recursos, Semáforos.
      */
     public void moverNave(BCP bcp, String destinoId) {
         Point2D target = ubicaciones.get(destinoId);
-        if (target == null) return; // Destino no registrado
+        if (target == null) return;
 
         if (Platform.isFxApplicationThread()) {
-            // Si lo llama el botón (UI), no podemos bloquear, solo animar
             animarInternal(bcp, target, null);
         } else {
-            // Si lo llama el Planificador, bloqueamos hasta que llegue
             CountDownLatch latch = new CountDownLatch(1);
             Platform.runLater(() -> animarInternal(bcp, target, latch));
             try {
-                latch.await(); // El hilo lógico se duerme aquí
+                latch.await(); // El hilo lógico espera aquí
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
         }
+    }
+
+    /**
+     * Mueve la nave SIN BLOQUEAR el hilo (Asíncrono).
+     * Úsalo para movimientos de rutina: Ir a Cola Listos, Ir a Bloqueados.
+     */
+    public void moverNaveAsync(BCP bcp, String destinoId) {
+        Point2D target = ubicaciones.get(destinoId);
+        if (target == null) return;
+        // Enviamos null como latch para que no intente avisar a nadie
+        Platform.runLater(() -> animarInternal(bcp, target, null));
     }
 
     private void animarInternal(BCP bcp, Point2D targetPos, CountDownLatch latch) {
@@ -89,16 +94,14 @@ public class UIAdapter {
             return;
         }
 
-        // Pequeña variabilidad para que no se superpongan exacto
         double offsetX = Math.random() * 20 - 10;
         double offsetY = Math.random() * 20 - 10;
         Point2D destinoFinal = new Point2D(targetPos.getX() + offsetX, targetPos.getY() + offsetY);
 
-        // Animación de 0.8 segundos
         FXGL.animationBuilder()
                 .duration(javafx.util.Duration.seconds(0.8))
                 .onFinished(() -> {
-                    if (latch != null) latch.countDown(); // Avisar al backend que llegamos
+                    if (latch != null) latch.countDown();
                 })
                 .translate(nave)
                 .to(destinoFinal)
@@ -112,7 +115,7 @@ public class UIAdapter {
         });
     }
 
-    // --- ACTUALIZACIONES DE TEXTO (Igual que antes) ---
+    // --- ACTUALIZADORES UI ---
     public void actualizarRecursoUI(String nombre, int enUso, int total) {
         Platform.runLater(() -> {
             Text t = textosRecursos.get(nombre);

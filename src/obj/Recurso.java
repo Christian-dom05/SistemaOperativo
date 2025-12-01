@@ -11,17 +11,21 @@ public class Recurso {
         this.cantidadTotal = cantidad;
     }
 
-    public synchronized boolean solicitar(BCP bcp) { // Aceptamos BCP para animar
-        // Nave intenta ir al recurso visualmente
+    // Quitamos 'synchronized' del método
+    public boolean solicitar(BCP bcp) {
+        // 1. Animación (Fuera del bloqueo): Otros hilos pueden trabajar mientras este viaja
         UIAdapter.getInstance().moverNave(bcp, nombre);
 
-        if (enUso < cantidadTotal) {
-            enUso++;
-            UIAdapter.getInstance().actualizarRecursoUI(nombre, enUso, cantidadTotal);
-            CentroControl.registrar(String.format("%s recolectó %s.", bcp.nombre, nombre));
-            return true;
+        // 2. Lógica crítica (Dentro del bloqueo): Solo dura microsegundos
+        synchronized (this) {
+            if (enUso < cantidadTotal) {
+                enUso++;
+                UIAdapter.getInstance().actualizarRecursoUI(nombre, enUso, cantidadTotal);
+                CentroControl.registrar(String.format("%s recolectó %s.", bcp.nombre, nombre));
+                return true;
+            }
+            return false;
         }
-        return false;
     }
 
     public synchronized void liberar() {
@@ -30,5 +34,6 @@ public class Recurso {
             UIAdapter.getInstance().actualizarRecursoUI(nombre, enUso, cantidadTotal);
         }
     }
+
     public synchronized int getEnUso() { return enUso; }
 }

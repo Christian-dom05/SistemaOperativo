@@ -8,11 +8,14 @@ import java.util.List;
 public class ColaBloqueados {
     private final Deque<BCP> cola = new ArrayDeque<>();
 
-    public synchronized void enlistar(BCP bcp) {
-        bcp.estado = BCP.EstadoProceso.BLOQUEADO;
-        cola.addLast(bcp);
-        // Nave vuela al Planeta Rojo y espera
-        UIAdapter.getInstance().moverNave(bcp, "BLOCKED");
+    public void enlistar(BCP bcp) {
+        // 1. Lógica protegida
+        synchronized (this) {
+            bcp.estado = BCP.EstadoProceso.BLOQUEADO;
+            cola.addLast(bcp);
+        }
+        // 2. Animación ASÍNCRONA (No bloquea el hilo)
+        UIAdapter.getInstance().moverNaveAsync(bcp, "BLOCKED");
         CentroControl.registrar(String.format("ColaBloqueados: %s atrapado en gravedad roja.", bcp.nombre));
     }
 
