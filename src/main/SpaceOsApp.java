@@ -41,7 +41,7 @@ public class SpaceOsApp extends GameApplication {
 
     @Override
     protected void initUI() {
-        FXGL.getGameScene().setBackgroundColor(Color.web("#020205"));
+        FXGL.getGameScene().setBackgroundRepeat("fondo_original.png");
 
         ListView<String> listViewLogs = new ListView<>();
 
@@ -116,11 +116,6 @@ public class SpaceOsApp extends GameApplication {
     @Override
     protected void initGame() {
         FXGL.getGameWorld().addEntityFactory(new SpaceOsFactory());
-
-        // Estrellas de fondo
-        for (int i = 0; i < 200; i++) {
-            FXGL.spawn("ESTRELLA", Math.random() * FXGL.getAppWidth(), Math.random() * FXGL.getAppHeight());
-        }
 
         // Posiciones simétricas
         double gameWidth = FXGL.getAppWidth() * 0.70;
