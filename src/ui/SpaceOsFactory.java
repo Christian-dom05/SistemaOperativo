@@ -5,6 +5,8 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
+import com.almasb.fxgl.physics.BoundingShape; // Importante: Importar esto
+import com.almasb.fxgl.physics.HitBox;       // Importante: Importar esto
 import javafx.geometry.Point2D;
 import javafx.scene.effect.Bloom;
 import javafx.scene.effect.DropShadow;
@@ -16,7 +18,6 @@ import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -28,10 +29,9 @@ import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 
 public class SpaceOsFactory implements EntityFactory {
 
-    // --- SOL / CPU: Una estrella brillante con corona ---
+    // --- SOL / CPU ---
     @Spawns("SOL_CPU")
     public Entity newSolCpu(SpawnData data) {
-        // Gradiente radial para simular esfera de plasma
         RadialGradient gradient = new RadialGradient(
                 0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE,
                 new Stop(0, Color.WHITE),
@@ -41,7 +41,6 @@ public class SpaceOsFactory implements EntityFactory {
 
         Circle cuerpo = new Circle(70);
         cuerpo.setFill(gradient);
-        // Efecto de resplandor intenso
         cuerpo.setEffect(new Bloom(0.8));
         cuerpo.setStroke(Color.ORANGERED);
         cuerpo.setStrokeWidth(2);
@@ -55,12 +54,14 @@ public class SpaceOsFactory implements EntityFactory {
 
         return entityBuilder(data)
                 .type(EntityType.SOL_CPU)
-                .viewWithBBox(cuerpo)
+                .view(cuerpo) // Usamos view() en lugar de viewWithBBox() para definir la caja manualmente
                 .view(text)
+                // CORRECCIÓN: Usar BoundingShape.circle para colisión circular
+                .bbox(new HitBox(BoundingShape.circle(70)))
                 .build();
     }
 
-    // --- PLANETA READY: Un mundo azul tipo Tierra con atmósfera ---
+    // --- PLANETA READY ---
     @Spawns("PLANETA_READY")
     public Entity newPlanetaReady(SpawnData data) {
         RadialGradient gradient = new RadialGradient(
@@ -71,7 +72,6 @@ public class SpaceOsFactory implements EntityFactory {
 
         Circle planeta = new Circle(45);
         planeta.setFill(gradient);
-        // Sombra suave azulada (Atmósfera)
         planeta.setEffect(new DropShadow(20, Color.DODGERBLUE));
 
         Text text = new Text("READY");
@@ -81,12 +81,14 @@ public class SpaceOsFactory implements EntityFactory {
 
         return entityBuilder(data)
                 .type(EntityType.PLANETA_READY)
-                .viewWithBBox(planeta)
+                .view(planeta)
                 .view(text)
+                // CORRECCIÓN: Colisión circular de radio 45
+                .bbox(new HitBox(BoundingShape.circle(45)))
                 .build();
     }
 
-    // --- PLANETA BLOCKED: Un gigante rojo o agujero negro ---
+    // --- PLANETA BLOCKED ---
     @Spawns("PLANETA_BLOCKED")
     public Entity newPlanetaBlocked(SpawnData data) {
         RadialGradient gradient = new RadialGradient(
@@ -99,7 +101,6 @@ public class SpaceOsFactory implements EntityFactory {
         planeta.setFill(gradient);
         planeta.setStroke(Color.RED);
         planeta.setStrokeWidth(1);
-        // Resplandor siniestro
         planeta.setEffect(new DropShadow(15, Color.RED));
 
         Text text = new Text("BLOCKED");
@@ -109,18 +110,19 @@ public class SpaceOsFactory implements EntityFactory {
 
         return entityBuilder(data)
                 .type(EntityType.PLANETA_BLOCKED)
-                .viewWithBBox(planeta)
+                .view(planeta)
                 .view(text)
+                // CORRECCIÓN: Colisión circular de radio 45
+                .bbox(new HitBox(BoundingShape.circle(45)))
                 .build();
     }
 
-    // --- RECURSO: Orbes flotantes tecnológicos ---
+    // --- RECURSO ---
     @Spawns("RECURSO")
     public Entity newRecurso(SpawnData data) {
         String nombre = data.get("nombre");
         int total = data.get("capacidad");
 
-        // Esfera de cristal verde
         Circle shape = new Circle(30, Color.rgb(0, 255, 100, 0.3));
         shape.setStroke(Color.LIME);
         shape.setStrokeWidth(2);
@@ -130,32 +132,32 @@ public class SpaceOsFactory implements EntityFactory {
         text.setFill(Color.LIGHTGREEN);
         text.setFont(Font.font("Consolas", 10));
         text.setTextAlignment(TextAlignment.CENTER);
-        text.setTranslateX(-20); // Centrar aprox
+        text.setTranslateX(-20);
         text.setTranslateY(5);
 
         UIAdapter.getInstance().textosRecursos.put(nombre, text);
 
         return entityBuilder(data)
                 .type(EntityType.RECURSO)
-                .viewWithBBox(shape)
+                .view(shape)
                 .view(text)
+                // Colisión circular
+                .bbox(new HitBox(BoundingShape.circle(30)))
                 .build();
     }
 
-    // --- SEMAFORO: Portales dimensionales ---
+    // --- SEMAFORO ---
     @Spawns("SEMAFORO")
     public Entity newSemaforo(SpawnData data) {
         String nombre = data.get("nombre");
         int valorInicial = data.get("valor");
 
-        // Un anillo en lugar de un cuadrado
         Circle anillo = new Circle(35);
         anillo.setFill(Color.TRANSPARENT);
         anillo.setStroke(Color.CYAN);
         anillo.setStrokeWidth(4);
-        anillo.setEffect(new Bloom(0.7)); // Efecto Neón
+        anillo.setEffect(new Bloom(0.7));
 
-        // Fondo oscuro del portal
         Circle fondo = new Circle(30, Color.rgb(0, 0, 50, 0.7));
 
         Text text = new Text("PORTAL\n" + valorInicial);
@@ -169,18 +171,19 @@ public class SpaceOsFactory implements EntityFactory {
 
         return entityBuilder(data)
                 .type(EntityType.SEMAFORO)
-                .viewWithBBox(anillo) // BBox es el anillo exterior
+                .view(anillo)
                 .view(fondo)
                 .view(text)
+                // Colisión circular
+                .bbox(new HitBox(BoundingShape.circle(35)))
                 .build();
     }
 
-    // --- MEMORIA: Nebulosa realista ---
+    // --- MEMORIA (Fondo) ---
     @Spawns("NEBULOSA_MEMORIA")
     public Entity newNebulosa(SpawnData data) {
-        // Creamos varias capas para dar profundidad a la nube
         Circle core = new Circle(60, Color.rgb(100, 0, 200, 0.2));
-        core.setEffect(new GaussianBlur(30)); // Muy borroso
+        core.setEffect(new GaussianBlur(30));
 
         Circle outer = new Circle(90, Color.rgb(50, 0, 150, 0.1));
         outer.setEffect(new GaussianBlur(50));
@@ -198,20 +201,20 @@ public class SpaceOsFactory implements EntityFactory {
                 .view(outer)
                 .view(core)
                 .view(text)
-                .zIndex(-5) // Detrás de todo
+                .zIndex(-5)
                 .build();
     }
 
-    // --- NAVES (Sin cambios mayores, solo mantener compatibilidad) ---
+    // --- NAVE PROCESO ---
     @Spawns("NAVE_PROCESO")
     public Entity newNaveProceso(SpawnData data) {
         BCP bcp = data.get("pcb");
-        // Rectángulo simple como pediste no tocar mucho
+
         Rectangle naveShape = new Rectangle(36, 36, Color.SILVER);
         naveShape.setArcWidth(10);
         naveShape.setArcHeight(10);
         naveShape.setStroke(Color.WHITE);
-        naveShape.setEffect(new DropShadow(5, Color.CYAN)); // Un pequeño brillo de motor
+        naveShape.setEffect(new DropShadow(5, Color.CYAN));
 
         Text pidText = new Text("P" + bcp.pid);
         pidText.setFill(Color.BLACK);
@@ -221,13 +224,14 @@ public class SpaceOsFactory implements EntityFactory {
 
         return entityBuilder(data)
                 .type(EntityType.NAVE_PROCESO)
+                // Aquí usamos viewWithBBox porque la nave es rectangular,
+                // así que la caja automática funciona bien.
                 .viewWithBBox(naveShape)
                 .view(pidText)
                 .with("pcb", bcp)
                 .build();
     }
 
-    // --- ESTRELLAS (Fondo) ---
     @Spawns("ESTRELLA")
     public Entity newEstrella(SpawnData data) {
         Circle shape = new Circle(1.0, Color.WHITE);
