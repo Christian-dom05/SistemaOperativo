@@ -61,7 +61,6 @@ public class SpaceOsFactory implements EntityFactory {
                 .build();
     }
 
-    // --- PLANETA READY ---
     @Spawns("PLANETA_READY")
     public Entity newPlanetaReady(SpawnData data) {
         RadialGradient gradient = new RadialGradient(
