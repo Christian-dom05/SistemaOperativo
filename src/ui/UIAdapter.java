@@ -8,7 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea; // Ya no se usa mucho, pero lo dejamos por compatibilidad
+import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 import obj.BCP;
 
@@ -20,7 +20,6 @@ public class UIAdapter {
 
     private static UIAdapter instance;
 
-    // --- NUEVO: Manejo de logs con lista observable para mejor UI ---
     private final ObservableList<String> listaLogs = FXCollections.observableArrayList();
     private ListView<String> listViewLogs;
 

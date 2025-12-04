@@ -43,12 +43,10 @@ public class SpaceOsApp extends GameApplication {
     protected void initUI() {
         FXGL.getGameScene().setBackgroundColor(Color.web("#020205"));
 
-        // --- 1. LISTVIEW PARA LOGS (Diseño Sci-Fi) ---
         ListView<String> listViewLogs = new ListView<>();
-        // Hacemos que la lista sea transparente
+
         listViewLogs.setStyle("-fx-background-color: rgba(0, 20, 0, 0.7); -fx-background-radius: 10; -fx-border-color: #004400; -fx-border-radius: 10;");
 
-        // Personalizamos CADA CELDA (Fila) de la lista
         listViewLogs.setCellFactory(param -> new ListCell<String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
@@ -61,7 +59,7 @@ public class SpaceOsApp extends GameApplication {
                     setText(item);
                     setFont(Font.font("Consolas", 12));
 
-                    // --- COLOREADO INTELIGENTE ---
+
                     String estiloBase = "-fx-background-color: transparent; -fx-font-weight: bold; ";
 
                     if (item.contains("CPU") || item.contains("SOL")) {
