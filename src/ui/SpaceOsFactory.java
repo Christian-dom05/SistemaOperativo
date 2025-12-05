@@ -8,11 +8,13 @@ import com.almasb.fxgl.entity.Spawns;
 import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
 import javafx.scene.paint.Color;
+import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
 import obj.BCP;
 
 import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
@@ -134,30 +136,94 @@ public class SpaceOsFactory implements EntityFactory {
                 .build();
     }
 
-    // --- MEMORIA (Sin imagen específica, usamos panel) ---
+    // --- REEMPLAZO: MATRIZ DE MEMORIA (Holo-Grid) ---
+    // En lugar de una imagen de nebulosa difícil de limpiar, usamos código
+    // para dibujar una estructura de "celdas de memoria" estilo panal.
     @Spawns("NEBULOSA_MEMORIA")
     public Entity newNebulosa(SpawnData data) {
-        // Usamos un rectángulo translúcido elegante
-        Rectangle panel = new Rectangle(200, 120, Color.rgb(30, 30, 60, 0.6));
-        panel.setArcWidth(20);
-        panel.setArcHeight(20);
-        panel.setStroke(Color.CYAN);
-        panel.setStrokeWidth(1);
 
-        Text text = new Text("MEMORIA RAM");
-        text.setFill(Color.CYAN);
-        text.setFont(Font.font("Verdana", 11));
-        text.setTranslateX(10);
-        text.setTranslateY(20);
+        // Grupo visual para contener los hexágonos
+        javafx.scene.Group matriz = new javafx.scene.Group();
 
-        UIAdapter.getInstance().textoMemoria = text;
+        // Color base: Violeta digital
+        Color colorBase = Color.rgb(180, 80, 255, 0.4);
+        Color colorBorde = Color.rgb(220, 150, 255, 0.8);
 
-        return entityBuilder(data)
+        // Crear un patrón de hexágonos (o cuadros)
+        // Dibujamos 7 celdas simulando marcos de memoria
+        Point2D[] offsets = {
+                new Point2D(0, 0),      // Centro
+                new Point2D(30, -17),   // Arriba Der
+                new Point2D(30, 17),    // Abajo Der
+                new Point2D(0, 34),     // Abajo
+                new Point2D(-30, 17),   // Abajo Izq
+                new Point2D(-30, -17),  // Arriba Izq
+                new Point2D(0, -34)     // Arriba
+        };
+
+        for (Point2D p : offsets) {
+            // Dibujar Hexágono usando Polygon
+            // Puntos para un hexágono de radio ~20
+            javafx.scene.shape.Polygon hex = new javafx.scene.shape.Polygon(
+                    -10.0, -17.0,
+                    10.0, -17.0,
+                    20.0, 0.0,
+                    10.0, 17.0,
+                    -10.0, 17.0,
+                    -20.0, 0.0
+            );
+
+            hex.setFill(colorBase);
+            hex.setStroke(colorBorde);
+            hex.setStrokeWidth(2);
+            hex.setTranslateX(p.getX());
+            hex.setTranslateY(p.getY());
+
+            // Efecto de neón individual
+            hex.setEffect(new javafx.scene.effect.DropShadow(10, colorBase));
+
+            matriz.getChildren().add(hex);
+        }
+
+        // Texto descriptivo
+        Text text = new Text("RAM\nMATRIX");
+        text.setFill(Color.WHITE);
+        text.setFont(Font.font("Consolas", FontWeight.BOLD, 10));
+        text.setTextAlignment(TextAlignment.CENTER);
+        text.setTranslateX(-15);
+        text.setTranslateY(5);
+
+        // Añadir animación de "respiración" a toda la matriz
+        Entity entidad = entityBuilder(data)
                 .type(EntityType.MEMORIA)
-                .view(panel)
+                .view(matriz)
                 .view(text)
                 .zIndex(-5)
                 .build();
+
+        // Animación suave de rotación y escala
+        FXGL.animationBuilder()
+                .duration(Duration.seconds(4))
+                .repeatInfinitely()
+                .autoReverse(true)
+                .scale(entidad)
+                .from(new Point2D(1, 1))
+                .to(new Point2D(1.1, 1.1))
+                .buildAndPlay();
+
+        // Animación de rotación lenta constante
+        FXGL.animationBuilder()
+                .duration(Duration.seconds(20))
+                .repeatInfinitely()
+                .rotate(entidad)
+                .from(0)
+                .to(360)
+                .buildAndPlay();
+
+        // Registrar referencia para textos
+        UIAdapter.getInstance().textoMemoria = text;
+
+        return entidad;
     }
 
     // --- NAVE PROCESO ---

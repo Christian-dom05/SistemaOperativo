@@ -1,1 +1,81 @@
-[17:59:26] Planificador: Iniciando Round-Robin (Quantum=200ms)
+[14:01:17] Planificador: Iniciando Round-Robin (Quantum=200ms)
+[14:01:31] Memoria: Cargado Mision-1.
+[14:01:31] ColaListos: Mision-1 en órbita de espera.
+[14:01:32] CPU: Mision-1 aterrizó en el SOL.
+[14:01:32] CPU: Mision-1 despegando del SOL.
+[14:01:32] ColaListos: Mision-1 en órbita de espera.
+[14:01:33] CPU: Mision-1 aterrizó en el SOL.
+[14:01:33] CPU: Mision-1 despegando del SOL.
+[14:01:33] ColaListos: Mision-1 en órbita de espera.
+[14:01:33] CPU: Mision-1 aterrizó en el SOL.
+[14:01:34] CPU: Mision-1 despegando del SOL.
+[14:01:34] ColaListos: Mision-1 en órbita de espera.
+[14:01:34] CPU: Mision-1 aterrizó en el SOL.
+[14:01:35] CPU: Mision-1 despegando del SOL.
+[14:01:35] ColaListos: Mision-1 en órbita de espera.
+[14:01:35] CPU: Mision-1 aterrizó en el SOL.
+[14:01:36] Mision-1 recolectó Marte.
+[14:01:36] CPU: Mision-1 despegando del SOL.
+[14:01:36] ColaListos: Mision-1 en órbita de espera.
+[14:01:37] CPU: Mision-1 aterrizó en el SOL.
+[14:01:37] CPU: Mision-1 despegando del SOL.
+[14:01:37] ColaListos: Mision-1 en órbita de espera.
+[14:01:38] Memoria: Cargado Mision-2.
+[14:01:38] ColaListos: Mision-2 en órbita de espera.
+[14:01:38] CPU: Mision-1 aterrizó en el SOL.
+[14:01:38] CPU: Mision-1 despegando del SOL.
+[14:01:38] ColaListos: Mision-1 en órbita de espera.
+[14:01:39] CPU: Mision-2 aterrizó en el SOL.
+[14:01:39] CPU: Mision-2 despegando del SOL.
+[14:01:39] ColaListos: Mision-2 en órbita de espera.
+[14:01:39] Memoria: Cargado Mision-3.
+[14:01:39] ColaListos: Mision-3 en órbita de espera.
+[14:01:40] CPU: Mision-1 aterrizó en el SOL.
+[14:01:40] CPU: Mision-1 despegando del SOL.
+[14:01:40] ColaListos: Mision-1 en órbita de espera.
+[14:01:41] CPU: Mision-2 aterrizó en el SOL.
+[14:01:41] CPU: Mision-2 despegando del SOL.
+[14:01:41] ColaListos: Mision-2 en órbita de espera.
+[14:01:42] CPU: Mision-3 aterrizó en el SOL.
+[14:01:42] CPU: Mision-3 despegando del SOL.
+[14:01:42] ColaListos: Mision-3 en órbita de espera.
+[14:01:43] CPU: Mision-1 aterrizó en el SOL.
+[14:01:43] ColaBloqueados: Mision-1 atrapado en gravedad roja.
+[14:01:43] Mision-1 realiza E/S y se bloquea.
+[14:01:43] CPU: Mision-1 despegando del SOL.
+[14:01:44] CPU: Mision-2 aterrizó en el SOL.
+[14:01:44] CPU: Mision-2 despegando del SOL.
+[14:01:44] ColaListos: Mision-2 en órbita de espera.
+[14:01:44] ColaListos: Mision-1 en órbita de espera.
+[14:01:45] CPU: Mision-3 aterrizó en el SOL.
+[14:01:45] CPU: Mision-3 despegando del SOL.
+[14:01:45] ColaListos: Mision-3 en órbita de espera.
+[14:01:46] CPU: Mision-2 aterrizó en el SOL.
+[14:01:46] ColaBloqueados: Mision-2 atrapado en gravedad roja.
+[14:01:46] Mision-2 realiza E/S y se bloquea.
+[14:01:46] CPU: Mision-2 despegando del SOL.
+[14:01:47] CPU: Mision-1 aterrizó en el SOL.
+[14:01:47] CPU: Mision-1 despegando del SOL.
+[14:01:47] ColaListos: Mision-1 en órbita de espera.
+[14:01:48] CPU: Mision-3 aterrizó en el SOL.
+[14:01:48] CPU: Mision-3 despegando del SOL.
+[14:01:48] ColaListos: Mision-3 en órbita de espera.
+[14:01:49] CPU: Mision-1 aterrizó en el SOL.
+[14:01:49] CPU: Mision-1 despegando del SOL.
+[14:01:49] ColaListos: Mision-1 en órbita de espera.
+[14:01:49] CPU: Mision-3 aterrizó en el SOL.
+[14:01:50] CPU: Mision-3 despegando del SOL.
+[14:01:50] ColaListos: Mision-3 en órbita de espera.
+[14:01:50] CPU: Mision-1 aterrizó en el SOL.
+[14:01:51] CPU: Mision-1 despegando del SOL.
+[14:01:51] ColaListos: Mision-1 en órbita de espera.
+[14:01:51] CPU: Mision-3 aterrizó en el SOL.
+[14:01:52] CPU: Mision-3 despegando del SOL.
+[14:01:52] ColaListos: Mision-3 en órbita de espera.
+[14:01:52] ColaListos: Mision-2 en órbita de espera.
+[14:01:52] CPU: Mision-1 aterrizó en el SOL.
+[14:01:53] CPU: Mision-1 despegando del SOL.
+[14:01:53] ColaListos: Mision-1 en órbita de espera.
+[14:01:53] CPU: Mision-3 aterrizó en el SOL.
+[14:01:54] CPU: Mision-3 despegando del SOL.
+[14:01:54] ColaListos: Mision-3 en órbita de espera.
