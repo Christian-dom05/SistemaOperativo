@@ -7,8 +7,12 @@ import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
 import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
-import javafx.scene.paint.Color;
+import com.almasb.fxgl.texture.Texture;
 import javafx.geometry.Point2D;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Glow;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -18,87 +22,104 @@ import javafx.util.Duration;
 import obj.BCP;
 
 import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
-import static com.almasb.fxgl.dsl.FXGL.texture; // Importante para cargar las imágenes
+import static com.almasb.fxgl.dsl.FXGLForKtKt.texture;
 
 public class SpaceOsFactory implements EntityFactory {
 
-    // --- SOL / CPU ---
+    private StackPane crearEtiqueta(String titulo, String subtitulo, Color colorTexto) {
+        Text t1 = new Text(titulo);
+        t1.setFont(Font.font("Consolas", 14));
+        t1.setFill(colorTexto);
+        t1.setStyle("-fx-font-weight: bold");
+
+        Text t2 = new Text(subtitulo);
+        t2.setFont(Font.font("Consolas", 10));
+        t2.setFill(colorTexto.deriveColor(0, 1, 1, 0.7));
+
+        javafx.scene.layout.VBox vb = new javafx.scene.layout.VBox(2, t1, t2);
+        vb.setAlignment(javafx.geometry.Pos.CENTER);
+
+        Rectangle bg = new Rectangle(120, 45, Color.rgb(0, 0, 0, 0.5)); // Fondo semitransparente
+        bg.setArcWidth(10);
+        bg.setArcHeight(10);
+        bg.setStroke(colorTexto.deriveColor(0, 1, 1, 0.3));
+
+        return new StackPane(bg, vb);
+    }
+
     @Spawns("SOL_CPU")
     public Entity newSolCpu(SpawnData data) {
-        // Usamos sol.png, tamaño ajustado a 150x150
-        var view = texture("sol.png", 150, 150);
+        // Sol un poco más grande
+        Texture texture = FXGL.texture("sol.png", 160, 160);
+        texture.setEffect(new Glow(0.8));
 
-        Text text = new Text("CPU\n(Core)");
-        text.setFill(Color.WHITE); // Ajustado a blanco para contraste
-        text.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
-        text.setTextAlignment(TextAlignment.CENTER);
-        text.setTranslateX(40); // Centrar texto a ojo sobre la imagen
-        text.setTranslateY(80);
+        StackPane etiqueta = crearEtiqueta("CPU CORE", "Procesando", Color.GOLD);
+        etiqueta.setTranslateY(95); // Bajamos la etiqueta para que no tape el sol
 
         return entityBuilder(data)
                 .type(EntityType.SOL_CPU)
-                .view(view)
-                .view(text)
-                // Colisión circular ajustada al tamaño de la imagen
-                .bbox(new HitBox(BoundingShape.circle(75)))
+                .viewWithBBox(texture)
+                .view(etiqueta)
+                .zIndex(10)
                 .build();
     }
 
-    // --- PLANETA READY ---
     @Spawns("PLANETA_READY")
     public Entity newPlanetaReady(SpawnData data) {
-        // Usamos planeta1.png
-        var view = texture("planeta1.png", 100, 100);
+        // Planeta azul
+        Texture texture = FXGL.texture("planetaReady.png", 210, 110);
 
-        Text text = new Text("READY");
-        text.setFill(Color.WHITE);
-        text.setFont(Font.font("Consolas", FontWeight.BOLD, 13));
-        text.setTranslateX(30);
-        text.setTranslateY(55);
+        StackPane etiqueta = crearEtiqueta("READY QUEUE", "En Espera", Color.CYAN);
+        etiqueta.setTranslateY(70);
 
         return entityBuilder(data)
                 .type(EntityType.PLANETA_READY)
-                .view(view)
-                .view(text)
-                .bbox(new HitBox(BoundingShape.circle(50)))
+                .viewWithBBox(texture)
+                .view(etiqueta)
                 .build();
     }
 
-    // --- PLANETA BLOCKED (AGUJERO NEGRO) ---
     @Spawns("PLANETA_BLOCKED")
     public Entity newPlanetaBlocked(SpawnData data) {
-        // Usamos agujero_negro.png
-        var view = texture("agujero_negro.png", 110, 110);
+        // Agujero negro
+        Texture texture = FXGL.texture("agujero_negro.png", 140, 140);
+        //FXGL.animationBuilder().duration(Duration.seconds(30)).repeatInfinitely().rotate(texture).from(0).to(360).buildAndPlay();
 
-        Text text = new Text("BLOCKED");
-        text.setFill(Color.ORANGERED);
-        text.setFont(Font.font("Consolas", FontWeight.BOLD, 13));
-        text.setTranslateX(25);
-        text.setTranslateY(60);
+        StackPane etiqueta = crearEtiqueta("BLOCKED", "I/O Wait", Color.RED);
+        etiqueta.setTranslateY(80);
 
         return entityBuilder(data)
                 .type(EntityType.PLANETA_BLOCKED)
-                .view(view)
-                .view(text)
-                .bbox(new HitBox(BoundingShape.circle(55)))
+                .viewWithBBox(texture)
+                .view(etiqueta)
                 .build();
     }
 
-    // --- RECURSO ---
+    // --- RECURSO (MODIFICADO PARA TENER DOS PLANETAS DISTINTOS) ---
     @Spawns("RECURSO")
     public Entity newRecurso(SpawnData data) {
         String nombre = data.get("nombre");
         int total = data.get("capacidad");
 
-        // Usamos planeta2.png para los recursos
-        var view = texture("planeta2.png", 60, 60);
+        // Selección dinámica de la imagen del planeta
+        String imagenFile;
+
+        // Si el recurso es Marte, usamos el planeta rojo (planeta2)
+        // Si es Estacion-Alpha, usamos el planeta azul (planeta1) para variarlo
+        if (nombre.contains("Marte")) {
+            imagenFile = "planeta2.png";
+        } else {
+            imagenFile = "planeta1.png";
+        }
+
+        var view = texture(imagenFile, 165, 65);
 
         Text text = new Text(nombre + "\n[0/" + total + "]");
         text.setFill(Color.LIGHTGREEN);
         text.setFont(Font.font("Consolas", 10));
         text.setTextAlignment(TextAlignment.CENTER);
-        text.setTranslateX(-5);
-        text.setTranslateY(75); // Texto debajo del planeta
+        text.setTranslateX(-10); // Ajuste para centrar texto
+        text.setTranslateY(80);  // Texto debajo del planeta
 
         UIAdapter.getInstance().textosRecursos.put(nombre, text);
 
@@ -106,42 +127,57 @@ public class SpaceOsFactory implements EntityFactory {
                 .type(EntityType.RECURSO)
                 .view(view)
                 .view(text)
-                .bbox(new HitBox(BoundingShape.circle(30)))
+                .bbox(new HitBox(BoundingShape.circle(32)))
                 .build();
     }
 
-    // --- SEMAFORO ---
     @Spawns("SEMAFORO")
     public Entity newSemaforo(SpawnData data) {
         String nombre = data.get("nombre");
-        int valorInicial = data.get("valor");
+        int valor = data.get("valor");
 
-        // Usamos estacion_espacial.png para los semáforos/portales
-        var view = texture("estacion_espacial.png", 80, 80);
+        // Estación un poco más ancha para evitar deformación
+        Texture texture = FXGL.texture("estacion_espacial.png", 100, 80);
+        FXGL.animationBuilder().duration(Duration.seconds(5)).repeatInfinitely().autoReverse(true).translate(texture).from(new Point2D(0,0)).to(new Point2D(0, -5)).buildAndPlay();
 
-        Text text = new Text("PORTAL\n" + valorInicial);
-        text.setFont(Font.font("Consolas", FontWeight.BOLD, 11));
-        text.setFill(Color.CYAN);
-        text.setTextAlignment(TextAlignment.CENTER);
-        text.setTranslateX(15);
-        text.setTranslateY(-10);
+        Text textVal = new Text("VAL: " + valor);
+        textVal.setFont(Font.font("Consolas", 11));
+        textVal.setFill(Color.CYAN);
+        UIAdapter.getInstance().textosSemaforos.put(nombre, textVal);
 
-        UIAdapter.getInstance().textosSemaforos.put(nombre, text);
+        StackPane etiqueta = crearEtiqueta(nombre, "Semaforo", Color.LIGHTBLUE);
+        etiqueta.setTranslateY(50);
+        ((javafx.scene.layout.VBox) etiqueta.getChildren().get(1)).getChildren().add(textVal);
 
         return entityBuilder(data)
                 .type(EntityType.SEMAFORO)
-                .view(view)
-                .view(text)
-                .bbox(new HitBox(BoundingShape.circle(40)))
+                .viewWithBBox(texture)
+                .view(etiqueta)
                 .build();
     }
 
-    // --- REEMPLAZO: MATRIZ DE MEMORIA (Holo-Grid) ---
-    // En lugar de una imagen de nebulosa difícil de limpiar, usamos código
-    // para dibujar una estructura de "celdas de memoria" estilo panal.
+    @Spawns("NAVE_PROCESO")
+    public Entity newNaveProceso(SpawnData data) {
+        BCP bcp = data.get("pcb");
+
+        // --- NAVE LIMPIA SIN TEXTO ROTATORIO ---
+        Texture texture = FXGL.texture("nave_espacial.png", 45, 45);
+        texture.setEffect(new DropShadow(15, Color.CYAN));
+
+        // NOTA: Hemos quitado el PID text de aquí para que no gire feo.
+        // La información del proceso se ve en los logs.
+
+        return entityBuilder(data)
+                .type(EntityType.NAVE_PROCESO)
+                .viewWithBBox(texture)
+                .with("pcb", bcp)
+                .zIndex(100)
+                .build();
+    }
+
+    // --- MATRIZ DE MEMORIA (Se mantiene igual, es código puro) ---
     @Spawns("NEBULOSA_MEMORIA")
     public Entity newNebulosa(SpawnData data) {
-
         // Grupo visual para contener los hexágonos
         javafx.scene.Group matriz = new javafx.scene.Group();
 
@@ -224,29 +260,5 @@ public class SpaceOsFactory implements EntityFactory {
         UIAdapter.getInstance().textoMemoria = text;
 
         return entidad;
-    }
-
-    // --- NAVE PROCESO ---
-    @Spawns("NAVE_PROCESO")
-    public Entity newNaveProceso(SpawnData data) {
-        BCP bcp = data.get("pcb");
-
-        // Usamos nave_espacial.png
-        var view = texture("nave_espacial.png", 40, 40);
-
-        Text pidText = new Text("P" + bcp.pid);
-        pidText.setFill(Color.YELLOW);
-        pidText.setFont(Font.font("Arial", FontWeight.BOLD, 12));
-        pidText.setTranslateX(10);
-        pidText.setTranslateY(-5);
-
-        return entityBuilder(data)
-                .type(EntityType.NAVE_PROCESO)
-                .view(view)
-                .view(pidText)
-                .with("pcb", bcp)
-                // Caja de colisión cuadrada para la nave
-                .bbox(new HitBox(BoundingShape.box(40, 40)))
-                .build();
     }
 }
