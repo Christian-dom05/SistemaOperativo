@@ -21,12 +21,6 @@ public class UIAdapter {
 
     private static UIAdapter instance;
 
-    // --- AJUSTE DE ROTACIÓN ---
-    // Cambia este valor si la nave sigue volando raro:
-    // 0   -> Si tu imagen apunta a la DERECHA
-    // 90  -> Si tu imagen apunta ARRIBA
-    // 180 -> Si tu imagen apunta a la IZQUIERDA
-    // -90 -> Si tu imagen apunta ABAJO
     private static final double AJUSTE_ROTACION = 0;
 
     private final ObservableList<String> listaLogs = FXCollections.observableArrayList();
@@ -50,7 +44,6 @@ public class UIAdapter {
         this.listViewLogs.setItems(listaLogs);
     }
 
-    // Compatibilidad
     public void setLogArea(TextArea area) {}
 
     public void registrarUbicacion(String id, Point2D pos) {
@@ -72,8 +65,6 @@ public class UIAdapter {
             navesVisuales.put(bcp.pid, nave);
         });
     }
-
-    // --- LÓGICA DE MOVIMIENTO MEJORADA ---
 
     public void moverNave(BCP bcp, String destinoId) {
         Point2D target = ubicaciones.get(destinoId);
@@ -100,12 +91,11 @@ public class UIAdapter {
             return;
         }
 
-        // Variación aleatoria para que no se amontonen exactamente en el mismo pixel
+        // Variación aleatoria para que no se amontonen en un mismo pixel
         double offsetX = Math.random() * 40 - 20;
         double offsetY = Math.random() * 40 - 20;
         Point2D destinoFinal = new Point2D(targetPos.getX() + offsetX, targetPos.getY() + offsetY);
 
-        // Calcular ángulo de rotación
         Point2D vectorDireccion = destinoFinal.subtract(nave.getPosition());
         double angle = Math.toDegrees(Math.atan2(vectorDireccion.getY(), vectorDireccion.getX()));
         double rotacionFinal = angle + AJUSTE_ROTACION;
@@ -133,8 +123,6 @@ public class UIAdapter {
         });
     }
 
-    // Métodos de actualización de UI (Recursos, Semáforos, Memoria)
-    // Se mantienen igual que antes para actualizar los textos fijos
     public void actualizarRecursoUI(String nombre, int enUso, int total) {
         Platform.runLater(() -> {
             Text t = textosRecursos.get(nombre);

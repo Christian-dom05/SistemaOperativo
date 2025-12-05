@@ -9,12 +9,10 @@ public class ColaListos {
     private final Deque<BCP> cola = new ArrayDeque<>();
 
     public void enlistar(BCP bcp) {
-        // 1. Lógica protegida
         synchronized (this) {
             bcp.estado = BCP.EstadoProceso.LISTO;
             cola.addLast(bcp);
         }
-        // 2. Animación ASÍNCRONA (No bloquea el hilo)
         UIAdapter.getInstance().moverNaveAsync(bcp, "READY");
         CentroControl.registrar(String.format("ColaListos: %s en órbita de espera.", bcp.nombre));
     }

@@ -35,11 +35,10 @@ public class SpaceOsApp extends GameApplication {
     private Map<String, SemaphoroGalactico> semaforos;
     private int pidCounter = 1;
 
-    // --- PANTALLA DE CARGA MEJORADA ---
     public static class NasaLoadingScene extends LoadingScene {
         public NasaLoadingScene() {
             getContentRoot().getChildren().add(new Rectangle(getAppWidth(), getAppHeight(), Color.BLACK));
-            Text t = new Text("INICIALIZANDO SISTEMA DE SIMULACIÓN...");
+            Text t = new Text("INICIANDO SISTEMA DE SIMULACIÓN...");
             t.setFont(Font.font("Consolas", 28));
             t.setFill(Color.LIME);
             t.setTranslateX(100);
@@ -66,7 +65,6 @@ public class SpaceOsApp extends GameApplication {
     protected void initUI() {
         FXGL.getGameScene().setBackgroundRepeat("fondo_original.png");
 
-        // --- CSS PARA HACER LA BARRA DEL SPLITPANE VISIBLE Y GRUESA ---
         String cssSplitPane =
                 ".split-pane > .split-pane-divider { " +
                         "   -fx-background-color: #00ff00; " + // Verde brillante
@@ -119,20 +117,14 @@ public class SpaceOsApp extends GameApplication {
         SplitPane splitPane = new SplitPane();
         splitPane.getItems().addAll(leftPane, gamePane);
 
-        // Aplicar estilos inline (o podrías cargarlos de un archivo .css)
         splitPane.setStyle("-fx-background-color: transparent; -fx-padding: 0;");
-        // Inyectamos el estilo del divider directamente en la escena cuando esté lista,
-        // o añadimos una hoja de estilo global. Como solución rápida:
+
         if (FXGL.getGameScene().getRoot().getStylesheets().isEmpty()) {
-            // Crear un archivo temporal o usar setStyle en nodos no funciona para selectores hijos complejos.
-            // Lo mejor es añadir el archivo "estilos.css" que te di antes.
-            // Asumimos que existe src/ui/estilos.css con el código que te pasé.
             try {
                 FXGL.getGameScene().getRoot().getStylesheets().add(getClass().getResource("/ui/estilos.css").toExternalForm());
-            } catch(Exception e) { System.out.println("Nota: Crea src/ui/estilos.css para ver la barra verde divisoria."); }
+            } catch(Exception e) { System.out.println("Nota: Crear src/ui/estilos.css para ver la barra verde divisoria."); }
         }
 
-        // Posición inicial del divisor (más espacio para logs)
         splitPane.setDividerPositions(0.25);
 
         FXGL.addUINode(splitPane);
@@ -142,9 +134,6 @@ public class SpaceOsApp extends GameApplication {
     protected void initGame() {
         FXGL.getGameWorld().addEntityFactory(new SpaceOsFactory());
 
-        // --- DISTRIBUCIÓN ESPACIAL MEJORADA (GRID EXPANDIDO) ---
-
-        // Calculamos el centro de la zona visible del juego (derecha del splitpane)
         double anchoJuego = FXGL.getAppWidth() * 0.75;
         double inicioJuegoX = FXGL.getAppWidth() * 0.25;
 
@@ -155,30 +144,30 @@ public class SpaceOsApp extends GameApplication {
         Entity sol = FXGL.spawn("SOL_CPU", cx, cy - 80);
         UIAdapter.getInstance().registrarUbicacion("CPU", sol.getPosition());
 
-        // 2. PLANETAS (Más separados horizontalmente)
-        // Ready a la izquierda
+        // 2. PLANETAS
+        // Ready
         Entity ready = FXGL.spawn("PLANETA_READY", cx - 350, cy - 80);
         UIAdapter.getInstance().registrarUbicacion("READY", ready.getPosition());
 
-        // Blocked a la derecha
+        // Blocked
         Entity blocked = FXGL.spawn("PLANETA_BLOCKED", cx + 350, cy - 80);
         UIAdapter.getInstance().registrarUbicacion("BLOCKED", blocked.getPosition());
 
-        // 3. MEMORIA (Arriba a la izquierda, bien separada)
+        // 3. MEMORIA
         Entity memoriaEnt = FXGL.spawn("NEBULOSA_MEMORIA", cx - 450, cy - 280);
         UIAdapter.getInstance().registrarUbicacion("MEMORIA", memoriaEnt.getPosition());
 
-        // 4. RECURSOS Y SEMAFOROS (Abajo, distribuidos en el ancho)
+        // 4. RECURSOS Y SEMAFOROS
         double yRecursos = cy + 180;
         double yPortales = cy + 280;
 
-        // Grupo Marte (Izquierda)
-        spawnYRegistrar("Marte", "RECURSO", cx - 200, yRecursos, 1);
-        spawnYRegistrar("Portal-Marte", "SEMAFORO", cx - 200, yPortales, 1);
+        // Grupo Marte  // cambia marte y portal-marte a tierra y portal-tierra
+        spawnYRegistrar("Tierra", "RECURSO", cx - 200, yRecursos, 1);
+        spawnYRegistrar("Portal-Tierra", "SEMAFORO", cx - 200, yPortales, 1);
 
-        // Grupo Estación (Derecha)
-        spawnYRegistrar("Estacion-Alpha", "RECURSO", cx + 200, yRecursos, 2);
-        spawnYRegistrar("Portal-EstAlpha", "SEMAFORO", cx + 200, yPortales, 2);
+        // Grupo Estación // cambia de estacion-alpha a Saturno y portal-estAlpha a portal-Saturno
+        spawnYRegistrar("Saturno", "RECURSO", cx + 200, yRecursos, 2);
+        spawnYRegistrar("Portal-Saturno", "SEMAFORO", cx + 200, yPortales, 2);
 
         inicializarKernel();
     }
@@ -194,11 +183,11 @@ public class SpaceOsApp extends GameApplication {
         colaBloq = new ColaBloqueados();
         cpu = new CPU();
         recursos = new HashMap<>();
-        recursos.put("Marte", new Recurso("Marte", 1));
+        recursos.put("Tierra", new Recurso("Tierra", 1));
         recursos.put("Estacion-Alpha", new Recurso("Estacion-Alpha", 2));
         semaforos = new HashMap<>();
-        semaforos.put("Portal-Marte", new SemaphoroGalactico("Portal-Marte", 1));
-        semaforos.put("Portal-EstAlpha", new SemaphoroGalactico("Portal-EstAlpha", 2));
+        semaforos.put("Portal-Tierra", new SemaphoroGalactico("Portal-Tierra", 1));
+        semaforos.put("Portal-Saturno", new SemaphoroGalactico("Portal-Saturno", 2));
 
         Planificador planificador = new Planificador(colaListos, colaBloq, memoria, cpu, recursos, semaforos, 200);
         Thread hiloPlanificador = new Thread(planificador, "HiloPlanificador");
@@ -228,8 +217,8 @@ public class SpaceOsApp extends GameApplication {
         int tiempoCpu = 2000 + rnd.nextInt(3000);
         int paginas = 2 + rnd.nextInt(8);
         List<String> misRecursos = new ArrayList<>();
-        if (rnd.nextBoolean()) misRecursos.add("Marte");
-        if (rnd.nextBoolean()) misRecursos.add("Estacion-Alpha");
+        if (rnd.nextBoolean()) misRecursos.add("Tierra");
+        if (rnd.nextBoolean()) misRecursos.add("Estacion-Saturno");
         BCP nuevoBcp = new BCP(pid, nombre, tiempoCpu, paginas, misRecursos);
         UIAdapter.getInstance().crearNaveVisual(nuevoBcp);
         if (memoria.asignar(nuevoBcp)) { colaListos.enlistar(nuevoBcp); }

@@ -28,7 +28,6 @@ public class Memoria {
         }
         return false;
     }
-    // ... resto igual (liberar)
     public synchronized void liberar(BCP bcp) {
         Integer m = asignacion.remove(bcp.pid);
         if (m != null) {

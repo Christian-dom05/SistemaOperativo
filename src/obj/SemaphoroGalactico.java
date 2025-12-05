@@ -13,7 +13,6 @@ public class SemaphoroGalactico {
         this.valor = inicial;
     }
 
-    // Quitamos 'synchronized' del método
     public void waitSem(BCP bcp, ColaListos colaListos, ColaBloqueados colaBloq) {
         // 1. Viajar al portal (Lento, pero no bloquea a otros)
         UIAdapter.getInstance().moverNave(bcp, nombre);

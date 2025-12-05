@@ -4,13 +4,9 @@ import ui.UIAdapter;
 public class CPU {
     private BCP actual = null;
 
-    // Quitamos 'synchronized'
     public void cargar(BCP bcp) {
-        // 1. Animación (Bloqueante para simular viaje, pero fuera del monitor)
-        // Mantenemos moverNave normal aquí porque queremos que el Planificador espere a llegar antes de ejecutar
         UIAdapter.getInstance().moverNave(bcp, "CPU");
 
-        // 2. Lógica
         synchronized (this) {
             actual = bcp;
             bcp.estado = BCP.EstadoProceso.EJECUTANDO;

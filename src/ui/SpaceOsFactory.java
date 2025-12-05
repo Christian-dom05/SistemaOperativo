@@ -39,7 +39,7 @@ public class SpaceOsFactory implements EntityFactory {
         javafx.scene.layout.VBox vb = new javafx.scene.layout.VBox(2, t1, t2);
         vb.setAlignment(javafx.geometry.Pos.CENTER);
 
-        Rectangle bg = new Rectangle(120, 45, Color.rgb(0, 0, 0, 0.5)); // Fondo semitransparente
+        Rectangle bg = new Rectangle(120, 45, Color.rgb(0, 0, 0, 0.5));
         bg.setArcWidth(10);
         bg.setArcHeight(10);
         bg.setStroke(colorTexto.deriveColor(0, 1, 1, 0.3));
@@ -49,12 +49,11 @@ public class SpaceOsFactory implements EntityFactory {
 
     @Spawns("SOL_CPU")
     public Entity newSolCpu(SpawnData data) {
-        // Sol un poco más grande
         Texture texture = FXGL.texture("sol.png", 160, 160);
         texture.setEffect(new Glow(0.8));
 
         StackPane etiqueta = crearEtiqueta("CPU CORE", "Procesando", Color.GOLD);
-        etiqueta.setTranslateY(95); // Bajamos la etiqueta para que no tape el sol
+        etiqueta.setTranslateY(95);
 
         return entityBuilder(data)
                 .type(EntityType.SOL_CPU)
@@ -82,7 +81,7 @@ public class SpaceOsFactory implements EntityFactory {
     @Spawns("PLANETA_BLOCKED")
     public Entity newPlanetaBlocked(SpawnData data) {
         // Agujero negro
-        Texture texture = FXGL.texture("agujero_negro.png", 140, 140);
+        Texture texture = FXGL.texture("agujero_negro.png", 200, 140);
         //FXGL.animationBuilder().duration(Duration.seconds(30)).repeatInfinitely().rotate(texture).from(0).to(360).buildAndPlay();
 
         StackPane etiqueta = crearEtiqueta("BLOCKED", "I/O Wait", Color.RED);
@@ -95,31 +94,27 @@ public class SpaceOsFactory implements EntityFactory {
                 .build();
     }
 
-    // --- RECURSO (MODIFICADO PARA TENER DOS PLANETAS DISTINTOS) ---
     @Spawns("RECURSO")
     public Entity newRecurso(SpawnData data) {
         String nombre = data.get("nombre");
         int total = data.get("capacidad");
 
-        // Selección dinámica de la imagen del planeta
         String imagenFile;
 
-        // Si el recurso es Marte, usamos el planeta rojo (planeta2)
-        // Si es Estacion-Alpha, usamos el planeta azul (planeta1) para variarlo
-        if (nombre.contains("Marte")) {
+        if (nombre.contains("Tierra")) {
             imagenFile = "planeta2.png";
         } else {
-            imagenFile = "planeta1.png";
+            imagenFile = "planeta3.png";
         }
 
-        var view = texture(imagenFile, 165, 65);
+        var view = texture(imagenFile, 130, 65);
 
         Text text = new Text(nombre + "\n[0/" + total + "]");
         text.setFill(Color.LIGHTGREEN);
         text.setFont(Font.font("Consolas", 10));
         text.setTextAlignment(TextAlignment.CENTER);
-        text.setTranslateX(-10); // Ajuste para centrar texto
-        text.setTranslateY(80);  // Texto debajo del planeta
+        text.setTranslateX(-10);
+        text.setTranslateY(80);
 
         UIAdapter.getInstance().textosRecursos.put(nombre, text);
 
@@ -136,7 +131,6 @@ public class SpaceOsFactory implements EntityFactory {
         String nombre = data.get("nombre");
         int valor = data.get("valor");
 
-        // Estación un poco más ancha para evitar deformación
         Texture texture = FXGL.texture("estacion_espacial.png", 100, 80);
         FXGL.animationBuilder().duration(Duration.seconds(5)).repeatInfinitely().autoReverse(true).translate(texture).from(new Point2D(0,0)).to(new Point2D(0, -5)).buildAndPlay();
 
@@ -146,7 +140,7 @@ public class SpaceOsFactory implements EntityFactory {
         UIAdapter.getInstance().textosSemaforos.put(nombre, textVal);
 
         StackPane etiqueta = crearEtiqueta(nombre, "Semaforo", Color.LIGHTBLUE);
-        etiqueta.setTranslateY(50);
+        etiqueta.setTranslateY(10); //----------------------------mirar aquí
         ((javafx.scene.layout.VBox) etiqueta.getChildren().get(1)).getChildren().add(textVal);
 
         return entityBuilder(data)
@@ -160,12 +154,8 @@ public class SpaceOsFactory implements EntityFactory {
     public Entity newNaveProceso(SpawnData data) {
         BCP bcp = data.get("pcb");
 
-        // --- NAVE LIMPIA SIN TEXTO ROTATORIO ---
         Texture texture = FXGL.texture("nave_espacial.png", 45, 45);
         texture.setEffect(new DropShadow(15, Color.CYAN));
-
-        // NOTA: Hemos quitado el PID text de aquí para que no gire feo.
-        // La información del proceso se ve en los logs.
 
         return entityBuilder(data)
                 .type(EntityType.NAVE_PROCESO)
@@ -175,18 +165,13 @@ public class SpaceOsFactory implements EntityFactory {
                 .build();
     }
 
-    // --- MATRIZ DE MEMORIA (Se mantiene igual, es código puro) ---
     @Spawns("NEBULOSA_MEMORIA")
     public Entity newNebulosa(SpawnData data) {
-        // Grupo visual para contener los hexágonos
         javafx.scene.Group matriz = new javafx.scene.Group();
 
-        // Color base: Violeta digital
         Color colorBase = Color.rgb(180, 80, 255, 0.4);
         Color colorBorde = Color.rgb(220, 150, 255, 0.8);
 
-        // Crear un patrón de hexágonos (o cuadros)
-        // Dibujamos 7 celdas simulando marcos de memoria
         Point2D[] offsets = {
                 new Point2D(0, 0),      // Centro
                 new Point2D(30, -17),   // Arriba Der
@@ -198,8 +183,6 @@ public class SpaceOsFactory implements EntityFactory {
         };
 
         for (Point2D p : offsets) {
-            // Dibujar Hexágono usando Polygon
-            // Puntos para un hexágono de radio ~20
             javafx.scene.shape.Polygon hex = new javafx.scene.shape.Polygon(
                     -10.0, -17.0,
                     10.0, -17.0,
@@ -221,7 +204,6 @@ public class SpaceOsFactory implements EntityFactory {
             matriz.getChildren().add(hex);
         }
 
-        // Texto descriptivo
         Text text = new Text("RAM\nMATRIX");
         text.setFill(Color.WHITE);
         text.setFont(Font.font("Consolas", FontWeight.BOLD, 10));
@@ -229,7 +211,6 @@ public class SpaceOsFactory implements EntityFactory {
         text.setTranslateX(-15);
         text.setTranslateY(5);
 
-        // Añadir animación de "respiración" a toda la matriz
         Entity entidad = entityBuilder(data)
                 .type(EntityType.MEMORIA)
                 .view(matriz)
@@ -237,7 +218,6 @@ public class SpaceOsFactory implements EntityFactory {
                 .zIndex(-5)
                 .build();
 
-        // Animación suave de rotación y escala
         FXGL.animationBuilder()
                 .duration(Duration.seconds(4))
                 .repeatInfinitely()
@@ -247,7 +227,6 @@ public class SpaceOsFactory implements EntityFactory {
                 .to(new Point2D(1.1, 1.1))
                 .buildAndPlay();
 
-        // Animación de rotación lenta constante
         FXGL.animationBuilder()
                 .duration(Duration.seconds(20))
                 .repeatInfinitely()
@@ -256,7 +235,6 @@ public class SpaceOsFactory implements EntityFactory {
                 .to(360)
                 .buildAndPlay();
 
-        // Registrar referencia para textos
         UIAdapter.getInstance().textoMemoria = text;
 
         return entidad;

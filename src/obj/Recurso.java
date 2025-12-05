@@ -11,12 +11,11 @@ public class Recurso {
         this.cantidadTotal = cantidad;
     }
 
-    // Quitamos 'synchronized' del método
     public boolean solicitar(BCP bcp) {
-        // 1. Animación (Fuera del bloqueo): Otros hilos pueden trabajar mientras este viaja
+        // 1. Animación (Fuera del bloqueo)
         UIAdapter.getInstance().moverNave(bcp, nombre);
 
-        // 2. Lógica crítica (Dentro del bloqueo): Solo dura microsegundos
+        // 2. Lógica crítica (Dentro del bloqueo)
         synchronized (this) {
             if (enUso < cantidadTotal) {
                 enUso++;

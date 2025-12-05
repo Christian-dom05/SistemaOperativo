@@ -5,7 +5,6 @@ public enum EntityType {
     PLANETA_READY,
     PLANETA_BLOCKED,
     NAVE_PROCESO,
-    // Nuevos tipos
     RECURSO,
     SEMAFORO,
     MEMORIA

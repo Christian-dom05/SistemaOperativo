@@ -24,7 +24,6 @@ public class Planificador implements Runnable {
         while (ejecutando) {
             BCP bcp = null;
 
-            // Sección crítica para sacar proceso
             synchronized (colaListos) {
                 bcp = colaListos.desenlistar();
             }
@@ -34,35 +33,30 @@ public class Planificador implements Runnable {
                 continue;
             }
 
-            // --- ANIMACIÓN Y CARGA ---
-            // Esto moverá la nave visualmente y pausará este hilo hasta que llegue
+            // Esto mueve la nave visualmente y pausa este hilo hasta que llegue
             cpu.cargar(bcp);
 
             boolean bloqueado = false;
             try {
                 int tiempo = Math.min(quantumMs, bcp.tiempoCpuRestanteMs);
-                int paso = 50; // Ejecutar en pasos pequeños
+                int paso = 50;
                 int ejecutado = 0;
 
                 while (ejecutado < tiempo) {
-                    // Simular tiempo de CPU
                     int s = Math.min(paso, tiempo - ejecutado);
-                    Thread.sleep(s); // Tiempo real de simulación
+                    Thread.sleep(s);
                     ejecutado += s;
                     bcp.tiempoCpuRestanteMs -= s;
                     bcp.contadorPrograma++;
 
-                    // --- LÓGICA DE RECURSOS (Probabilidad de pedir recurso) ---
-                    if (!bcp.recursosNecesarios.isEmpty() && Math.random() < 0.08) { // 8% de probabilidad por paso
+                    if (!bcp.recursosNecesarios.isEmpty() && Math.random() < 0.08) {
                         String nombreRecurso = bcp.recursosNecesarios.get(0);
 
-                        // Intentar obtener recurso
                         Recurso r = recursos.get(nombreRecurso);
                         boolean adquirido = false;
 
                         if (r != null) {
                             synchronized (r) {
-                                // Pasamos 'bcp' para que Recurso pueda animar la nave yendo hacia él
                                 if (r.solicitar(bcp)) {
                                     bcp.recursosNecesarios.remove(0);
                                     adquirido = true;
@@ -70,10 +64,8 @@ public class Planificador implements Runnable {
                             }
                         }
 
-                        // Si no se pudo adquirir (o es un semáforo lo que se necesita)
                         if (!adquirido) {
                             SemaphoroGalactico sys = semaforos.get(nombreRecurso);
-                            // Intentamos buscar semáforo con el nombre "Portal-" + nombreRecurso si no existe directo
                             if (sys == null) sys = semaforos.get("Portal-" + nombreRecurso);
 
                             if (sys != null) {
@@ -92,7 +84,7 @@ public class Planificador implements Runnable {
                         }
                     }
 
-                    // --- SIMULACIÓN DE E/S (Bloqueo aleatorio) ---
+                    // SIMULACIÓN De Entrada y salida (Bloqueo aleatorio)
                     if (Math.random() < 0.02) { // 2% probabilidad
                         bcp.estado = BCP.EstadoProceso.BLOQUEADO;
                         colaBloq.enlistar(bcp); // Esto anima la nave yendo al planeta Blocked
@@ -105,14 +97,11 @@ public class Planificador implements Runnable {
                 }
             } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
 
-            // --- FIN DEL QUANTUM ---
-
             if (bcp.tiempoCpuRestanteMs <= 0) {
                 bcp.estado = BCP.EstadoProceso.TERMINADO;
                 cpu.descargar();
                 memoria.liberar(bcp);
 
-                // Animación: Destruir la nave visualmente al terminar
                 ui.UIAdapter.getInstance().destruirNaveVisual(bcp);
 
                 CentroControl.registrar(String.format("Planificador: %s TERMINADO.", bcp.nombre));
@@ -121,10 +110,8 @@ public class Planificador implements Runnable {
 
             if (bloqueado) {
                 cpu.descargar();
-                // No reencolamos en Listos porque ya se fue a Bloqueados o Semáforo
                 continue;
             } else {
-                // Quantum agotado, vuelve a la cola de listos
                 cpu.descargar();
                 colaListos.enlistar(bcp); // Anima la nave de vuelta a Ready
             }

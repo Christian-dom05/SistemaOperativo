@@ -18,13 +18,10 @@ public class CentroControl {
         String ts = LocalTime.now().withNano(0).toString();
         String linea = String.format("[%s] %s", ts, msg);
 
-        // Salida a consola
         System.out.println(linea);
 
-        // Salida a archivo
         if (writer != null) writer.println(linea);
 
-        // Salida a UI Gráfica (Conexión clave)
         UIAdapter.getInstance().agregarLog(linea);
     }
 
