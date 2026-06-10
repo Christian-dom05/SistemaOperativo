@@ -1,42 +1,47 @@
+package obj;
+import ui.UIAdapter;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class SemaphoroGalactico {
     public final String nombre;
     private int valor;
-    private final Queue<PCB> colaEspera = new LinkedList<>();
+    private final Queue<BCP> colaEspera = new LinkedList<>();
 
     public SemaphoroGalactico(String nombre, int inicial) {
         this.nombre = nombre;
         this.valor = inicial;
     }
 
-    // wait / P
-    public synchronized void waitSem(PCB pcb, ColaListos colaListos, ColaBloqueados colaBloq) {
-        CentroControl.registrar(String.format("Semaforo %s: %s (pid=%d) hace WAIT (valor=%d)", nombre, pcb.nombre, pcb.pid, valor));
-        if (valor > 0) {
-            valor--;
-            CentroControl.registrar(String.format("Semaforo %s: otorgado a %s (pid=%d). Nuevo valor=%d", nombre, pcb.nombre, pcb.pid, valor));
-        } else {
-            colaEspera.add(pcb);
-            pcb.estado = PCB.EstadoProceso.BLOQUEADO;
-            colaBloq.encolar(pcb);
-            CentroControl.registrar(String.format("Semaforo %s: %s (pid=%d) bloqueado y enviado al agujero negro", nombre, pcb.nombre, pcb.pid));
+    public void waitSem(BCP bcp, ColaListos colaListos, ColaBloqueados colaBloq) {
+        // 1. Viajar al portal (Lento, pero no bloquea a otros)
+        UIAdapter.getInstance().moverNave(bcp, nombre);
+
+        // 2. Lógica (Rápido)
+        synchronized (this) {
+            if (valor > 0) {
+                valor--;
+                UIAdapter.getInstance().actualizarSemaforoUI(nombre, valor);
+                CentroControl.registrar(String.format("Semaforo %s: %s cruzó el portal.", nombre, bcp.nombre));
+            } else {
+                colaEspera.add(bcp);
+                bcp.estado = BCP.EstadoProceso.BLOQUEADO;
+                colaBloq.enlistar(bcp); // Se mueve a blocked
+                CentroControl.registrar(String.format("Semaforo %s: Portal cerrado para %s.", nombre, bcp.nombre));
+            }
         }
     }
 
-    // signal / V
     public synchronized void signalSem(ColaListos colaListos, ColaBloqueados colaBloq) {
-        CentroControl.registrar(String.format("Semaforo %s: SIGNAL llamado. Valor actual=%d", nombre, valor));
-        PCB pcb = colaEspera.poll();
-        if (pcb != null) {
-            pcb.estado = PCB.EstadoProceso.LISTO;
-            colaBloq.remover(pcb);
-            colaListos.encolar(pcb);
-            CentroControl.registrar(String.format("Semaforo %s: liberado %s (pid=%d) hacia cola de listos", nombre, pcb.nombre, pcb.pid));
+        BCP bcp = colaEspera.poll();
+        if (bcp != null) {
+            bcp.estado = BCP.EstadoProceso.LISTO;
+            colaBloq.remover(bcp);
+            colaListos.enlistar(bcp); // Se mueve a ready
+            CentroControl.registrar(String.format("Semaforo %s: Portal abierto para %s.", nombre, bcp.nombre));
         } else {
             valor++;
-            CentroControl.registrar(String.format("Semaforo %s: ningun proceso esperando. Valor incrementado a %d", nombre, valor));
+            UIAdapter.getInstance().actualizarSemaforoUI(nombre, valor);
         }
     }
 }

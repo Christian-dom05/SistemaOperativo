@@ -1,18 +1,24 @@
-public class CPU {
-    private PCB actual = null;
+package obj;
+import ui.UIAdapter;
 
-    public synchronized void cargar(PCB pcb) {
-        actual = pcb;
-        pcb.estado = PCB.EstadoProceso.EJECUTANDO;
-        CentroControl.registrar(String.format("CPU: cargado %s (pid=%d) en el SOL.", pcb.nombre, pcb.pid));
+public class CPU {
+    private BCP actual = null;
+
+    public void cargar(BCP bcp) {
+        UIAdapter.getInstance().moverNave(bcp, "CPU");
+
+        synchronized (this) {
+            actual = bcp;
+            bcp.estado = BCP.EstadoProceso.EJECUTANDO;
+            CentroControl.registrar(String.format("CPU: %s aterrizó en el SOL.", bcp.nombre));
+        }
     }
 
     public synchronized void descargar() {
         if (actual != null) {
-            CentroControl.registrar(String.format("CPU: descargado %s (pid=%d) desde el SOL.", actual.nombre, actual.pid));
+            CentroControl.registrar(String.format("CPU: %s despegando del SOL.", actual.nombre));
             actual = null;
         }
     }
-
-    public synchronized PCB getActual() { return actual; }
+    public synchronized BCP getActual() { return actual; }
 }

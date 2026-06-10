@@ -1,0 +1,64 @@
+[19:10:23] Planificador: Iniciando Round-Robin (Quantum=200ms)
+[19:10:51] Memoria: Cargado Mision-1.
+[19:10:51] ColaListos: Mision-1 en órbita de espera.
+[19:10:52] CPU: Mision-1 aterrizó en el SOL.
+[19:10:53] CPU: Mision-1 despegando del SOL.
+[19:10:53] ColaListos: Mision-1 en órbita de espera.
+[19:10:54] CPU: Mision-1 aterrizó en el SOL.
+[19:10:54] CPU: Mision-1 despegando del SOL.
+[19:10:54] ColaListos: Mision-1 en órbita de espera.
+[19:10:55] CPU: Mision-1 aterrizó en el SOL.
+[19:10:56] Mision-1 recolectó Tierra.
+[19:10:56] ColaBloqueados: Mision-1 atrapado en gravedad roja.
+[19:10:56] Mision-1 realiza E/S y se bloquea.
+[19:10:56] CPU: Mision-1 despegando del SOL.
+[19:10:57] ColaListos: Mision-1 en órbita de espera.
+[19:10:58] CPU: Mision-1 aterrizó en el SOL.
+[19:10:58] ColaBloqueados: Mision-1 atrapado en gravedad roja.
+[19:10:58] Mision-1 bloqueado por recurso no disponible: Estacion-Saturno
+[19:10:58] CPU: Mision-1 despegando del SOL.
+[19:10:59] ColaListos: Mision-1 en órbita de espera.
+[19:11] CPU: Mision-1 aterrizó en el SOL.
+[19:11] ColaBloqueados: Mision-1 atrapado en gravedad roja.
+[19:11] Mision-1 realiza E/S y se bloquea.
+[19:11] CPU: Mision-1 despegando del SOL.
+[19:11:01] ColaListos: Mision-1 en órbita de espera.
+[19:11:02] CPU: Mision-1 aterrizó en el SOL.
+[19:11:02] ColaBloqueados: Mision-1 atrapado en gravedad roja.
+[19:11:02] Mision-1 bloqueado por recurso no disponible: Estacion-Saturno
+[19:11:02] CPU: Mision-1 despegando del SOL.
+[19:11:03] ColaListos: Mision-1 en órbita de espera.
+[19:11:05] CPU: Mision-1 aterrizó en el SOL.
+[19:11:05] CPU: Mision-1 despegando del SOL.
+[19:11:05] ColaListos: Mision-1 en órbita de espera.
+[19:11:06] CPU: Mision-1 aterrizó en el SOL.
+[19:11:06] CPU: Mision-1 despegando del SOL.
+[19:11:06] ColaListos: Mision-1 en órbita de espera.
+[19:11:08] CPU: Mision-1 aterrizó en el SOL.
+[19:11:08] ColaBloqueados: Mision-1 atrapado en gravedad roja.
+[19:11:08] Mision-1 bloqueado por recurso no disponible: Estacion-Saturno
+[19:11:08] CPU: Mision-1 despegando del SOL.
+[19:11:08] ColaListos: Mision-1 en órbita de espera.
+[19:11:10] CPU: Mision-1 aterrizó en el SOL.
+[19:11:10] ColaBloqueados: Mision-1 atrapado en gravedad roja.
+[19:11:10] Mision-1 bloqueado por recurso no disponible: Estacion-Saturno
+[19:11:10] CPU: Mision-1 despegando del SOL.
+[19:11:10] ColaListos: Mision-1 en órbita de espera.
+[19:11:11] CPU: Mision-1 aterrizó en el SOL.
+[19:11:11] CPU: Mision-1 despegando del SOL.
+[19:11:11] ColaListos: Mision-1 en órbita de espera.
+[19:11:13] CPU: Mision-1 aterrizó en el SOL.
+[19:11:13] CPU: Mision-1 despegando del SOL.
+[19:11:13] ColaListos: Mision-1 en órbita de espera.
+[19:11:14] CPU: Mision-1 aterrizó en el SOL.
+[19:11:14] CPU: Mision-1 despegando del SOL.
+[19:11:14] ColaListos: Mision-1 en órbita de espera.
+[19:11:15] CPU: Mision-1 aterrizó en el SOL.
+[19:11:16] CPU: Mision-1 despegando del SOL.
+[19:11:16] ColaListos: Mision-1 en órbita de espera.
+[19:11:17] CPU: Mision-1 aterrizó en el SOL.
+[19:11:17] CPU: Mision-1 despegando del SOL.
+[19:11:17] ColaListos: Mision-1 en órbita de espera.
+[19:11:18] CPU: Mision-1 aterrizó en el SOL.
+[19:11:18] CPU: Mision-1 despegando del SOL.
+[19:11:18] Planificador: Mision-1 TERMINADO.

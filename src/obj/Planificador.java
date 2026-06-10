@@ -1,3 +1,5 @@
+package obj;
+
 import java.util.Map;
 
 public class Planificador implements Runnable {
@@ -18,79 +20,103 @@ public class Planificador implements Runnable {
 
     @Override
     public void run() {
-        CentroControl.registrar("Planificador: iniciando Round-Robin con quantum=" + quantumMs + "ms");
+        CentroControl.registrar("Planificador: Iniciando Round-Robin (Quantum=" + quantumMs + "ms)");
         while (ejecutando) {
-            PCB pcb = null;
-            synchronized (colaListos) { pcb = colaListos.desencolar(); }
-            if (pcb == null) {
+            BCP bcp = null;
+
+            synchronized (colaListos) {
+                bcp = colaListos.desenlistar();
+            }
+
+            if (bcp == null) {
                 try { Thread.sleep(100); } catch (InterruptedException ignored) {}
                 continue;
             }
-            cpu.cargar(pcb);
+
+            // Esto mueve la nave visualmente y pausa este hilo hasta que llegue
+            cpu.cargar(bcp);
+
             boolean bloqueado = false;
             try {
-                int tiempo = Math.min(quantumMs, pcb.tiempoCpuRestanteMs);
+                int tiempo = Math.min(quantumMs, bcp.tiempoCpuRestanteMs);
                 int paso = 50;
                 int ejecutado = 0;
+
                 while (ejecutado < tiempo) {
                     int s = Math.min(paso, tiempo - ejecutado);
                     Thread.sleep(s);
                     ejecutado += s;
-                    pcb.tiempoCpuRestanteMs -= s;
-                    pcb.contadorPrograma++;
+                    bcp.tiempoCpuRestanteMs -= s;
+                    bcp.contadorPrograma++;
 
-                    // Simular intento de adquirir recurso
-                    if (!pcb.recursosNecesarios.isEmpty() && Math.random() < 0.12) {
-                        String nombreRecurso = pcb.recursosNecesarios.get(0);
+                    if (!bcp.recursosNecesarios.isEmpty() && Math.random() < 0.08) {
+                        String nombreRecurso = bcp.recursosNecesarios.get(0);
+
                         Recurso r = recursos.get(nombreRecurso);
+                        boolean adquirido = false;
+
                         if (r != null) {
                             synchronized (r) {
-                                if (r.solicitar()) {
-                                    CentroControl.registrar(String.format("%s (pid=%d) adquirio recurso %s.", pcb.nombre, pcb.pid, nombreRecurso));
-                                    pcb.recursosNecesarios.remove(0);
-                                } else {
-                                    SemaphoroGalactico sys = semaforos.get(nombreRecurso);
-                                    if (sys != null) {
-                                        sys.waitSem(pcb, colaListos, colaBloq);
-                                        bloqueado = true; break;
-                                    } else {
-                                        pcb.estado = PCB.EstadoProceso.BLOQUEADO;
-                                        colaBloq.encolar(pcb);
-                                        CentroControl.registrar(String.format("%s (pid=%d) bloqueado por recurso %s.", pcb.nombre, pcb.pid, nombreRecurso));
-                                        bloqueado = true; break;
-                                    }
+                                if (r.solicitar(bcp)) {
+                                    bcp.recursosNecesarios.remove(0);
+                                    adquirido = true;
                                 }
                             }
                         }
+
+                        if (!adquirido) {
+                            SemaphoroGalactico sys = semaforos.get(nombreRecurso);
+                            if (sys == null) sys = semaforos.get("Portal-" + nombreRecurso);
+
+                            if (sys != null) {
+                                // waitSem moverá la nave y bloqueará si es necesario
+                                sys.waitSem(bcp, colaListos, colaBloq);
+                                bloqueado = true;
+                                break; // Salir del quantum, se bloqueó
+                            } else {
+                                // Si no hay recurso ni semáforo, bloqueo genérico
+                                bcp.estado = BCP.EstadoProceso.BLOQUEADO;
+                                colaBloq.enlistar(bcp);
+                                CentroControl.registrar(String.format("%s bloqueado por recurso no disponible: %s", bcp.nombre, nombreRecurso));
+                                bloqueado = true;
+                                break;
+                            }
+                        }
                     }
-                    if (Math.random() < 0.04) {
-                        pcb.estado = PCB.EstadoProceso.BLOQUEADO;
-                        colaBloq.encolar(pcb);
-                        CentroControl.registrar(String.format("%s (pid=%d) realiza E/S y se bloquea.", pcb.nombre, pcb.pid));
-                        bloqueado = true; break;
+
+                    // SIMULACIÓN De Entrada y salida (Bloqueo aleatorio)
+                    if (Math.random() < 0.02) { // 2% probabilidad
+                        bcp.estado = BCP.EstadoProceso.BLOQUEADO;
+                        colaBloq.enlistar(bcp); // Esto anima la nave yendo al planeta Blocked
+                        CentroControl.registrar(String.format("%s realiza E/S y se bloquea.", bcp.nombre));
+                        bloqueado = true;
+                        break;
                     }
-                    if (pcb.tiempoCpuRestanteMs <= 0) break;
+
+                    if (bcp.tiempoCpuRestanteMs <= 0) break;
                 }
             } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
 
-            if (pcb.tiempoCpuRestanteMs <= 0) {
-                pcb.estado = PCB.EstadoProceso.TERMINADO;
+            if (bcp.tiempoCpuRestanteMs <= 0) {
+                bcp.estado = BCP.EstadoProceso.TERMINADO;
                 cpu.descargar();
-                memoria.liberar(pcb);
-                CentroControl.registrar(String.format("Planificador: %s (pid=%d) TERMINADO.", pcb.nombre, pcb.pid));
+                memoria.liberar(bcp);
+
+                ui.UIAdapter.getInstance().destruirNaveVisual(bcp);
+
+                CentroControl.registrar(String.format("Planificador: %s TERMINADO.", bcp.nombre));
                 continue;
             }
 
             if (bloqueado) {
                 cpu.descargar();
-                CentroControl.registrar(String.format("Planificador: %s (pid=%d) fue bloqueado durante su quantum.", pcb.nombre, pcb.pid));
-                continue; // no reencolar
+                continue;
             } else {
                 cpu.descargar();
-                colaListos.encolar(pcb);
+                colaListos.enlistar(bcp); // Anima la nave de vuelta a Ready
             }
         }
-        CentroControl.registrar("Planificador: detenido.");
+        CentroControl.registrar("Planificador: Detenido.");
     }
 
     public void detener() { ejecutando = false; }
